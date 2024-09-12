@@ -1,0 +1,54 @@
+/* Variables 
+============================================*/
+:root{
+    --color-100: #ebedef;
+    --color-200: #d6dbdf;
+    --color-300: #aeb6bf;
+    --color-400: #85929e;
+    --color-500: #5d6d7e;
+    --color-600: #34495e;
+    --color-700: #2e4053;
+    --color-800: #283747;
+    --color-900: #212f3c;
+    --color-950: #1b2631;
+
+    --color-main: #e67e22;
+    --color-main2: #d35400;
+}
+
+/*Configuraciones  iniciales
+============================================*/
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+body{
+    background-color: var(--color-100);
+    color: var(--color-950);
+    font-size: 1.4rem;
+    font-family: 'Open Sans Variable', sans-serif;
+    font-weight: 500;
+}
+
+@media (min-width: 568px){
+    body{
+        font-size: 1.6rem;
+    }
+}
+
+
+/* Utilidades 
+============================================*/
+.container{
+    max-width: 1200px;
+    margin: auto;
+    padding: 1rem;
+    height: 100%;
+}

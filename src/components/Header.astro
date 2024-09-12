@@ -1,0 +1,48 @@
+---
+
+---
+
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <a href="/" class="logo">
+                <img src="images/header-logo.png" height="50" alt="Logo de RustCode">
+            </a>
+            <div class="menu">
+                <a href="/" class="nav-link">Inicio</a>
+                <a href="" class="nav-link">Acerca de</a>
+                <a href="" class="nav-link">Contact</a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<style>
+    .header{
+        height: 7rem;
+        width: 100%;
+        position: fixed;
+        background-color: var(--color-200);
+        top: 0;
+    }
+    .navbar{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu{
+        display: flex;
+        gap: 1rem;
+    }
+
+    .nav-link{
+        text-decoration: none;
+        font-weight: 500;
+        color: var(--color-900);
+    }
+
+    .nav-link:hover{
+        color: var(--color-main2);
+    }
+</style>
