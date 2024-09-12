@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content";
+import { sidebar } from "../config/sidebar"; // Importar el sidebar
+
+// Obtiene todo el contenido de la colección 'docs'
+const docs = await getCollection("docs");
+
+// Filtrar el contenido por subcarpetas usando autogenerate.directory
+const sections = sidebar.map((section) => {
+   return {
+      label: section.label,
+      image: section.image,
+      docs: docs.filter(
+         (doc) =>
+            section.autogenerate &&
+            doc.slug.startsWith(section.autogenerate.directory + "/"),
+      ),
+   };
+});
+---
+
+{
+   sections.map((section) => (
+      <section>
+         <img src={section.image} alt="Logo de sección" width="100"/>
+         <h2>{section.label}</h2>
+         <ol>
+            {section.docs.length > 0 ? (
+               section.docs.map((doc) => (
+                  <li>
+                     <a href={`/${doc.slug}`}>{doc.data.title || doc.slug}</a>
+                  </li>
+               ))
+            ) : (
+               <p>No hay documentos en esta sección.</p>
+            )}
+         </ol>
+      </section>
+   ))
+}
