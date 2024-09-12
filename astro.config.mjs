@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 import starlight from '@astrojs/starlight';
+import { sidebar } from './src/config/sidebar';
 
 // https://astro.build/config
 export default defineConfig({
@@ -24,23 +25,7 @@ export default defineConfig({
 				// Ruta relativa a tu archivo CSS personalizado
 				'./src/styles/custom.css',
 			],
-            sidebar: [
-				/*{
-					label: 'Introducción',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Introducción', slug: 'intro/intro' },
-					],
-				},*/
-                {
-					label: 'Introducción a Rust',
-					autogenerate: { directory: '01-intro-rust' },
-				},
-				{
-					label: 'Fundamentos',
-					autogenerate: { directory: '02-fundamentos' },
-				},
-			],
+            sidebar: sidebar,
         }),
     ],
 });

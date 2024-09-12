@@ -1,5 +1,20 @@
 ---
+import { getCollection } from "astro:content";
 import MainLayout from "../layouts/MainLayout.astro";
+import { sidebar } from "../config/sidebar"; // Importar el sidebar
+
+// Obtiene todo el contenido de la colección 'docs'
+const docs = await getCollection("docs");
+
+// Filtrar el contenido por subcarpetas usando autogenerate.directory
+const sections = sidebar.map((section) => {
+  return {
+    label: section.label,
+    docs: docs.filter((doc) =>
+      section.autogenerate && doc.slug.startsWith(section.autogenerate.directory + "/")
+    ),
+  };
+});
 ---
 
 <MainLayout title="RusCode">
@@ -41,15 +56,29 @@ import MainLayout from "../layouts/MainLayout.astro";
 					width=""
 				/>
 			</div>
-			
 		</div>
 	</section>
 
 	<section>
 		<div class="container">
-
+		  {sections.map((section) => (
+			<section>
+			  <h2>{section.label}</h2>
+			  <ol>
+				{section.docs.length > 0 ? (
+				  section.docs.map((doc) => (
+					<li>
+					  <a href={`/${doc.slug}`}>{doc.data.title || doc.slug}</a>
+					</li>
+				  ))
+				) : (
+				  <p>No hay documentos en esta sección.</p>
+				)}
+			  </ol>
+			</section>
+		  ))}
 		</div>
-	</section>
+	  </section>
 </MainLayout>
 
 <style>
@@ -77,19 +106,19 @@ import MainLayout from "../layouts/MainLayout.astro";
 			place-items: center;
 		}
 
-		.title{
+		.title {
 			font-size: 3.5rem;
 		}
 	}
 
-	@media (min-width: 1200px){
-		.title{
+	@media (min-width: 1200px) {
+		.title {
 			font-size: 4.5rem;
 			font-weight: 900;
 		}
 	}
 
-	.btn-start{
+	.btn-start {
 		padding: 1.5rem 4rem;
 		font-size: 1.8rem;
 		font-weight: 600;
@@ -103,7 +132,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 		font-size: 2.6rem;
 	}
 
-	.btn-start:hover{
+	.btn-start:hover {
 		transform: scale(1.1);
 		background-color: var(--color-950);
 		color: var(--color-200);
