@@ -9,7 +9,6 @@ const docs = await getCollection("docs");
 const sections = sidebar.map((section) => {
    return {
       label: section.label,
-      image: section.image,
       docs: docs.filter(
          (doc) =>
             section.autogenerate &&
@@ -19,22 +18,85 @@ const sections = sidebar.map((section) => {
 });
 ---
 
-{
-   sections.map((section) => (
-      <section>
-         <img src={section.image} alt="Logo de sección" width="100"/>
-         <h2>{section.label}</h2>
-         <ol>
-            {section.docs.length > 0 ? (
-               section.docs.map((doc) => (
-                  <li>
-                     <a href={`/${doc.slug}`}>{doc.data.title || doc.slug}</a>
-                  </li>
-               ))
-            ) : (
-               <p>No hay documentos en esta sección.</p>
-            )}
-         </ol>
-      </section>
-   ))
-}
+<ol class="list">
+   {
+      sections.map((section) => (
+         <li class="list-item">
+            <h4>{section.label}</h4>
+
+            <ol class="sub-list">
+               {section.docs.length > 0 ? (
+                  section.docs.map((doc) => (
+                     <li class="sub-list-item">
+                        <a href={`/${doc.slug}`} class="link">
+                           {doc.data.title || doc.slug}
+                        </a>
+                     </li>
+                  ))
+               ) : (
+                  <p>No hay documentos en esta sección.</p>
+               )}
+            </ol>
+         </li>
+      ))
+   }
+</ol>
+
+<style>
+   ol {
+      list-style: none;
+      counter-reset: item;
+      padding: 0;
+   }
+
+   li {
+      counter-increment: item;
+   }
+
+   li > ol {
+      counter-reset: subitem;
+   }
+
+   li > ol > li {
+      counter-increment: subitem;
+   }
+
+   @media (min-width: 768px) {
+      .sub-list {
+         column-count:2;
+         column-gap: 4rem;
+      }
+   }
+
+   @media (min-width: 992px) {
+      .sub-list {
+         column-count:3;
+         column-gap: 4rem;
+      }
+   }
+
+   .sub-list li {
+      padding-left: 0.8rem;
+      display: flex;
+      align-items: start;
+      height: 3rem;
+   }
+
+   .sub-list li a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--color-600);
+      display: inline-flex;
+   }
+
+   .sub-list li a:hover {
+      color: var(--color-main2);
+      text-decoration: underline;
+   }
+
+   .sub-list li::before {
+      content: counter(item) "." counter(subitem) " ";
+      margin-right: 10px;
+      color: var(--color-950);
+   }
+</style>
