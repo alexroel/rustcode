@@ -1,0 +1,68 @@
+:root {
+    /* --sl-content-width: 40rem;
+    --sl-text-5xl: 3.5rem; */
+
+}
+
+/* Dark mode colors. */
+:root {
+    --sl-color-accent-low: #f8c471;
+    --sl-color-accent: #e67e22;
+    --sl-color-accent-high: #d35400;
+
+    --sl-color-white: #ebedef;
+    --sl-color-gray-1: #d6dbdf;
+    --sl-color-gray-2: #aeb6bf;
+    --sl-color-gray-3: #85929e;
+    --sl-color-gray-4: #34495e;
+    --sl-color-gray-5: #283747;
+    --sl-color-gray-6: #212f3c;
+    --sl-color-black: #1b2631;
+}
+
+/* Light mode colors. */
+:root[data-theme='light'] {
+    --sl-color-accent-low: #f8c471;
+    --sl-color-accent: #e67e22;
+    --sl-color-accent-high: #d35400;
+
+    --sl-color-white: #1b2631;
+    --sl-color-gray-1: #212f3c;
+    --sl-color-gray-2: #283747;
+    --sl-color-gray-3: #2e4053;
+    --sl-color-gray-4: #34495e;
+    --sl-color-gray-5: #85929e;
+    --sl-color-gray-6: #aeb6bf;
+    --sl-color-gray-7: #d6dbdf;
+    --sl-color-black: #ebedef;
+}
+
+
+:where(.astro-3ii7xxms)[aria-current=page],
+:where(.astro-3ii7xxms)[aria-current=page]:hover,
+:where(.astro-3ii7xxms)[aria-current=page]:focus {
+    color: var(--sl-color-gray-1);
+    background-color: var(--sl-color-gray-5);
+    border-left: 2px solid var(--sl-color-accent);
+}
+
+@media (min-width: 72rem) {
+    .right-sidebar:where(.astro-67yu43on) {
+        width: auto;
+        right: 0;
+    }
+}
+
+.content-panel:where(.astro-7nkwcw3z)+.content-panel:where(.astro-7nkwcw3z) {
+    border-top: none;
+}
+
+.site-title:where(.astro-m46x6ez3) {
+    gap: 10px;
+    font-weight: 700;
+    font-size: 27px;
+}
+
+a:where(.astro-wy4te6ga) {
+    color: var(--sl-color-gray-1);
+}
