@@ -59,24 +59,24 @@ Rust es un lenguaje de programación que ofrece alto rendimiento y seguridad en 
    Si optas por la instalación rápida, se te redirigirá a Visual Studio Community. Aquí tienes un paso a paso:
 
    - **Paso 1: Inicia el Instalador de Visual Studio Community:**
-     ![Captura de pantalla del instalador de Visual Studio Community](./src/assets/install/01.png)
+     ![Captura de pantalla del instalador de Visual Studio Community](../../../assets/install/01.png)
      Presiona el botón "Continuar" para comenzar.
 
    - **Paso 2: Selecciona los Componentes Necesarios:**
-     ![Captura de pantalla del instalador de Visual Studio Community](./src/assets/install/02.png)
+     ![Captura de pantalla del instalador de Visual Studio Community](../../../assets/install/02.png)
      Marca las siguientes opciones en "Componentes individuales":
      - Herramientas de compilación de C++ de MSVC
      - Windows 11 SDK
      Luego, presiona el botón "Instalar".
 
    - **Paso 3: Espera a que la Instalación Finalice:**
-     ![Captura de pantalla de la instalación completa](./src/assets/install/02-1.png)
+     ![Captura de pantalla de la instalación completa](../../../assets/install/02-1.png)
      La instalación puede tardar unos minutos. Espera a que termine.
 
    - **Paso 4: Finaliza la Instalación:**
      Una vez completada la instalación, verás las ventanas de:
-     ![Captura de pantalla de la instalación final](./src/assets/install/03.png)
-     ![Captura de pantalla de la instalación final](./src/assets/install/04.png)
+     ![Captura de pantalla de la instalación final](../../../assets/install/03.png)
+     ![Captura de pantalla de la instalación final](../../../assets/install/04.png)
      Asegúrate de cerrar estas ventanas.
 
 ### Continuación de la Instalación de Rust
