@@ -21,7 +21,7 @@ fn main() {
     println!("Ingresa un número entre (0 y 100):");
     
     // Lee los datos ingresados por el usuario desde el teclado
-    stdin().read_line(&mut user_choese).expect("Error al ingresar datos");
+    stdin().read_line(&mut user_choese).expect("Error al leer la línea");
     
     println!("El número ingresado por el usuario es: {}", user_choese);
 }
@@ -61,7 +61,7 @@ fn main() {
     stdout().flush().expect("Error al vaciar el búfer");
 
     // Lee los datos desde el teclado
-    stdin().read_line(&mut user_choese).expect("Error al ingresar datos");
+    stdin().read_line(&mut user_choese).expect("Error al leer la línea");
     
     println!("El número ingresado por el usuario es: {}", user_choese);
 }
