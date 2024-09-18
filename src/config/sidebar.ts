@@ -4,7 +4,7 @@ export const sidebar = [
       autogenerate: { directory: '01-intro-rust' },
     },
     {
-      label: 'Fundamentos',
-      autogenerate: { directory: '02-fundamentos' },
+      label: 'Tu primer juego',
+      autogenerate: { directory: '02-firts-game' },
     },
 ];
