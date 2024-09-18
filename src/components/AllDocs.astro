@@ -47,6 +47,7 @@ const sections = sidebar.map((section) => {
       list-style: none;
       counter-reset: item;
       padding: 0;
+      margin: 10px 0;
    }
 
    li {
@@ -75,28 +76,17 @@ const sections = sidebar.map((section) => {
       }
    }
 
-   .sub-list li {
-      padding-left: 0.8rem;
-      display: flex;
-      align-items: start;
-      height: 3rem;
-   }
 
    .sub-list li a {
       text-decoration: none;
-      font-weight: 500;
-      color: var(--color-600);
-      display: inline-flex;
    }
 
    .sub-list li a:hover {
-      color: var(--color-main2);
       text-decoration: underline;
    }
 
    .sub-list li::before {
       content: counter(item) "." counter(subitem) " ";
       margin-right: 10px;
-      color: var(--color-950);
    }
 </style>
