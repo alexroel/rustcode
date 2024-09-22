@@ -7,27 +7,19 @@ Rust es un lenguaje de programación de sistemas que ha ganado popularidad rápi
 
 ## ¿Qué ofrece Rust?
 
-Rust destaca en varios aspectos que lo hacen único en el ámbito de los lenguajes de programación de sistemas. Aquí tienes algunas de las características más importantes:
-
 - **Seguridad de tipos:** Rust tiene un sistema de tipos estáticos, lo que significa que muchos errores potenciales se detectan en tiempo de compilación, reduciendo las posibilidades de errores en tiempo de ejecución.
   
-- **Seguridad de memoria:** Uno de los principales enfoques de Rust es la gestión de la memoria sin necesidad de un recolector de basura. Gracias a su sistema de "ownership" (propiedad), Rust garantiza que no haya fugas de memoria ni accesos incorrectos a áreas no válidas de la misma.
+- **Seguridad de memoria:** Uno de los principales enfoques de Rust es la gestión de la memoria sin necesidad de un recolector de basura.
 
 - **Sin carrera de datos:** En aplicaciones concurrentes, las condiciones de carrera (cuando múltiples hilos acceden a los mismos datos de manera no controlada) son una fuente común de errores. Rust, gracias a su sistema de propiedad y "borrowing" (préstamos de referencias), evita las condiciones de carrera en tiempo de compilación.
 
-- **Abstracción de costo cero:** Rust permite utilizar abstracciones de alto nivel sin incurrir en un costo de rendimiento, lo que lo convierte en una opción ideal para software de sistemas y aplicaciones críticas donde el rendimiento es esencial.
+- **Abstracción de costo cero:** Rust permite utilizar abstracciones de alto nivel sin incurrir en un costo de rendimiento.
 
 - **Tiempo de ejecución mínimo:** A diferencia de lenguajes como Java o Python, Rust no requiere un gran entorno de ejecución o una máquina virtual, lo que permite que el software desarrollado en Rust sea más eficiente y ligero.
 
 - **Desarrollo para entornos sin sistema operativo:** Rust se puede utilizar en sistemas embebidos y otros entornos sin sistema operativo, gracias a su capacidad para trabajar sin dependencias externas significativas.
 
-## Según las encuestas de Stack Overflow
-
-Rust ha sido reconocido como el **lenguaje más amado** por la comunidad de Stack Overflow durante varios años consecutivos. Esta distinción refleja su creciente adopción por parte de desarrolladores, especialmente aquellos que valoran la seguridad y el control. La combinación de un compilador estricto pero útil, junto con una comunidad activa y recursos de aprendizaje en constante crecimiento, ha hecho que muchos desarrolladores prefieran Rust sobre otros lenguajes.
-
 ## Características únicas de Rust
-
-Rust se diferencia de otros lenguajes por su enfoque en la seguridad sin sacrificar el rendimiento. Algunas de sus características únicas incluyen:
 
 - **Propiedad y préstamos:** El sistema de propiedad (ownership) asegura que cada recurso tiene un único dueño, y su sistema de préstamos permite compartir referencias sin comprometer la seguridad de los datos.
 

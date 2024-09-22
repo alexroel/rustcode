@@ -12,6 +12,7 @@ Cargo es el sistema de gestión de paquetes y construcción para el lenguaje de 
 :::note
 
 Cargo se incluye automáticamente cuando instalas Rust mediante `rustup`. Esto significa que no necesitas instalarlo por separado.
+
 :::
 
 ## Verificación de la Instalación de Cargo

@@ -5,10 +5,6 @@ description: El Playground de Rust es una herramienta en línea proporcionada po
 
 El **Playground de Rust** es una herramienta en línea proporcionada por la comunidad de Rust que permite escribir, compilar y ejecutar código Rust directamente desde un navegador, sin necesidad de instalar nada localmente. Es una plataforma perfecta para experimentar con el lenguaje, probar pequeñas piezas de código y compartir ejemplos con otros desarrolladores.
 
-## ¿Qué es?
-
-El **Playground de Rust** es un entorno interactivo que ofrece a los usuarios la posibilidad de escribir y ejecutar código Rust en tiempo real. Esto lo convierte en una herramienta educativa y de experimentación, ya que los desarrolladores pueden obtener retroalimentación inmediata sobre el comportamiento de su código sin tener que configurar un entorno de desarrollo completo.
-
 ## ¿Para qué se puede usar?
 
 El Playground de Rust es útil para una variedad de casos, tales como:
