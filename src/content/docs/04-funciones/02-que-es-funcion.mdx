@@ -1,0 +1,67 @@
+---
+title: ¿Qué es una función?
+description: Aprende más sobre mi proyecto en este sitio de documentación construido con Starlight.
+---
+
+Una función es un bloque de código que realiza una tarea específica. Se puede ver como una "receta" que lleva a cabo un proceso definido. Las funciones son esenciales en la programación, ya que ayudan a estructurar el código, lo hacen más legible y permiten la reutilización de código.
+
+Imagina que tienes un robot que limpia tu casa. Cada vez que le das la orden de "limpiar", el robot sigue un conjunto de instrucciones para completar la tarea: encenderse, mover los muebles, pasar la aspiradora y apagar el motor. Aquí, la orden de "limpiar" es como una función:
+
+- **Entrada:** La orden de "limpiar" (no se requieren parámetros adicionales).
+- **Proceso:** Realizar las tareas de limpieza.
+- **Salida:** La casa limpia.
+
+Al igual que este robot, una función puede ejecutarse sin necesitar datos adicionales, realizando una acción predeterminada.
+
+## Sintaxis de la función
+
+La sintaxis para definir una función en Rust sin parámetros es la siguiente:
+
+```rust
+fn nombre_de_la_funcion() -> tipo_de_retorno {
+    // Cuerpo de la función
+}
+```
+
+- `fn`: Palabra clave que indica que estás definiendo una función.
+- `nombre_de_la_funcion`: El nombre que le das a la función.
+- `-> tipo_de_retorno`: Indica el tipo de valor que la función devolverá. Puedes omitirlo si la función no devuelve nada.
+- `{}`: Dentro de las llaves se encuentra el cuerpo de la función, donde se escriben las instrucciones a ejecutar.
+
+## Ejemplo de la función
+
+Aquí tienes un ejemplo de una función en Rust que imprime un mensaje en la consola y no tiene parámetros ni devuelve un valor:
+
+```rust
+fn saludar() {
+    println!("¡Hola! Bienvenido a Rust.");
+}
+
+fn main() {
+    saludar();
+}
+```
+
+### Desglose del ejemplo:
+
+1. **Definición de la función `saludar`:**
+   - `fn saludar()`: Define una función llamada `saludar` que no toma parámetros.
+   - No tiene una declaración de tipo de retorno porque no devuelve nada.
+   - `println!("¡Hola! Bienvenido a Rust.");`: El cuerpo de la función que imprime un saludo en la consola.
+
+2. **Uso de la función en `main`:**
+   - `saludar();`: Llama a la función `saludar`, que ejecuta el código dentro de su cuerpo.
+
+### Salida del programa
+
+Si ejecutas el programa, verás la siguiente salida:
+
+```
+¡Hola! Bienvenido a Rust.
+```
+
+---
+
+Con este artículo, tienes una visión clara sobre cómo funcionan las funciones sin parámetros en Rust, su estructura y cómo se utilizan. Si tienes más preguntas o necesitas más ejemplos, ¡no dudes en preguntar!
+
+## Conclución

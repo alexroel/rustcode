@@ -7,7 +7,7 @@ description: Este artículo te guiará a través del proceso de instalación de 
 
 Rust es un lenguaje de programación que ofrece alto rendimiento y seguridad en la memoria. Este artículo te guiará a través del proceso de instalación de Rust en Windows, explicando cada uno de los pasos necesarios, así como las opciones disponibles durante la instalación.
 
-### Accede al Instalador de Rust
+##### Accede al Instalador de Rust
 
 1. **Accede a la Página de Instalación de Rust:**
    Dirígete a la [página de instalación de Rust](https://www.rust-lang.org/es/tools/install).
@@ -15,7 +15,7 @@ Rust es un lenguaje de programación que ofrece alto rendimiento y seguridad en 
 2. **Descarga el Instalador:**
    En la página, encontrarás un enlace para descargar el instalador de Rust para Windows. Haz clic en el enlace para descargar el archivo `.exe`.
 
-### Ejecuta el Instalador de Rust
+##### Ejecuta el Instalador de Rust
 
 1. **Ejecuta el Archivo Descargado:**
    Una vez que hayas descargado el archivo, haz doble clic en él para iniciar la instalación.
@@ -53,7 +53,7 @@ Rust es un lenguaje de programación que ofrece alto rendimiento y seguridad en 
 
    Para la mayoría de los usuarios, la **opción 1** es la más recomendada.
 
-### Instalación de Visual Studio Community
+##### Instalación de Visual Studio Community
 
 1. **Instala Visual Studio Community:**
    Si optas por la instalación rápida, se te redirigirá a Visual Studio Community. Aquí tienes un paso a paso:
@@ -79,7 +79,7 @@ Rust es un lenguaje de programación que ofrece alto rendimiento y seguridad en 
      ![Captura de pantalla de la instalación final](../../../assets/install/04.png)
      Asegúrate de cerrar estas ventanas.
 
-### Continuación de la Instalación de Rust
+##### Continuación de la Instalación de Rust
 
 1. **Regresa a la Consola de Rust:**
    Después de instalar los requisitos previos, vuelve a la consola donde estabas instalando Rust.

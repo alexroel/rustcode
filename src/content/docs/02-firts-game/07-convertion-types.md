@@ -7,7 +7,7 @@ En Rust, la conversión entre tipos de datos es una operación común y crucial 
 
 ## Conversión de Tipos Básicos
 
-### Conversión entre Tipos Numéricos
+##### Conversión entre Tipos Numéricos
 
 Rust proporciona varias formas de convertir entre tipos numéricos, como enteros y flotantes.
 
@@ -26,7 +26,7 @@ fn main() {
 
 - **Casting (`as`)**: El operador `as` se utiliza para convertir entre tipos numéricos. En el ejemplo, convertimos un entero (`i32`) a un flotante (`f64`).
 
-### Conversión entre Strings y Otros Tipos
+##### Conversión entre Strings y Otros Tipos
 
 A menudo, necesitarás convertir cadenas (`String`) a números y viceversa.
 
@@ -59,7 +59,7 @@ fn main() {
 - **`to_string()`**: El método `to_string()` convierte un tipo numérico a una cadena (`String`).
 
 
-### Conversión entre Tipos de Cadenas
+##### Conversión entre Tipos de Cadenas
 
 Rust maneja dos tipos principales de cadenas: `String` y `&str`.
 

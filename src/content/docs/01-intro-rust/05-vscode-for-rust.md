@@ -28,7 +28,7 @@ Lo más probable es que ya tengas Visual Studio Code instalado en tu sistema, pe
 
 Una vez que tengas Visual Studio Code instalado, el siguiente paso es instalar las extensiones necesarias para trabajar con Rust. La extensión más importante para Rust es `rust-analyzer`, que proporciona características clave como el análisis de código, la completación automática y el refactorizado.
 
-### Instalación de la Extensión `rust-analyzer`
+##### Instalación de la Extensión `rust-analyzer`
 
 1. **Abrir Visual Studio Code**: Inicia VSCode desde tu escritorio o menú de inicio.
 

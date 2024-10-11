@@ -54,11 +54,11 @@ El **Playground de Rust** es una herramienta esencial para aprender y experiment
 
 Aquí tienes un ejemplo paso a paso de cómo usar el **Playground de Rust**, desde acceder a la página hasta escribir y ejecutar un código básico, explicando cada línea del código.
 
-### Acceder al Playground
+##### Acceder al Playground
 1. Abre tu navegador y ve a la página del **Playground de Rust**: [https://play.rust-lang.org](https://play.rust-lang.org).
 2. Verás un editor de código donde podrás escribir y ejecutar programas en Rust directamente desde el navegador.
 
-### Escribir el código
+##### Escribir el código
 En el editor del Playground, escribe el siguiente código:
 
 ```rust
@@ -68,7 +68,7 @@ fn main() {
 }
 ```
 
-### Ejecutar el código
+##### Ejecutar el código
 1. Después de escribir el código, haz clic en el botón **"Run"** ubicado en la parte superior derecha del editor.
 2. El Playground compilará y ejecutará el código.
 3. Debajo del editor, verás la salida del programa, que será:
@@ -78,11 +78,11 @@ fn main() {
 Bienvenido al curso de Rust
 ```
 
-### Compartir el código
+##### Compartir el código
 1. Para compartir tu código, haz clic en **"Share"** en la parte superior derecha.
 2. Copia el enlace generado y compártelo con quien desees. El enlace llevará a las personas al Playground con tu código pre-cargado, listo para ser ejecutado o modificado.
 
-### Explicación del código 
+##### Explicación del código 
 
 ```rust
 fn main() {
@@ -100,7 +100,7 @@ fn main() {
 - De nuevo, estamos usando la macro `println!`, pero esta vez para imprimir `"Bienvenido al curso de Rust"`. Puedes usar tantas llamadas a `println!` como necesites para mostrar diferentes mensajes en la consola.
 
 
-### Recapitulación:
+##### Recapitulación:
 - **Acceder al Playground**: Visita [https://play.rust-lang.org](https://play.rust-lang.org).
 - **Escribir el código**: Copia el código de ejemplo.
 - **Ejecutar el código**: Haz clic en "Run" y observa la salida en la consola.

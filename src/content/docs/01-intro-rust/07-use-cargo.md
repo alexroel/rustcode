@@ -51,7 +51,7 @@ hola-cargo/
     Cargo.toml
 ```
 
-### Estructura del Proyecto con Cargo
+##### Estructura del Proyecto con Cargo
 
 - **`src/`**: Contiene el código fuente del proyecto. El archivo principal `main.rs` es el punto de entrada de la aplicación.
 - **`target/`**: Directorio generado automáticamente donde Cargo coloca los archivos compilados.

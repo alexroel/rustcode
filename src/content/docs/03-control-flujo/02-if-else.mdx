@@ -1,0 +1,146 @@
+---
+title: Condicional if-else
+description: Aprende más sobre mi proyecto en este sitio de documentación construido con Starlight.
+---
+import { Aside } from '@astrojs/starlight/components';
+
+El bloque `if-else` en Rust es una estructura de control de flujo que permite que el programa tome decisiones basadas en una condición booleana. 
+
+Si la condición es `true`, se ejecuta un bloque de código; si es `false`, se puede ejecutar una alternativa especificada por `else`. Esta estructura permite que el programa realice diferentes acciones dependiendo de la evaluación de condiciones.
+
+Imagina que estás decidiendo si llevar un paraguas antes de salir de casa. Si ves que el cielo está nublado, decides llevar el paraguas. Si está despejado, decides no llevarlo. 
+
+Aquí, "ver si está nublado" es la condición, y las dos acciones posibles (llevar o no el paraguas) dependen del resultado de esa evaluación, similar a cómo un `if-else` evalúa una condición y toma diferentes acciones en un programa.
+
+
+## Sintaxis
+
+El bloque `if-else` en Rust permite que tu programa tome decisiones basadas en condiciones. Si la condición es verdadera (`true`), Rust ejecuta un bloque de código. Si es falsa (`false`), puedes especificar un bloque alternativo con `else`.
+
+```rust
+let x = 5;
+
+if x > 3 {
+    println!("x es mayor que 3");
+} else {
+    println!("x no es mayor que 3");
+}
+```
+
+- Si la condición `x > 3` es verdadera, se imprime `"x es mayor que 3"`.
+- De lo contrario, se ejecuta el bloque en `else` y se imprime `"x no es mayor que 3"`.
+
+<Aside>
+- Las condiciones en Rust deben evaluar a un valor booleano (`true` o `false`).
+- No puedes usar enteros directamente como condiciones (a diferencia de C o C++), por lo que `if x` no es válido; en Rust debe ser una expresión booleana como `if x != 0`.
+</Aside>
+
+## Encadenamiento
+
+Cuando tienes múltiples condiciones que evaluar, puedes encadenar bloques `if` usando `else if`. Esto es útil cuando tienes más de dos posibles caminos de ejecución.
+
+```rust
+fn main() {
+    let x = 7;
+
+    if x > 10 {
+        println!("x es mayor que 10");
+    } else if x > 5 {
+        println!("x es mayor que 5, pero no mayor que 10");
+    } else {
+        println!("x es 5 o menor");
+    }
+}
+```
+- Primero se evalúa si `x > 10`. Si es verdadero, se ejecuta el bloque correspondiente.
+- Si no, se evalúa si `x > 5`. Si es verdadero, se ejecuta ese bloque.
+- Si ninguna de las condiciones anteriores es verdadera, se ejecuta el bloque final en `else`.
+
+## Múltiples condiciones
+
+Cuando tienes múltiples condiciones, es importante recordar que una vez que se encuentra una condición verdadera, las demás no se evalúan. Esto puede ser utilizado para optimizar el código.
+
+**Ejemplo:**
+```rust
+fn main() {
+    let x = 15;
+
+    if x > 20 {
+        println!("x es mayor que 20");
+    } else if x > 10 {
+        println!("x es mayor que 10, pero no mayor que 20");
+    } else if x > 5 {
+        println!("x es mayor que 5, pero no mayor que 10");
+    } else {
+        println!("x es 5 o menor");
+    }
+}
+```
+- Cuando `x` es 15, se cumple la condición `x > 10`, y el resto de las condiciones no se evalúan, mejorando la eficiencia del programa.
+
+
+## `if-else` como expresión
+
+En Rust, el bloque `if-else` no solo es una estructura de control, sino también una **expresión**, lo que significa que puede devolver un valor. Esto es extremadamente útil, ya que permite asignar el resultado de una decisión condicional a una variable directamente.
+
+```rust
+fn main() {
+    let x = 10;
+
+    let result = if x > 5 {
+        "Mayor que 5"
+    } else {
+        "Menor o igual a 5"
+    };
+
+    println!("Resultado: {}", result);
+}
+```
+- El bloque `if-else` devuelve un valor dependiendo de la condición, y ese valor se asigna a `result`.
+- Esto reduce la necesidad de código repetitivo, mejorando la legibilidad y la eficiencia.
+
+<Aside>
+- Ambos bloques (`if` y `else`) deben devolver el mismo tipo de valor. Si un bloque devuelve un tipo diferente al otro, Rust generará un error de compilación.
+</Aside>
+---
+
+## Bloques `if` sin `else`
+
+En algunos casos, es posible que solo quieras ejecutar código si una condición es verdadera, sin necesitar un bloque `else`. En Rust, puedes omitir `else` si no necesitas un camino alternativo.
+
+```rust
+fn main() {
+    let x = 3;
+
+    if x == 3 {
+        println!("x es igual a 3");
+    }
+    // No hay else, el programa continúa
+    println!("Fin del programa");
+}
+```
+
+## Combinar varias condiciones
+
+Puedes combinar varias condiciones usando los operadores lógicos `&&` (AND) y `||` (OR). Esto te permite hacer evaluaciones más complejas dentro de un solo bloque `if`.
+
+```rust
+fn main() {
+    let x = 8;
+    let y = 12;
+
+    if x > 5 && y > 10 {
+        println!("Ambos valores son mayores");
+    } else {
+        println!("Uno o ambos valores son menores");
+    }
+}
+```
+- El bloque `if` solo se ejecutará si ambas condiciones son verdaderas (`x > 5` y `y > 10`).
+- Si una de las condiciones es falsa, se ejecuta el bloque `else`.
+
+## Conclusión
+
+El bloque `if-else` en Rust es una estructura de control fundamental que comienza con un uso simple pero que se extiende a escenarios más complejos y expresivos. Desde su uso básico para tomar decisiones hasta su integración con expresiones y patrones avanzados como `if let`, ofrece una gran versatilidad en la escritura de programas eficientes y claros.
+
+En resumen, dominar `if-else` en Rust te permite manejar condiciones de una manera fluida y lógica, aprovechando el sistema de tipos seguro y las características únicas del lenguaje.

@@ -1,0 +1,128 @@
+---
+title: Condicional Match
+description: Aprende más sobre mi proyecto en este sitio de documentación construido con Starlight.
+---
+
+Rust es un lenguaje de programación que se preocupa mucho por evitar errores y facilitar que el código sea claro y fácil de escribir. Una de las herramientas más poderosas que tiene para esto es el bloque `match`. 
+
+`match` te permite comparar un valor (como un número, una palabra, o cualquier dato) con diferentes opciones o patrones. Dependiendo de cuál opción coincide, se ejecuta el código que corresponde a ese patrón. Es como un "interruptor" que te da varias opciones y elige la correcta.
+
+Esta estructura es más avanzada que un simple `if-else` porque te permite controlar mejor lo que sucede, haciendo que tu código sea más seguro y eficiente. Por ejemplo, evita que te olvides de manejar ciertos casos y mejora el rendimiento del programa porque Rust sabe exactamente qué debe hacer en cada situación. 
+
+Es una forma clave en Rust de escribir código que sea confiable y rápido.
+
+## Sintaxis
+
+La estructura `match` en Rust compara un valor con diferentes patrones y ejecuta el bloque de código asociado al patrón que coincida. Cada bloque de código se llama "brazo" del `match`, y al menos uno debe coincidir o de lo contrario el compilador generará un error.
+
+```rust
+fn main() {
+    let number = 3;
+
+    match number {
+        1 => println!("El número es 1"),
+        2 => println!("El número es 2"),
+        3 => println!("El número es 3"),
+        _ => println!("Es otro número"),
+    }
+}
+```
+- En este ejemplo, `number` se compara con los patrones `1`, `2`, y `3`. Si coincide con uno de estos valores, se ejecuta el bloque correspondiente.
+- El símbolo `_` es un **comodín** que coincide con cualquier valor no cubierto por los otros patrones. Es útil para manejar casos "por defecto".
+- Rust requiere que todos los posibles casos se manejen. Si no se proporciona un patrón para cada valor posible, el compilador te advertirá.
+
+## Guardas en Patrones con `if`
+
+Puedes añadir condiciones adicionales a los patrones usando **guardas** (`if`), lo que permite mayor control sobre la coincidencia.
+
+```rust
+fn main() {
+    let edad = 25;
+
+    match edad {
+        0 => println!("Recién nacido"),
+        n if n < 18 => println!("Menor de edad"),
+        n if n >= 18 && n < 65 => println!("Adulto"),
+        _ => println!("Senior"),
+    }
+}
+```
+1. **`0 => println!("Recién nacido")`**:
+   - Si el valor es `0`, entonces imprime "Recién nacido". Este es un caso específico que solo coincide cuando la edad es exactamente 0.
+
+2. **`n if n < 18 => println!("Menor de edad")`**:
+   - Si la edad (que aquí llamamos `n`) es menor que 18, entonces imprime "Menor de edad". El patrón `n` captura el valor y la condición `if n < 18` hace la comparación.
+
+3. **`n if n >= 18 && n < 65 => println!("Adulto")`**:
+   - Si la edad es mayor o igual a 18 y menor que 65, entonces imprime "Adulto". Esta condición cubre el rango de edades de los adultos.
+
+4. **`_ => println!("Senior")`**:
+   - El símbolo `_` es un comodín que coincide con cualquier valor que no haya coincidido antes. Si la edad no encajó en los otros casos, imprime "Senior", que sería para personas de 65 años o más.
+
+Este es un ejemplo de cómo Rust utiliza `match` y condiciones adicionales (`if`) para manejar diferentes rangos de valores de manera clara y eficiente.
+
+## Coincidencia con Rangos
+
+En Rust, puedes usar rangos en los patrones de `match` para manejar secuencias de valores, lo que es muy útil para trabajar con números o caracteres.
+
+**Ejemplo:**
+```rust
+fn main() {
+    let calificacion = 85;
+
+    match calificacion {
+        90..=100 => println!("Excelente"),
+        80..=89 => println!("Bueno"),
+        70..=79 => println!("Aprobado"),
+        _ => println!("Reprobado"),
+    }
+}
+```
+- El rango `90..=100` coincide con cualquier número entre 90 y 100 inclusive. Similarmente, los otros rangos permiten agrupar intervalos de valores.
+- Si la calificación no coincide con ninguno de los rangos especificados, se ejecuta el bloque asociado al comodín `_`.
+
+## Como Expresión
+
+Al igual que el bloque `if-else`, `match` en Rust es una **expresión**, lo que significa que puede devolver un valor. Esto te permite usar `match` para asignar resultados a variables o incluso retornar valores directamente.
+
+```rust
+fn main() {
+    let numero = 5;
+
+    let mensaje = match numero {
+        1 => "Uno",
+        2 => "Dos",
+        3 => "Tres",
+        _ => "Otro número",
+    };
+
+    println!("El número es: {}", mensaje);
+}
+```
+- El valor devuelto por cada brazo del `match` se asigna a la variable `mensaje`.
+- Los brazos deben devolver el mismo tipo de valor, ya que Rust es fuertemente tipado y no permite mezclar tipos de retorno en un `match`.
+
+## Optimización
+
+Rust permite optimizar la lógica condicional con `match`, especialmente cuando se trata de combinar diferentes tipos de valores y patrones. Puedes combinarlo con otras estructuras de control para mejorar la legibilidad y reducir el código repetido.
+
+```rust
+fn main() {
+   
+
+ let animal = "perro";
+
+    match animal {
+        "gato" | "perro" | "ratón" => println!("Es un animal pequeño"),
+        "elefante" | "jirafa" => println!("Es un animal grande"),
+        _ => println!("Animal desconocido"),
+    }
+}
+```
+- El patrón `"gato" | "perro" | "ratón"` combina varias opciones en un solo brazo, haciendo que el código sea más conciso y fácil de leer.
+
+## Conclusión
+
+`match` en Rust es una de las estructuras más poderosas y flexibles que ofrece el lenguaje. Su capacidad para trabajar con enums, tuplas, structs, y patrones complejos lo hace esencial para escribir código robusto y expresivo. Desde lo básico hasta usos más avanzados, `match` permite controlar el flujo de tu programa de manera eficiente y segura.
+
+Al dominar `match`, estarás aprovechando una de las características más distintivas de Rust, lo que te permitirá escribir código más limpio, menos propenso a errores y con una semántica más clara.

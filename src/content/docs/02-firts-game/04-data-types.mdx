@@ -1,0 +1,75 @@
+---
+title: Tipos de datos
+description: Aprende más sobre mi proyecto en este sitio de documentación construido con Starlight.
+---
+
+En Rust, los números se dividen en varias categorías según su tipo y si son enteros o flotantes. Existen tipos de datos específicos para representar números con signo, sin signo y números flotantes.
+
+## Enteros
+Rust ofrece varios tipos de enteros que se dividen en dos categorías: con signo y sin signo.
+
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. **Enteros con Signo (i):**
+Los enteros con signo permiten representar tanto números positivos como negativos:
+    | **Tipo** | **Bits** |
+    |----------|----------|
+    | `i8`     | 8        |
+    | `i16`    | 16       |
+    | `i32`    | 32       |
+    | `i64`    | 64       |
+    | `i128`   | 128      |
+    | `isize`  | Depende de la arquitectura |
+
+2. **Enteros sin Signo (u):** Los enteros sin signo solo pueden almacenar números positivos:
+
+    | **Tipo** | **Bits** |
+    |----------|----------|
+    | `u8`     | 8        |
+    | `u16`    | 16       |
+    | `u32`    | 32       |
+    | `u64`    | 64       |
+    | `u128`   | 128      |
+    | `usize`  | Depende de la arquitectura |
+
+</Steps>
+
+:::tip[Tipo de entero por defecto]
+En Rust, los tipos de datos por defecto son `i32` para números enteros
+:::
+
+## Flotantes
+
+<Steps>
+
+1. **32-bit Floating Point** Este tipo de dato usa 32 bits para representar un número en punto flotante. Es menos preciso que `f64`, pero consume menos memoria.
+    ```rust
+    let a: f32 = 3.14;
+    let b: f32 = 2.5e2; // Notación científica (250.0)
+    ```
+
+2. **64-bit Floating Point:** Este tipo de dato utiliza 64 bits para representar un número en punto flotante. Ofrece más precisión que `f32`.
+
+    ```rust
+    let x: f64 = 3.141592653589793;
+    let y: f64 = 1.0e-10; // Notación científica (0.0000000001)
+    ```
+
+</Steps>
+:::tip[¿Sabías esto?]
+Es el tipo de número de punto flotante por defecto en Rust, utilizado para representar números decimales con mayor precisión. 
+:::
+
+:::note
+Para calcular el valor máximo y el valor mínimo de los tipos de enteros y flotantes en Rust, podemos comprobar estos valores en un programa Rust, puedes usar el siguiente código:
+
+```rust
+println!("Valores para i8: Máximo = {}, Mínimo = {}", i8::MAX, i8::MIN);
+println!("Valores para i16: Máximo = {}, Mínimo = {}", f32::MAX, f32::MIN);
+```
+
+:::
+## Booleanos
+## Caracteres
