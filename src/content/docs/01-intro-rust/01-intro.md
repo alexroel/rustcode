@@ -25,3 +25,4 @@ En esta sección, te adentrarás en los siguientes aspectos:
 - Herramientas clave para crear, compilar y ejecutar proyectos de Rust, como Cargo (el gestor de paquetes de Rust) y Rustfmt (para formatear código).
 - Cómo utilizar el área de juegos de Rust (Rust Playground), un entorno en línea para escribir y ejecutar código sin necesidad de instalarlo localmente.
 
+### Destino final
