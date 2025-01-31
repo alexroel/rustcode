@@ -2,7 +2,7 @@
     --sl-font: 'Inter Variable', sans-serif;
 
     --sl-content-width: 50rem;
-    --sl-sidebar-width: 20rem;
+    --sl-sidebar-width: 22rem;
 
     --sl-text-5xl: 2.5rem;
 
@@ -17,7 +17,7 @@
 
 /* Dark mode colors. */
 :root {
-    --sl-color-accent-low: #d35400;
+    --sl-color-accent-low: #4e1f00;
     --sl-color-accent: #e67e22;
     --sl-color-accent-high: #f8c471;
 
@@ -36,7 +36,7 @@
 :root[data-theme='light'] {
     --sl-color-accent-low: #f8c471;
     --sl-color-accent: #e67e22;
-    --sl-color-accent-high: #d35400;
+    --sl-color-accent-high: #4e1f00;
 
     --sl-color-white: #1b2631;
     --sl-color-gray-1: #212f3c;

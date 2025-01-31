@@ -36,53 +36,48 @@ El Playground también permite personalizar las opciones de compilación para aj
 - **Optimizaciones para velocidad o tamaño**: Puedes ajustar el compilador para que optimice tu código en función del rendimiento o el tamaño del binario generado.
 - **Modo de depuración**: Permite obtener información detallada sobre errores y advertencias, ideal para entender el comportamiento del código o depurar problemas.
 
-## Límites de protección
-
-Dado que el Playground de Rust es un entorno compartido en la web, existen algunos **límites de protección** para garantizar la seguridad y el rendimiento:
-
-- **Tiempo de ejecución limitado**: Los programas no pueden ejecutarse indefinidamente. Si el código excede un tiempo de ejecución predefinido, se detendrá automáticamente.
-- **Recursos restringidos**: Para evitar el uso excesivo de recursos del servidor, se limitan la cantidad de memoria y CPU disponibles para los programas.
-- **Acceso restringido al sistema**: El Playground no permite acceso a archivos, redes u otras interacciones del sistema por razones de seguridad.
-
-Estos límites aseguran que el Playground de Rust siga siendo una herramienta rápida y segura para todos los usuarios.
-
-:::note
-El **Playground de Rust** es una herramienta esencial para aprender y experimentar con el lenguaje. Gracias a su simplicidad y versatilidad, es un recurso invaluable para desarrolladores de todos los niveles que desean explorar y compartir código Rust de manera eficiente.
-:::
-
 ## Ejemplo de uso 
 
 Aquí tienes un ejemplo paso a paso de cómo usar el **Playground de Rust**, desde acceder a la página hasta escribir y ejecutar un código básico, explicando cada línea del código.
 
-##### Acceder al Playground
-1. Abre tu navegador y ve a la página del **Playground de Rust**: [https://play.rust-lang.org](https://play.rust-lang.org).
-2. Verás un editor de código donde podrás escribir y ejecutar programas en Rust directamente desde el navegador.
+import { Steps } from '@astrojs/starlight/components';
 
-##### Escribir el código
-En el editor del Playground, escribe el siguiente código:
+<Steps>
 
-```rust
-fn main() {
-    println!("¡Hola, mundo!");
-    println!("Bienvenido al curso de Rust");
-}
-```
+1. **Acceder al Playground**: Visita la página del Playground de Rust en [https://play.rust-lang.org](https://play.rust-lang.org), donde podrás escribir y ejecutar código Rust en línea.
 
-##### Ejecutar el código
-1. Después de escribir el código, haz clic en el botón **"Run"** ubicado en la parte superior derecha del editor.
-2. El Playground compilará y ejecutará el código.
-3. Debajo del editor, verás la salida del programa, que será:
+2. **Escribir el código**: Escribe el código de ejemplo en el editor del Playground. En este caso, usaremos un programa simple que imprime dos mensajes en la consola.
 
-```
-¡Hola, mundo!
-Bienvenido al curso de Rust
-```
+    Para modificar el código, puedes hacer clic en el editor y realizar los cambios necesarios. Por ejemplo, puedes cambiar el mensajes para que muestre en otro idioma o agregar más líneas de código.
 
-##### Compartir el código
-1. Para compartir tu código, haz clic en **"Share"** en la parte superior derecha.
-2. Copia el enlace generado y compártelo con quien desees. El enlace llevará a las personas al Playground con tu código pre-cargado, listo para ser ejecutado o modificado.
+    ```rust
+    fn main() {
+        println!("¡Hola, mundo!");
+        println!("Bienvenido al curso de Rust");
+    }
+    ```
 
-##### Explicación del código 
+3. **Ejecutar el código**: Haz clic en el botón **"Run"** en la parte superior del editor para compilar y ejecutar el código. Verás la salida del programa debajo del editor o en la parte derecha del editor.
+
+    ```bash
+    Compiling playground v0.0.1 (/playground)
+        Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.53s
+        Running `target/debug/playground`
+    Standard Output
+    ¡Hola, mundo!
+    Bienvenido al curso de Rust
+    ```
+
+4. **Compartir el código**: Si deseas compartir tu código con otros, puedes hacer clic en **"Share"** para obtener un enlace que llevará a las personas al Playground con tu código pre-cargado.
+
+5. **Más opciones**: En la parte superior del editor, encontrarás opciones para personalizar la compilación, como desactivar optimizaciones, ajustar el nivel de optimización y habilitar el modo de depuración.
+
+    ![Una nave espacial en el espacio](../../../assets/intro-rust/playground.png)
+
+</Steps>
+
+
+## Explicación del código 
 
 ```rust
 fn main() {
@@ -98,12 +93,5 @@ fn main() {
     println!("Bienvenido al curso de Rust");
 ```
 - De nuevo, estamos usando la macro `println!`, pero esta vez para imprimir `"Bienvenido al curso de Rust"`. Puedes usar tantas llamadas a `println!` como necesites para mostrar diferentes mensajes en la consola.
-
-
-##### Recapitulación:
-- **Acceder al Playground**: Visita [https://play.rust-lang.org](https://play.rust-lang.org).
-- **Escribir el código**: Copia el código de ejemplo.
-- **Ejecutar el código**: Haz clic en "Run" y observa la salida en la consola.
-- **Compartir**: Usa la opción "Share" para obtener un enlace con tu código y compartirlo fácilmente.
 
 Este proceso te permite probar Rust de forma interactiva, sin necesidad de instalar nada en tu computadora, perfecto para aprender y compartir ejemplos con otros.

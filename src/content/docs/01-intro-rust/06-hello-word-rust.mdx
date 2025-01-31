@@ -3,6 +3,8 @@ title: Hola mundo con Rusto
 description: En este artículo, te guiaré a través de los pasos para crear y ejecutar un simple programa "Hola Mundo" en Rust.
 ---
 
+import { FileTree } from '@astrojs/starlight/components';
+
 En este artículo, te guiaré a través de los pasos para crear y ejecutar un simple programa "Hola Mundo" en Rust. A continuación, veremos cómo crear un proyecto, escribir el código, compilarlo y ejecutarlo.
 
 ## Creación del Proyecto
@@ -19,6 +21,13 @@ En este artículo, te guiaré a través de los pasos para crear y ejecutar un si
 2. **Crear un Archivo de Código Rust**
 
    En el directorio `hola-mundo`, crea un archivo de código Rust con la extensión `.rs`. Por ejemplo, lo llamaremos `hola.rs`:
+
+   <FileTree>
+
+      - hola-mundo/
+         - hola.rs
+
+   </FileTree>
 
 3. **Escribir el Código en Rust**
 
@@ -42,7 +51,17 @@ En este artículo, te guiaré a través de los pasos para crear y ejecutar un si
    rustc hola.rs
    ```
 
+   <FileTree>
+
+      - hola-mundo/
+         - hola.rs
+         - hola.exe
+         - hola.pdb
+
+   </FileTree>
+
    Este comando generará un archivo ejecutable en el mismo directorio. En sistemas Windows, el archivo se llamará `hola.exe`. En otros sistemas operativos, el archivo se llamará simplemente `hola` (sin extensión).
+ 
 
 ## Ejecución del Archivo Compilado
 
@@ -69,5 +88,5 @@ En este artículo, te guiaré a través de los pasos para crear y ejecutar un si
    ```
 
 :::tip[¡Y eso es todo!]
-Has creado, compilado y ejecutado tu primer programa en Rust. Ahora que tienes una base, puedes comenzar a explorar más características y capacidades del lenguaje Rust. ¡Feliz programación!
+Has creado, compilado y ejecutado tu primer programa en Rust. Ahora que tienes una base, puedes comenzar a explorar más características y capacidades del lenguaje Rust.
 :::

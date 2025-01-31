@@ -26,7 +26,7 @@ cargo --version
 Ejemplo de salida:
 
 ```shell
-cargo 1.81.0 (2dbb1af80 2024-08-20)
+cargo 1.84.1 (66221abde 2024-11-19)
 ```
 
 Este comando te mostrará la versión actual de Cargo que tienes instalada.
@@ -41,17 +41,21 @@ cargo new hola-cargo
 
 Este comando generará una estructura de directorios básica para tu proyecto. La estructura del proyecto se verá así:
 
-```shell
-hola-cargo/
-    src/
-        main.rs
-    target/
-    .gitignore
-    Cargo.lock
-    Cargo.toml
-```
+import { FileTree } from '@astrojs/starlight/components';
 
-##### Estructura del Proyecto con Cargo
+   <FileTree>
+
+      - hola-cargo/
+         - src/
+            - main.rs
+         - target/
+         - .gitignore
+         - Cargo.lock
+         - Cargo.toml
+
+   </FileTree>
+
+**Estructura del Proyecto con Cargo**
 
 - **`src/`**: Contiene el código fuente del proyecto. El archivo principal `main.rs` es el punto de entrada de la aplicación.
 - **`target/`**: Directorio generado automáticamente donde Cargo coloca los archivos compilados.
