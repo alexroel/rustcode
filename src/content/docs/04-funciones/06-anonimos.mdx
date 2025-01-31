@@ -1,0 +1,193 @@
+---
+title: Funciones Anónimas
+description: Aprende más sobre mi proyecto en este sitio de documentación construido con Starlight.
+---
+
+Aquí tienes un artículo completo sobre **Funciones Anónimas en Rust**.
+
+---
+
+# Funciones Anónimas en Rust
+
+En Rust, las **funciones anónimas** son funciones que no tienen un nombre explícito y se utilizan generalmente en el contexto donde son definidas. También se les conoce como **closures** (cierres) debido a su capacidad para capturar variables del entorno en el que fueron creadas. Estas funciones anónimas son extremadamente útiles para escribir código conciso y manejable, especialmente cuando se necesitan funciones temporales o pequeñas, como en operaciones de orden superior (por ejemplo, cuando trabajamos con iteradores).
+
+En este artículo exploraremos qué son las funciones anónimas, cómo se definen, cómo capturan el entorno y los distintos tipos de closures disponibles en Rust.
+
+## ¿Qué es una Función Anónima?
+
+Una **función anónima** es una función sin nombre que se define en línea dentro de otra expresión o como argumento de una función. A diferencia de las funciones normales, las funciones anónimas en Rust pueden acceder a variables en su entorno de declaración. Este comportamiento las convierte en "closures" porque "cierran" sobre las variables del ámbito exterior.
+
+### Sintaxis de una Función Anónima
+
+La sintaxis básica de una función anónima en Rust es:
+
+```rust
+let closure = |param1, param2| {
+    // Cuerpo del closure
+};
+```
+
+1. Los parámetros del closure se encierran entre barras verticales (`|param1, param2|`).
+2. El cuerpo de la función se define entre llaves `{}` (aunque se pueden omitir si es una expresión de una sola línea).
+3. No es necesario especificar el tipo de los parámetros o el valor de retorno, ya que Rust es capaz de inferirlos, aunque puedes proporcionarlos explícitamente si lo deseas.
+
+## Ejemplo Básico de Función Anónima
+
+Aquí tienes un ejemplo sencillo de un closure que toma dos números y los suma:
+
+```rust
+fn main() {
+    let suma = |a, b| a + b; // Closure que suma dos valores
+    let resultado = suma(5, 10);
+    println!("El resultado de la suma es: {}", resultado);
+}
+```
+
+### Salida:
+
+```
+El resultado de la suma es: 15
+```
+
+En este caso, hemos creado un closure llamado `suma` que toma dos parámetros `a` y `b` y devuelve su suma. Luego, llamamos al closure pasándole los valores 5 y 10, y obtenemos el resultado 15.
+
+## Closures Capturando el Entorno
+
+Una característica clave de los closures en Rust es que pueden capturar y utilizar variables de su entorno, es decir, variables que fueron definidas fuera del closure pero que siguen siendo accesibles dentro de él. Esta característica los hace más flexibles que las funciones regulares.
+
+Rust ofrece tres formas en las que un closure puede capturar variables de su entorno:
+
+1. **Por referencia (inmutable):** Captura la variable como una referencia inmutable (`&T`).
+2. **Por mutación:** Captura la variable como una referencia mutable (`&mut T`).
+3. **Por propiedad:** Captura la variable por su propiedad, moviéndola al closure (similar a `T`).
+
+### Ejemplo: Captura por Referencia
+
+```rust
+fn main() {
+    let x = 10;
+    let closure = || println!("El valor de x es: {}", x); // Captura x por referencia inmutable
+    closure();
+}
+```
+
+### Salida:
+
+```
+El valor de x es: 10
+```
+
+En este caso, `closure` accede a la variable `x` definida fuera de su ámbito y la captura por referencia. La variable `x` sigue siendo accesible después de la llamada al closure porque no ha sido movida.
+
+### Ejemplo: Captura por Mutación
+
+```rust
+fn main() {
+    let mut y = 5;
+    let mut closure = || {
+        y += 1; // Captura y por referencia mutable
+        println!("El valor de y es: {}", y);
+    };
+    closure();
+}
+```
+
+### Salida:
+
+```
+El valor de y es: 6
+```
+
+Aquí el closure captura la variable `y` por referencia mutable, permitiendo modificar su valor dentro del closure.
+
+### Ejemplo: Captura por Propiedad
+
+```rust
+fn main() {
+    let s = String::from("Hola");
+    let closure = || {
+        println!("s ha sido movido: {}", s);
+        // Después de esto, s ya no es accesible
+    };
+    closure();
+    // println!("{}", s); // Error: s ha sido movido al closure
+}
+```
+
+### Salida:
+
+```
+s ha sido movido: Hola
+```
+
+En este caso, el closure toma la propiedad de `s`, lo que significa que después de la ejecución del closure, `s` ya no es accesible fuera de él.
+
+## Inferencia de Tipos en Closures
+
+Una característica interesante de los closures en Rust es que los tipos de parámetros y de retorno son inferidos automáticamente por el compilador, lo que permite escribir closures de manera concisa. Sin embargo, si es necesario, también puedes especificar los tipos explícitamente.
+
+### Ejemplo con Tipos Inferidos
+
+```rust
+fn main() {
+    let multiplicar = |a, b| a * b; // Rust infiere que a y b son enteros
+    println!("Resultado: {}", multiplicar(4, 5));
+}
+```
+
+### Ejemplo con Tipos Especificados
+
+```rust
+fn main() {
+    let multiplicar = |a: i32, b: i32| -> i32 { a * b }; // Tipos explícitos
+    println!("Resultado: {}", multiplicar(4, 5));
+}
+```
+
+En ambos ejemplos, el closure realiza la misma tarea, pero en el segundo hemos especificado explícitamente que `a` y `b` son de tipo `i32` y que el closure retorna un `i32`.
+
+## Closures como Parámetros
+
+Las funciones en Rust pueden aceptar closures como parámetros. Esto es muy útil cuando trabajamos con funciones de orden superior, donde queremos que una función tome otra función como argumento. Rust utiliza los siguientes tipos para definir los closures como parámetros:
+
+1. **`Fn`**: Un closure que toma una referencia inmutable.
+2. **`FnMut`**: Un closure que toma una referencia mutable.
+3. **`FnOnce`**: Un closure que toma la propiedad de las variables.
+
+### Ejemplo: Closure como Parámetro
+
+```rust
+fn aplicar_a_dos<F>(f: F) -> i32
+where
+    F: Fn(i32) -> i32,
+{
+    f(2)
+}
+
+fn main() {
+    let doble = |x| x * 2;
+    println!("El doble de 2 es: {}", aplicar_a_dos(doble));
+}
+```
+
+### Salida:
+
+```
+El doble de 2 es: 4
+```
+
+En este ejemplo, la función `aplicar_a_dos` toma un closure `f` como argumento, que acepta un valor `i32` y devuelve otro `i32`. Luego, aplica el closure al número `2`.
+
+## Funciones y Closures: Diferencias
+
+Aunque las funciones y los closures tienen muchas similitudes, existen algunas diferencias importantes:
+
+1. **Captura de entorno:** Los closures pueden capturar variables del entorno donde fueron creados, mientras que las funciones regulares no pueden hacerlo.
+2. **Declaración:** Las funciones regulares requieren una declaración más formal con `fn`, mientras que los closures se definen en línea con `|param| { cuerpo }`.
+3. **Tipos inferidos:** Los closures permiten inferencia de tipos automática, mientras que en las funciones normales los tipos de los parámetros y de retorno deben ser especificados explícitamente.
+
+## Conclusión
+
+Las **funciones anónimas** o **closures** en Rust son una herramienta poderosa para escribir código conciso, flexible y eficiente. Permiten capturar variables del entorno, lo que las hace útiles para tareas como manipulación de datos en iteradores, manejo de errores y funciones de orden superior. Entender cómo funcionan los closures y cuándo usarlos es clave para aprovechar al máximo las características de Rust y escribir código más expresivo y reutilizable.
+
+Si tienes más preguntas sobre closures o te gustaría ver ejemplos adicionales, ¡no dudes en preguntar!

@@ -1,0 +1,117 @@
+:root {
+    --sl-font: 'Inter Variable', sans-serif;
+
+    --sl-content-width: 50rem;
+    --sl-sidebar-width: 20rem;
+
+    --sl-text-5xl: 2.5rem;
+
+    --sl-text-4xl: 2rem;
+    --sl-text-3xl: 1.8rem;
+    --sl-text-2xl: 1.5rem;
+    --sl-text-xl: 1.25rem;
+    --sl-text-lg: 1.125rem;
+    --sl-text-md: 1rem;
+    --sl-text-sm: 0.875rem;
+}
+
+/* Dark mode colors. */
+:root {
+    --sl-color-accent-low: #d35400;
+    --sl-color-accent: #e67e22;
+    --sl-color-accent-high: #f8c471;
+
+    --sl-color-white: #ebedef;
+    --sl-color-gray-1: #d6dbdf;
+    --sl-color-gray-2: #aeb6bf;
+    --sl-color-gray-3: #5d6d7e;
+    --sl-color-gray-4: #34495e;
+    --sl-color-gray-5: #2e4053;
+    --sl-color-gray-6: #283747;
+    --sl-color-gray-7: #212f3c;
+    --sl-color-black: #1b2631;
+}
+
+/* Light mode colors. */
+:root[data-theme='light'] {
+    --sl-color-accent-low: #f8c471;
+    --sl-color-accent: #e67e22;
+    --sl-color-accent-high: #d35400;
+
+    --sl-color-white: #1b2631;
+    --sl-color-gray-1: #212f3c;
+    --sl-color-gray-2: #283747;
+    --sl-color-gray-3: #2e4053;
+    --sl-color-gray-4: #34495e;
+    --sl-color-gray-5: #85929e;
+    --sl-color-gray-6: #aeb6bf;
+    --sl-color-gray-7: #d6dbdf;
+    --sl-color-black: #ebedef;
+}
+
+/* Global styles. */
+body {
+    font-family: var(--sl-font);
+    font-size: var(--sl-text-md);
+    letter-spacing: 0.5px;
+}
+
+main {
+    font-family: 'Inter Variable', sans-serif;
+}
+
+:where(.astro-3ii7xxms)[aria-current=page],
+:where(.astro-3ii7xxms)[aria-current=page]:hover,
+:where(.astro-3ii7xxms)[aria-current=page]:focus {
+    color: var(--sl-color-gray-1);
+    background-color: var(--sl-color-gray-7);
+    border-left: 2px solid var(--sl-color-accent);
+}
+
+@media (min-width: 72rem) {
+    .right-sidebar:where(.astro-67yu43on) {
+        width: auto;
+        right: 0;
+    }
+}
+
+.content-panel:where(.astro-7nkwcw3z)+.content-panel:where(.astro-7nkwcw3z) {
+    border-top: none;
+}
+
+@media (min-width: 1400px) {
+    .right-sidebar-container {
+        width: 320px;
+        margin-left: auto;
+    }
+}
+
+.site-title {
+    gap: 10px;
+    font-weight: 700;
+    font-size: 27px;
+}
+
+@media (min-width: 800px) {
+    .hero {
+        grid-template-columns: 8fr 4fr;
+    }
+}
+
+.primary {
+    font-weight: 500;
+}
+
+.link-title {
+    font-size: 16px;
+}
+
+.content-panel:where(.astro-7nkwcw3z)+.content-panel:where(.astro-7nkwcw3z) {
+    border-top: none;
+}
+
+.center {
+    text-align: center;
+    margin: 0 auto;
+}
+

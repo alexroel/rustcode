@@ -1,0 +1,153 @@
+---
+title: Bucle For
+description: Aprende más sobre mi proyecto en este sitio de documentación construido con Starlight.
+---
+import { Aside } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+
+El ciclo `for` en Rust es una herramienta poderosa que permite iterar sobre rangos, colecciones, y otros elementos iterables de manera eficiente. Rust optimiza el uso de `for` para recorrer secuencias de datos sin necesidad de índices explícitos, lo que lo hace fácil de usar y menos propenso a errores comunes como los desbordamientos de índices.
+Los **rangos** en Rust son una forma de representar un conjunto de valores secuenciales, como un intervalo de números. Se usan frecuentemente para iterar, realizar comparaciones o trabajar con segmentos específicos de datos. Los rangos pueden ser **inclusivos** (que incluyen el valor final) o **exclusivos** (que no lo incluyen).
+
+## Rangos
+
+<Steps>
+1. **Rango exclusivo (`start..end`)**:
+   - Piensa en este tipo de rango como un tramo de una línea recta, donde tienes un punto inicial y un punto final, pero te detienes justo antes del final.
+   - Por ejemplo, si tienes el rango `1..5`, imagina que marcas una línea que comienza en el número 1 y avanza hasta el número 4, pero no toca el número 5. El número 5 está justo fuera del alcance de este rango.
+
+   **Analogía**: Es como si estuvieras pintando un tramo de la carretera, empezando desde el kilómetro 1 y terminando justo antes del kilómetro 5. El kilómetro 5 no se pinta.
+
+2. **Rango inclusivo (`start..=end`)**:
+   - Este rango es similar al anterior, pero ahora incluye el valor final. Es como si marcaras una línea desde el número inicial hasta el número final, sin dejar ningún número fuera.
+   - Si usas el rango `1..=5`, marcarías los números 1, 2, 3, 4 y también el número 5.
+</Steps>
+
+<Aside>
+- Los rangos también pueden ser **infinitos** (solo tienen un valor inicial) con el operador `start..`, por ejemplo, `0..` que representa todos los valores desde `0` en adelante.
+</Aside>
+
+Los rangos en Rust son una forma poderosa y sencilla de trabajar con secuencias de valores. Se pueden utilizar para recorrer números en un bucle, hacer comparaciones en bloques `match`, o manejar subconjuntos de colecciones. Los rangos pueden ser inclusivos o exclusivos dependiendo del operador que utilices (`..` o `..=`).
+
+## Sintaxis del bucle `for`
+
+La estructura básica de un bucle `for` en Rust es la siguiente:
+
+```rust
+for var in expresión {
+    código
+}
+```
+
+- **`var`**: Es una variable que tomará el valor de cada elemento del iterador en cada iteración.
+- **`expresión`**: Es algo que puede convertirse en un iterador, es decir, una colección de elementos sobre los que se puede iterar.
+
+## Ciclo `for`
+
+El ciclo `for` en Rust se utiliza principalmente para iterar sobre colecciones, como rangos, vectores, o cualquier estructura que implemente el trait `Iterator`. La sintaxis es simple y limpia, eliminando la necesidad de manejar manualmente los índices.
+
+**¿Qué es un `Iterator` en Rust?**
+
+Un iterador es un objeto que devuelve una serie de elementos, uno por uno, en cada vuelta del bucle. En Rust, cualquier expresión que pueda convertirse en un iterador implementa el trait `IntoIterator`. Cuando el bucle `for` comienza, Rust obtiene el primer valor del iterador y lo asigna a la variable `var`. Después de ejecutar el bloque de código, el siguiente valor del iterador se asigna a `var`, y así sucesivamente. Cuando no quedan más valores, el bucle se termina.
+
+```rust
+for x in 0..10 { 
+    println!("{}", x); // x: i32
+}
+```
+
+- **`0..10`**: Esta es una expresión que genera un rango, empezando en 0 y terminando antes de 10. Es importante notar que el límite superior es exclusivo, lo que significa que se imprimen los números del 0 al 9, no hasta el 10.
+
+Rust no implementa el bucle estilo-C de manera intencionada. Controlar manualmente el inicio, la condición y la actualización en cada iteración puede ser propenso a errores, incluso para desarrolladores experimentados. Con la sintaxis de Rust, se simplifica este proceso y se reduce la posibilidad de errores.
+
+
+<Aside>
+¿Qué hace el `in` dentro del `for`?
+- El `in` conecta la variable que recibe cada elemento con el rango o la colección sobre la que estamos iterando.
+- No es para verificar si algo está "en" el rango o colección, sino para decirle al programa que tome cada elemento de la colección o rango y lo procese.
+
+El **`in`** en un bucle `for` en Rust **indica de dónde se están obteniendo los valores para la iteración**. No está comprobando si algo está en una colección, sino que simplemente "extrae" los elementos, uno por uno, de una colección o rango y los procesa en el cuerpo del bucle.
+</Aside>
+
+## Rangos con Exclusión e Inclusión
+
+Rust tiene dos formas principales de definir rangos: los rangos excluyentes (`..`) y los rangos inclusivos (`..=`). La diferencia radica en si el valor final se incluye o no en la secuencia de iteración.
+
+**Ejemplo:**
+```rust
+fn main() {
+    for numero in 1..=5 {
+        println!("Número inclusivo: {}", numero);
+    }
+}
+```
+
+**Explicación:**
+- Aquí se usa el operador `..=` para incluir el valor 5 en la iteración.
+- Se imprimen los números del 1 al 5, a diferencia del rango excluyente.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### ¿Qué es un iterador en Rust?
+
+
+### Uso de `.enumerate()`
+
+Cuando necesitas llevar un conteo del número de iteraciones, puedes usar el método `.enumerate()`. Este método agrega un índice a cada valor que se itera, permitiéndote rastrear la cantidad de veces que has iterado.
+
+#### Ejemplo con rangos:
+
+```rust
+for (indice, valor) in (5..10).enumerate() {
+    println!("índice = {} y valor = {}", indice, valor);
+}
+```
+
+Este código produce el siguiente resultado:
+
+```
+índice = 0 y valor = 5
+índice = 1 y valor = 6
+índice = 2 y valor = 7
+índice = 3 y valor = 8
+índice = 4 y valor = 9
+```
+
+Observa que `.enumerate()` empieza contando desde 0, lo que es útil para llevar un seguimiento preciso de las iteraciones. Además, debes asegurarte de colocar paréntesis alrededor del rango `(5..10)`.
+
+#### Ejemplo con iteradores:
+
+También puedes usar `.enumerate()` con iteradores, como en el siguiente ejemplo:
+
+```rust
+let lineas = "hola\nmundo".lines();
+
+for (num_linea, linea) in lineas.enumerate() {
+    println!("{}: {}", num_linea, linea);
+}
+```
+
+Este código genera:
+
+```
+0: hola
+1: mundo
+```
+
+Aquí, el método `.lines()` convierte una cadena en un iterador sobre las líneas de texto, y `.enumerate()` nos permite rastrear el número de línea junto con el contenido de cada línea.
+
+## Conclusión
+
+El ciclo `for` en Rust es una herramienta versátil que permite iterar sobre rangos, colecciones y cualquier estructura que implemente el trait `Iterator`. Su simplicidad para el manejo de iteradores y la optimización que Rust ofrece, junto con las capacidades avanzadas como `enumerate`, iteradores personalizados y paralelización con `rayon`, hacen que sea una opción muy poderosa para trabajar con datos en Rust.
+
+A medida que te vuelvas más cómodo con Rust, descubrirás que los iteradores son fundamentales para escribir código limpio, eficiente y seguro. ¡Experimenta con diferentes colecciones, métodos y patrones para sacarle el máximo provecho a `for`!

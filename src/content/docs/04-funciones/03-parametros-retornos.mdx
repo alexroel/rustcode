@@ -1,0 +1,105 @@
+---
+title: Parámetros y Retorno de Valores
+description: Aprende más sobre mi proyecto en este sitio de documentación construido con Starlight.
+---
+
+En Rust, las funciones pueden recibir datos de entrada, conocidos como **parámetros**, y devolver resultados, lo que las convierte en herramientas potentes y versátiles. Este artículo explora cómo se realiza el paso de parámetros y el retorno de valores en funciones.
+
+## ¿Qué son los parámetros?
+
+Los parámetros son variables que se utilizan en la definición de una función. Al llamar a una función, puedes proporcionar argumentos (valores) que se asignan a estos parámetros. El tipo de cada parámetro debe estar claramente definido, lo que ayuda a prevenir errores y a garantizar que la función reciba el tipo de datos esperado.
+
+## Sintaxis del Paso de Parámetros
+
+La sintaxis básica para definir una función con parámetros en Rust es:
+
+```rust
+fn nombre_de_la_funcion(parametro1: tipo1, parametro2: tipo2) -> tipo_de_retorno {
+    // Cuerpo de la función
+}
+```
+
+- `nombre_de_la_funcion`: Nombre de la función.
+- `parametro1: tipo1`: Un parámetro llamado `parametro1` de tipo `tipo1`.
+- `parametro2: tipo2`: Otro parámetro llamado `parametro2` de tipo `tipo2`.
+- `-> tipo_de_retorno`: Tipo del valor que la función devolverá (opcional si no devuelve nada).
+
+## Ejemplo de Paso de Parámetros
+
+A continuación, se muestra un ejemplo de una función que toma dos números enteros como parámetros y devuelve su suma:
+
+```rust
+fn sumar(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+fn main() {
+    let resultado = sumar(5, 3);
+    println!("La suma es: {}", resultado);
+}
+```
+
+### Desglose del ejemplo:
+
+1. **Definición de la función `sumar`:**
+   - `fn sumar(a: i32, b: i32)`: La función `sumar` toma dos parámetros enteros, `a` y `b`.
+   - `-> i32`: Indica que la función devuelve un valor de tipo entero.
+   - `a + b`: El cuerpo de la función que suma los dos parámetros.
+
+2. **Uso de la función en `main`:**
+   - `let resultado = sumar(5, 3);`: Llama a la función `sumar` con los argumentos `5` y `3`, y almacena el resultado en `resultado`.
+   - `println!("La suma es: {}", resultado);`: Imprime el resultado en la consola.
+
+### Salida del programa
+
+Si ejecutas el programa, obtendrás la siguiente salida:
+
+```
+La suma es: 8
+```
+
+## Retorno de Valores
+
+El valor que una función devuelve se especifica en la declaración de la función y se utiliza la palabra clave `return` para devolver un valor. Si el valor es el resultado de la última expresión en el cuerpo de la función, no es necesario usar `return`.
+
+### Ejemplo de Retorno de Valores
+
+Aquí tienes un ejemplo de una función que calcula el cuadrado de un número y devuelve el resultado:
+
+```rust
+fn cuadrado(x: i32) -> i32 {
+    x * x
+}
+
+fn main() {
+    let num = 4;
+    let resultado = cuadrado(num);
+    println!("El cuadrado de {} es: {}", num, resultado);
+}
+```
+
+### Desglose del ejemplo:
+
+1. **Definición de la función `cuadrado`:**
+   - `fn cuadrado(x: i32)`: La función `cuadrado` toma un parámetro entero `x`.
+   - `-> i32`: Indica que la función devuelve un entero.
+   - `x * x`: El cuerpo de la función que calcula el cuadrado de `x`.
+
+2. **Uso de la función en `main`:**
+   - `let num = 4;`: Declara una variable `num` con el valor `4`.
+   - `let resultado = cuadrado(num);`: Llama a la función `cuadrado` con `num` y almacena el resultado.
+   - `println!("El cuadrado de {} es: {}", num, resultado);`: Imprime el resultado en la consola.
+
+### Salida del programa
+
+Si ejecutas el programa, verás la siguiente salida:
+
+```
+El cuadrado de 4 es: 16
+```
+
+## Conclusión
+fin
+El paso de parámetros y el retorno de valores son conceptos fundamentales en Rust que permiten a las funciones ser más dinámicas y útiles. Con esta habilidad, puedes crear funciones que realicen cálculos complejos, procesen datos y devuelvan resultados precisos. ¡Experimenta creando tus propias funciones y aprovechando la potencia de Rust!
+
+Si tienes más preguntas o necesitas ejemplos adicionales, ¡no dudes en preguntar!

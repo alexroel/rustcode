@@ -1,0 +1,72 @@
+---
+title: Operadores en Rust
+description: Aprende más sobre mi proyecto en este sitio de documentación construido con Starlight.
+---
+
+En Rust, los operadores permiten realizar diversas operaciones con valores y variables, como cálculos matemáticos, comparaciones lógicas o trabajar con bits. A continuación, se presenta una descripción de los operadores más utilizados en Rust, organizados en varias categorías.
+
+## Operadores Aritméticos
+
+Los operadores aritméticos permiten realizar operaciones matemáticas con números.
+
+| Operador | Descripción                     | Ejemplo                      |
+|----------|---------------------------------|------------------------------|
+| `+`      | Suma dos valores                | `5 + 10` = `15`              |
+| `-`      | Resta un valor de otro          | `10 - 5` = `5`               |
+| `*`      | Multiplica dos valores          | `4 * 5` = `20`               |
+| `/`      | Divide un valor entre otro      | `10 / 3` = `3` (trunca decimales) |
+| `%`      | Calcula el residuo de una división | `10 % 3` = `1`            |
+
+
+## Operadores de Comparación
+
+Los operadores de comparación comparan dos valores y devuelven un valor booleano (`true` o `false`).
+
+| Operador | Descripción                              | Ejemplo              |
+|----------|------------------------------------------|----------------------|
+| `==`     | Verifica si dos valores son iguales       | `5 == 5` = `true`    |
+| `!=`     | Verifica si dos valores no son iguales    | `5 != 3` = `true`    |
+| `>`      | Verifica si un valor es mayor que otro    | `5 > 3` = `true`     |
+| `<`      | Verifica si un valor es menor que otro    | `3 < 5` = `true`     |
+| `>=`     | Verifica si un valor es mayor o igual que otro | `5 >= 5` = `true` |
+| `<=`     | Verifica si un valor es menor o igual que otro | `3 <= 5` = `true` |
+
+
+## Operadores Lógicos
+
+Los operadores lógicos permiten combinar o invertir condiciones.
+
+| Operador | Descripción                    | Ejemplo                      |
+|----------|--------------------------------|------------------------------|
+| `&&`     | Devuelve `true` si ambas condiciones son verdaderas | `(5 > 2) && (3 < 4)` = `true` |
+| `\|\|`     | Devuelve `true` si al menos una condición es verdadera | `(5 > 2) \|\| (3 > 4)` = `true` |
+| `!`      | Invierte el valor booleano de una condición | `!(5 > 2)` = `false` |
+
+
+## Operadores de Asignación
+
+Los operadores de asignación permiten asignar o modificar el valor de una variable.
+
+| Operador | Descripción                                         | Ejemplo                   |
+|----------|-----------------------------------------------------|---------------------------|
+| `=`      | Asigna un valor a una variable                      | `let x = 5`               |
+| `+=`     | Suma y asigna el resultado a la variable            | `x += 3` (equivale a `x = x + 3`) |
+| `-=`     | Resta y asigna el resultado a la variable           | `x -= 3`                  |
+| `*=`     | Multiplica y asigna el resultado a la variable      | `x *= 2`                  |
+| `/=`     | Divide y asigna el resultado a la variable          | `x /= 2`                  |
+| `%=`     | Calcula el residuo y asigna el resultado a la variable | `x %= 2`               |
+
+
+## Operadores de Incremento y Decremento
+
+Aunque Rust no tiene operadores de incremento (`++`) y decremento (`--`) como otros lenguajes, se puede lograr el mismo resultado mediante los operadores de asignación compuesta.
+
+| Operador | Descripción                    | Ejemplo           |
+|----------|--------------------------------|-------------------|
+| `+= 1`   | Incrementa el valor en 1       | `x += 1`          |
+| `-= 1`   | Decrementa el valor en 1       | `x -= 1`          |
+
+
+## Conclusión
+
+Rust proporciona una amplia gama de operadores que te permiten realizar operaciones matemáticas, comparaciones lógicas, manipulaciones de bits y mucho más. Comprender cómo utilizar cada uno de estos operadores es fundamental para escribir código eficiente y legible en Rust.

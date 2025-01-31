@@ -1,0 +1,137 @@
+---
+title: Bucle Loop
+description: Aprende más sobre mi proyecto en este sitio de documentación construido con Starlight.
+---
+
+Un **bucle** en Rust (y en programación en general) es una estructura que permite repetir una serie de instrucciones varias veces hasta que se cumpla una condición o se alcance un objetivo. Los bucles son útiles cuando queremos realizar una tarea repetitiva sin tener que escribir el mismo código una y otra vez.
+
+Imagina que estás organizando una fiesta de cumpleaños, y tu tarea es inflar globos. Sabes que tienes 20 globos en total. La tarea es simple: inflas un globo, lo atas, y lo dejas en un lugar específico. Luego repites este proceso para el siguiente globo, y así sucesivamente, hasta que hayas inflado todos los globos.
+
+El bucle en este caso sería el proceso de inflar y atar un globo repetidamente. Una vez que terminas con un globo, vuelves a comenzar con otro. La condición para detener el bucle es cuando has inflado los 20 globos.
+
+En programación, los bucles funcionan de manera similar: ejecutan una serie de instrucciones repetidamente hasta que una condición específica se cumpla (por ejemplo, inflar todos los globos o alcanzar un número límite).
+
+## Ciclo `loop`
+
+El ciclo `loop` es el tipo más sencillo de bucle en Rust, ya que no tiene una condición asociada. El ciclo se ejecuta indefinidamente a menos que se rompa explícitamente con la instrucción `break`.
+
+```rust
+fn main() {
+    loop {
+        println!("Este ciclo se repite indefinidamente");
+    }
+}
+```
+- En este ejemplo, la instrucción `println!()` se ejecuta repetidamente.
+- Como el ciclo no tiene una condición de salida y no hay una instrucción `break`, el programa continuará imprimiendo indefinidamente hasta que sea interrumpido manualmente.
+
+### Interrumpiendo un Ciclo
+
+Para evitar que un ciclo `loop` se ejecute infinitamente, se puede utilizar la instrucción `break` para detenerlo cuando se cumpla una condición específica.
+
+```rust
+fn main() {
+    let mut contador = 0;
+
+    loop {
+        contador += 1;
+        println!("Contador: {}", contador);
+
+        if contador == 5 {
+            break;
+        }
+    }
+}
+```
+- Este ciclo incrementa la variable `contador` en cada iteración.
+- Cuando `contador` llega a 5, el ciclo se interrumpe usando `break` y el programa deja de ejecutar el bucle.
+
+### Usando `continue`
+
+La instrucción `continue` dentro de un ciclo permite saltar el resto del bloque de código actual y comenzar una nueva iteración.
+
+```rust
+fn main() {
+    let mut contador = 0;
+
+    loop {
+        contador += 1;
+
+        if contador % 2 == 0 {
+            continue;  // Salta los números pares
+        }
+
+        println!("Número impar: {}", contador);
+
+        if contador == 9 {
+            break;
+        }
+    }
+}
+```
+- El ciclo `loop` incrementa `contador` y usa `continue` para saltar a la siguiente iteración si el valor de `contador` es par.
+- De esta forma, solo los números impares son impresos.
+
+## Retornando Valores
+
+Una de las características más útiles de `loop` en Rust es que puede devolver un valor. Esto se logra utilizando `break` con un valor que es luego asignado a una variable.
+
+```rust
+fn main() {
+    let mut contador = 0;
+
+    let resultado = loop {
+        contador += 1;
+
+        if contador == 10 {
+            break contador * 2; // Devuelve el valor cuando el contador llega a 10
+        }
+    };
+
+    println!("El resultado es: {}", resultado);
+}
+```
+- Cuando `contador` llega a 10, el ciclo se interrumpe y se devuelve el valor `contador * 2`.
+- Este valor es luego asignado a la variable `resultado`, lo que permite usar el resultado fuera del ciclo.
+
+## Bucles Etiquetados
+
+Rust permite etiquetar ciclos para diferenciar entre ciclos anidados y facilitar el control del flujo. Esto es especialmente útil cuando tienes varios ciclos anidados y necesitas controlar desde cuál de ellos romper o continuar.
+
+```rust
+fn main() {
+    let mut contador_externo = 0;
+
+    'ciclo_externo: loop {
+        let mut contador_interno = 0;
+
+        loop {
+            println!("Contador interno: {}", contador_interno);
+
+            if contador_interno == 2 {
+                break;
+            }
+
+            if contador_externo == 3 {
+                break 'ciclo_externo; // Sale del ciclo externo
+            }
+
+            contador_interno += 1;
+        }
+
+        contador_externo += 1;
+    }
+
+    println!("Contador externo ha terminado en: {}", contador_externo);
+}
+```
+- El ciclo interno se ejecuta hasta que `contador_interno` llega a 2, pero si el ciclo externo alcanza un valor de 3, el programa rompe ambos ciclos utilizando la etiqueta `'ciclo_externo`.
+- Las etiquetas facilitan la gestión de ciclos complejos donde el control de flujo depende de múltiples niveles de anidación.
+
+## Conclusión
+
+El ciclo `loop` en Rust es una herramienta flexible que te permite manejar iteraciones de código de manera simple y efectiva. Desde usos básicos para ejecutar bloques indefinidamente hasta casos más avanzados donde se requiere control de flujo, manejo de recursos y concurrente, `loop` es una parte esencial del ecosistema Rust.
+
+Con la capacidad de devolver valores, etiquetar ciclos y manejar situaciones concurrentes, `loop` en Rust te proporciona las bases para construir aplicaciones robustas que requieren una alta eficiencia en la ejecución de tareas repetitivas o servicios que deben permanecer activos a largo plazo.
+
+Por último, al aprender a combinar `loop` con otras características de Rust, como las expresiones y el manejo seguro de memoria, podrás escribir código más eficiente, legible y seguro para todo tipo de aplicaciones.
