@@ -1,5 +1,5 @@
 ---
-title: Variables
+title: Variables y Constantes
 description: Las variables son fundamentales en la programación. En este artículo, exploraremos cómo se utilizan las variables en Rust, incluyendo la inmutabilidad y la mutabilidad.
 ---
 
@@ -82,6 +82,17 @@ println!("El número ingresado por el usuario ahora es {numero}");
 
 En este caso, `numero` se declara como mutable, lo que permite cambiar su valor de 50 a 100 sin problemas.
 
+## Constantes
+
+Además de las variables, Rust también permite declarar **constantes**, que son valores inmutables que no pueden ser modificados durante la ejecución del programa. Las constantes se declaran utilizando la palabra clave `const` y deben tener un tipo de dato explícito:
+
+```rust
+const PI: f64 = 3.14159;
+println!("El valor de PI es: {}", PI);
+```
+
+En este ejemplo, hemos declarado una constante `PI` de tipo `f64` con un valor de 3.14159. Las constantes son útiles para valores que no cambian durante la ejecución del programa y que deben ser accesibles en todo el código.
+
 ## Conclusión
 
-Rust promueve la seguridad a través de la inmutabilidad predeterminada de las variables, lo que previene cambios accidentales. Sin embargo, cuando se necesita modificar el valor de una variable, puedes hacerlo mediante **shadowing** o declarando la variable como **mutable** con `mut`. Estas características proporcionan flexibilidad sin comprometer la integridad del programa.
+Las variables y las constantes son fundamentales en Rust y en la programación en general. Al comprender cómo declarar, inicializar y utilizar variables y constantes, puedes escribir código más claro, seguro y eficiente en Rust. Recuerda que Rust fomenta la inmutabilidad por defecto, lo que promueve la seguridad y la claridad en el código. ¡Sigue practicando y explorando las posibilidades que Rust tiene para ofrecer!

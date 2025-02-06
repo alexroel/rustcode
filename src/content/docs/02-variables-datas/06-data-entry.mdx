@@ -45,7 +45,7 @@ stdin().read_line(&mut user_choese).expect("Error al ingresar datos");
 
 ## Uso de `print!` y vaciado de búfer
 
-En este ejemplo, veremos cómo utilizar `print!` para mostrar mensajes sin agregar un salto de línea al final, y cómo vaciar el búfer de salida con la función `flush` para asegurarnos de que el mensaje se muestre inmediatamente.
+En Rust, puedes usar el macro `print!` para mostrar mensajes en la consola sin agregar un salto de línea al final. Esto es útil cuando deseas mostrar mensajes en la misma línea que la entrada del usuario. Para vaciar el búfer de salida y mostrar los mensajes inmediatamente, puedes usar la función `flush()` del módulo `io::stdout()`. Aquí hay un ejemplo que muestra cómo usar `print!` y `flush()` para interactuar con el usuario:
 
 ```rust
 use std::io::{stdin, stdout, Write};
@@ -66,18 +66,35 @@ fn main() {
 }
 ```
 
+- `use std::io::{stdin, stdout, Write}`: Importa los módulos `stdin`, `stdout` y `Write` del módulo `io` de la biblioteca estándar `std`.
 
-:::note
+- `stdout().flush().expect("Error al vaciar el búfer")`: Vacía el búfer de salida para mostrar el mensaje inmediatamente en la consola.
 
-1. **`print!` y `println!`**:
-   - Ambos macros se usan para mostrar mensajes en la consola, pero `println!` siempre agrega un salto de línea al final del mensaje, mientras que `print!` no lo hace. Esto es útil cuando queremos que el mensaje y la entrada del usuario se vean en la misma línea.
+:::tip[Uso de `flush()`]
 
-2. **Vaciado del búfer con `flush()`**:
-   - En sistemas donde la salida estándar está en búfer, los datos no se muestran en la consola hasta que se llene el búfer o se vacíe manualmente con `flush`. El uso de `flush()` es importante cuando queremos asegurarnos de que los datos se impriman inmediatamente.
+La función `flush()` se utiliza para vaciar el búfer de salida y mostrar los mensajes inmediatamente en la consola. Esto es útil cuando deseas que los mensajes se muestren de inmediato en lugar de esperar a que se llene el búfer.
 
-3. **Lectura de entrada con `read_line()`**:
-   - La función `read_line()` captura lo que el usuario ingresa como una cadena de texto (`String`). Si se necesitan otros tipos de datos, como enteros o flotantes, es necesario convertir la cadena utilizando métodos como `parse()`.
 :::
+
+## Caracteres especiales
+
+En Rust, puedes usar caracteres especiales para dar formato a los mensajes que se muestran en la consola. Algunos de los caracteres especiales más comunes son:
+
+- `\n`: Salto de línea.
+- `\t`: Tabulación.
+- `\r`: Retorno de carro.
+- `\\`: Barra invertida.
+- `\"`: Comillas dobles.
+
+Aquí hay un ejemplo que muestra cómo usar caracteres especiales en Rust:
+
+```rust
+fn main() {
+    println!("Hola, \n\tRust");
+    println!("Esto es una barra invertida: \\");
+    println!("Esto es una comilla doble: \"");
+}
+```
 
 ## Conclusión
 
