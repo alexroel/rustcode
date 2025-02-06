@@ -4,8 +4,8 @@ export const sidebar = [
       autogenerate: { directory: '01-intro-rust' },
     },
     {
-      label: 'Crea tu primer juego',
-      autogenerate: { directory: '02-firts-game' },
+      label: 'Variables y Tipos de Datos',
+      autogenerate: { directory: '02-variables-datas' },
     },
     {
       label: 'Control de flujo',
