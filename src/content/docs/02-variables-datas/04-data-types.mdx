@@ -71,5 +71,47 @@ println!("Valores para i16: Máximo = {}, Mínimo = {}", f32::MAX, f32::MIN);
 ```
 
 :::
+
 ## Booleanos
+
+Los valores booleanos en Rust son representados por el tipo de dato `bool`. Este tipo de dato solo puede tener dos valores: `true` o `false`.
+
+```rust
+let is_raining: bool = true;
+let is_sunny: bool = false;
+``` 
+
 ## Caracteres
+
+En Rust, el tipo de dato `char` es utilizado para representar un solo carácter Unicode. Los caracteres en Rust son escritos entre comillas simples.
+
+```rust
+let letter: char = 'A';
+let emoji: char = '😀';
+```
+
+## Cadenas de texto
+
+Las cadenas de texto en Rust son representadas por el tipo de dato `str`. Las cadenas de texto en Rust son inmutables y no pueden ser modificadas una vez que son creadas.
+
+```rust
+let message: &str = "¡Hola, mundo!";
+println!("{}", message);
+```
+
+:::tip[Tipo de dato `String`]
+El tipo de dato `String` es una cadena de texto dinámica que puede ser modificada. Para crear una cadena de texto `String`, puedes usar el método `to_string()`.
+
+```rust
+let mut name = "Alex".to_string();
+name.push_str(" en el mundo de Rust");
+println!("{}", name); // Alex en el mundo de Rust
+```
+
+:::
+
+## Conclusiones
+
+En Rust, los números se dividen en varias categorías según su tipo y si son enteros o flotantes. Existen tipos de datos específicos para representar números con signo, sin signo y números flotantes. Además, Rust ofrece tipos de datos para representar valores booleanos, caracteres y cadenas de texto.
+
+

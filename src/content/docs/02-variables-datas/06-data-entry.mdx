@@ -1,0 +1,91 @@
+---
+title: Entrada de datos
+description: En este artículo, exploraremos cómo leer datos desde la consola y mostrar información al usuario en Rust.
+---
+
+El manejo de entrada y salida de datos es una parte esencial de la programación, ya que permite a los programas interactuar con los usuarios y procesar información. En Rust, puedes leer datos desde la consola y mostrar mensajes utilizando funciones y macros proporcionados por la biblioteca estándar. En este artículo, exploraremos cómo leer datos desde la consola y mostrar información al usuario en Rust.
+
+
+## Leer datos desde la consola
+
+Para leer datos ingresados por el usuario desde la consola en Rust, puedes utilizar la función `read_line()` del módulo `io` de la biblioteca estándar `std`. Esta función lee una línea de texto desde la entrada estándar y la almacena en una variable mutable. Aquí hay un ejemplo simple que muestra cómo leer un número ingresado por el usuario y mostrarlo en la consola:
+
+```rust
+use std::io::stdin;
+
+fn main() {
+    println!("Mi primer juego con Rust");
+
+    let mut user_choese = String::new();
+
+    println!("Ingresa un número entre (0 y 100):");
+    
+    // Lee los datos ingresados por el usuario desde el teclado
+    stdin().read_line(&mut user_choese).;
+    
+    println!("El número ingresado por el usuario es: {}", user_choese);
+}
+```
+
+- `use std::io::stdin`: Importa el módulo `stdin` del módulo `io` de la biblioteca estándar `std`.
+- `stdin()`: Lee la entrada estándar, es decir, los datos que el usuario ingresa a través del teclado.
+- `read_line(&mut user_choese)`: Lee la línea de texto ingresada por el usuario y la almacena en la variable `user_choese`.
+- `unwrap()`: Maneja cualquier error que pueda ocurrir durante la lectura de la entrada.
+
+:::note[Uso de `expect("Mensaje de error")`]
+
+En lugar de `unwrap()`, puedes usar `expect("Mensaje de error")` para mostrar un mensaje de error personalizado si ocurre un error durante la lectura de la entrada. Por ejemplo:
+
+```rust
+stdin().read_line(&mut user_choese).expect("Error al ingresar datos");
+```
+
+:::
+
+
+## Uso de `print!` y vaciado de búfer
+
+En este ejemplo, veremos cómo utilizar `print!` para mostrar mensajes sin agregar un salto de línea al final, y cómo vaciar el búfer de salida con la función `flush` para asegurarnos de que el mensaje se muestre inmediatamente.
+
+```rust
+use std::io::{stdin, stdout, Write};
+
+fn main() {
+    println!("Adivina el número");
+
+    let mut user_choese = String::new();
+
+    print!("Ingresa un número entre (0 y 100):");
+    // Vacía el búfer de salida para mostrar el mensaje inmediatamente
+    stdout().flush().expect("Error al vaciar el búfer");
+
+    // Lee los datos desde el teclado
+    stdin().read_line(&mut user_choese).expect("Error al leer la línea");
+    
+    println!("El número ingresado por el usuario es: {}", user_choese);
+}
+```
+
+
+:::note
+
+1. **`print!` y `println!`**:
+   - Ambos macros se usan para mostrar mensajes en la consola, pero `println!` siempre agrega un salto de línea al final del mensaje, mientras que `print!` no lo hace. Esto es útil cuando queremos que el mensaje y la entrada del usuario se vean en la misma línea.
+
+2. **Vaciado del búfer con `flush()`**:
+   - En sistemas donde la salida estándar está en búfer, los datos no se muestran en la consola hasta que se llene el búfer o se vacíe manualmente con `flush`. El uso de `flush()` es importante cuando queremos asegurarnos de que los datos se impriman inmediatamente.
+
+3. **Lectura de entrada con `read_line()`**:
+   - La función `read_line()` captura lo que el usuario ingresa como una cadena de texto (`String`). Si se necesitan otros tipos de datos, como enteros o flotantes, es necesario convertir la cadena utilizando métodos como `parse()`.
+:::
+
+## Conclusión
+
+En Rust, la entrada y salida de datos desde la consola se maneja a través del módulo `io` de la biblioteca estándar. Con los macros `print!` y `println!`, puedes mostrar mensajes en la consola, y con `stdin().read_line()`, puedes leer la entrada del usuario. Además, es importante conocer el uso de `flush()` para vaciar el búfer de salida cuando sea necesario. Estos conceptos son esenciales para interactuar con los usuarios y crear aplicaciones más dinámicas y útiles.
+
+
+
+
+
+
+
