@@ -36,9 +36,8 @@ impl Persona {
 
 En este ejemplo, hemos definido un método asociado llamado `nuevo` en la estructura `Persona`. El método `nuevo` toma dos parámetros: `nombre` de tipo `&str` y `edad` de tipo `u8`, y devuelve una instancia de la estructura `Persona` con los valores proporcionados.
 
-:::nota[Uso de `Self`]
+:::note[Uso de `Self`]
 En Rust, puedes usar la palabra clave `Self` para referirte al tipo de la estructura o el enumerado en el que se está definiendo el método. En este ejemplo, estamos usando `Self` para referirnos al tipo de la estructura `Persona`.
-
 :::
 
 Puedes llamar a un método asociado en una estructura usando la notación de doble dos puntos `::`. Aquí tienes un ejemplo de cómo llamar al método `nuevo` en la estructura `Persona`:
@@ -91,9 +90,8 @@ persona.info(); // Método de instancia
 
 En este ejemplo, estamos llamando al método `nuevo` en la estructura `Persona` para crear una instancia de la estructura `Persona` con el nombre `Alex` y la edad `30`. Luego, estamos llamando al método `info` en la instancia de la estructura `Persona` para mostrar el nombre y la edad de la persona en la consola.
 
-:::nota[Referencia a `self`]
+:::note[Referencia a `self`]
 En Rust, los métodos de instancia toman una referencia inmutable `&self` o una referencia mutable `&mut self` como primer parámetro. La referencia `&self` permite acceder a los datos de la estructura de forma inmutable, mientras que la referencia `&mut self` permite acceder a los datos de la estructura de forma mutable.
-
 :::
 
 ## Conclusiones

@@ -1,0 +1,100 @@
+---
+title: Vectores
+description: En esta lección, aprenderás cómo usar vectores en Rust. Aprenderás cómo definir vectores, cómo agregar y quitar elementos de un vector, cómo acceder a los elementos de un vector y cómo usar vectores en tu código.
+---
+
+En esta lección, aprenderás cómo usar vectores en Rust. Aprenderás cómo definir vectores, cómo agregar y quitar elementos de un vector, cómo acceder a los elementos de un vector y cómo usar vectores en tu código. Los vectores son una colección de elementos del mismo tipo que te permiten almacenar varios valores juntos. Puedes usar vectores para almacenar una lista de elementos y acceder a ellos por índice. También puedes agregar y quitar elementos de un vector según sea necesario.
+
+## Definición de vectores
+
+Los vectores en Rust se definen usando la macro `vec!` seguida de corchetes `[]` con los elementos del vector separados por comas. Aquí tienes un ejemplo de cómo definir un vector en Rust:
+
+```rust
+let numeros = vec![1, 2, 3, 4, 5];
+```
+
+En este ejemplo, hemos definido un vector llamado `numeros` con cinco elementos: `1`, `2`, `3`, `4` y `5`. El tipo de dato del vector es `Vec<i32>`, que significa que el vector contiene elementos de tipo `i32` (entero de 32 bits).
+
+## Acceso a los elementos de un vector
+
+Puedes acceder a los elementos de un vector usando la notación de corchetes `[]` seguida del índice del elemento que quieres acceder. Los índices de los elementos de un vector comienzan en `0` y van hasta `n-1`, donde `n` es el número de elementos del vector. Aquí tienes un ejemplo de cómo acceder a los elementos del vector `numeros`:
+
+```rust
+println!("Primer número: {}", numeros[0]);
+println!("Segundo número: {}", numeros[1]);
+```
+
+En este ejemplo, estamos accediendo al primer y segundo elemento del vector `numeros` y mostrando sus valores en la consola.
+
+## Crear un vector vacío
+
+Puedes crear un vector vacío en Rust y agregar elementos a él según sea necesario. Aquí tienes un ejemplo de cómo crear un vector vacío y agregar elementos a él:
+
+```rust
+let mut nombres = Vec::new();
+
+// Agregar elementos al vector
+nombres.push("Alex");
+nombres.push("John");
+nombres.push("Alice");
+
+// Mostrar los elementos del vector
+for nombre in nombres {
+    println!("{}", nombre);
+}
+```
+
+En este ejemplo, hemos creado un vector vacío llamado `nombres` usando la función `Vec::new()`. Luego, hemos agregado tres elementos al vector usando el método `push()`. Finalmente, hemos recorrido el vector con un bucle `for` y mostrado los elementos en la consola.
+
+## Eliminar elementos de un vector
+
+Puedes eliminar elementos de un vector usando el método `remove()` o `pop()`. Aquí tienes un ejemplo de cómo eliminar elementos de un vector:
+
+```rust
+nombres.remove(1); // Eliminar el segundo elemento
+nombres.pop(); // Eliminar el último elemento
+```
+
+En este ejemplo, estamos eliminando el segundo elemento del vector `nombres` usando el método `remove()` y el último elemento usando el método `pop()`.
+
+## Vectores con tipos de datos compuestos
+
+Puedes crear vectores con tipos de datos compuestos en Rust. Aquí tienes un ejemplo de cómo hacerlo:
+
+```rust
+struct Persona {
+    nombre: String,
+    edad: u8,
+}
+
+let personas = vec![
+    Persona { nombre: String::from("Alex"), edad: 30 },
+    Persona { nombre: String::from("John"), edad: 25 },
+    Persona { nombre: String::from("Alice"), edad: 35 },
+];
+```
+
+En este ejemplo, hemos definido una estructura `Persona` con dos campos: `nombre` de tipo `String` y `edad` de tipo `u8`. Luego, hemos creado un vector `personas` de tres elementos de tipo `Persona` y hemos inicializado cada elemento con una persona diferente.
+
+## Iterar sobre un vector
+
+Puedes iterar sobre un vector usando un bucle `for` o el método `iter()`. Aquí tienes un ejemplo de cómo iterar sobre un vector:
+
+```rust
+for persona in personas.iter() {
+    println!("Nombre: {}, Edad: {}", persona.nombre, persona.edad);
+}
+```
+
+En este ejemplo, estamos iterando sobre el vector `personas` con un bucle `for` y mostrando el nombre y la edad de cada persona en la consola.
+
+## Métodos útiles para vectores
+
+Rust proporciona varios métodos útiles para trabajar con vectores, como `len()`, `is_empty()`, `contains()`, `sort()`, `reverse()`, `join()`, `split()`, `map()`, `filter()`, `fold()`, entre otros. Puedes consultar la [documentación oficial de Rust](https://doc.rust-lang.org/std/vec/struct.Vec.html) para obtener más información sobre los métodos disponibles para vectores.
+
+¡Ahora estás listo para usar vectores en Rust! Prueba a crear vectores con diferentes tipos de datos y a trabajar con ellos en tu código.
+
+
+
+
+

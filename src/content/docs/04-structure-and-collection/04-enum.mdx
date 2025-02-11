@@ -10,14 +10,18 @@ En esta lección, aprenderás cómo definir y usar enumeraciones en Rust. Aprend
 Las enumeraciones en Rust se definen usando la palabra clave `enum` seguida del nombre de la enumeración y una lista de elementos separados por comas. Cada elemento de la enumeración puede tener un valor asociado o no. Aquí tienes un ejemplo de cómo definir una enumeración en Rust:
 
 ```rust
+#[derive(Debug)]
 enum Genero {
     Masculino,
     Femenino,
     Otro,
 }
 ```
-
 En este ejemplo, hemos definido una enumeración llamada `Genero` con tres elementos: `Masculino`, `Femenino` y `Otro`. Cada elemento de la enumeración representa un género y no tiene un valor asociado. Ahora puedes usar esta enumeración para representar géneros en tu código.
+
+:::note[Derivar el trait `Debug`]
+Hemos usado el atributo `#[derive(Debug)]` en la definición de la enumeración `Genero` para poder imprimir los valores de la enumeración con el formato de depuración `{:?}`. Este atributo deriva automáticamente la implementación del trait `Debug` para la enumeración `Genero`.
+:::
 
 Ejemplo de uso de la enumeración `Genero`:
 
@@ -58,9 +62,104 @@ En este ejemplo, hemos definido una estructura `Persona` con tres campos: `nombr
 Las enumeraciones en Rust pueden tener valores asociados a sus elementos. Puedes usar valores asociados para almacenar información adicional junto con el elemento de la enumeración. Aquí tienes un ejemplo de cómo definir una enumeración con valores asociados en Rust:
 
 ```rust
+#[derive(Debug)]
 enum Color {
     RGB(u8, u8, u8),
     Hex(String),
 }
 ```
+
+En este ejemplo, hemos definido una enumeración llamada `Color` con dos elementos: `RGB` y `Hex`. El elemento `RGB` tiene tres valores asociados de tipo `u8` para representar los componentes rojo, verde y azul de un color. El elemento `Hex` tiene un valor asociado de tipo `String` para representar un color en formato hexadecimal. Ahora puedes usar esta enumeración para representar colores en tu código.
+
+Ejemplo de uso de la enumeración `Color`:
+
+```rust
+#[derive(Debug)]
+struct Pixel {
+    x: u32,
+    y: u32,
+    color: Color,
+}
+
+impl Pixel {
+    fn nuevo(x: u32, y: u32, color: Color) -> Self {
+        Self { x, y, color }
+    }
+
+    fn info(&self) {
+        println!("Posición: ({}, {})", self.x, self.y);
+        println!("Color: {:?}", self.color);
+    }
+}
+
+fn main() {
+    let pixel1 = Pixel::nuevo(10, 20, Color::RGB(255, 0, 0));
+    let pixel2 = Pixel::nuevo(20, 30, Color::Hex(String::from("#00FF00")));
+    pixel1.info();
+    pixel2.info();
+}
+```
+
+En este ejemplo, hemos definido una estructura `Pixel` con tres campos: `x` de tipo `u32`, `y` de tipo `u32` y `color` de tipo `Color`. Hemos definido un método asociado `nuevo` en la estructura `Pixel` para crear instancias de la estructura con los valores proporcionados. Hemos definido un método de instancia `info` en la estructura `Pixel` para mostrar la información del píxel en la consola. Hemos creado dos instancias de la estructura `Pixel` con diferentes colores y mostrado la información de cada píxel en la consola.
+
+## Definición de una enumeración con estructuras
+
+Las enumeraciones en Rust pueden contener estructuras como valores asociados. Puedes usar estructuras para representar información más compleja junto con el elemento de la enumeración. Aquí tienes un ejemplo de cómo definir una enumeración con estructuras en Rust:
+
+```rust
+#[derive(Debug)]
+struct RGB {
+    r: u8,
+    g: u8,
+    b: u8,
+}
+
+#[derive(Debug)]
+struct Hex {
+    value: String,
+}
+
+#[derive(Debug)]
+enum Color {
+    RGB(RGB),
+    Hex(Hex),
+}
+```
+
+En este ejemplo, hemos definido dos estructuras `RGB` y `Hex` para representar los componentes rojo, verde y azul de un color y un color en formato hexadecimal, respectivamente. Hemos definido una enumeración `Color` con dos elementos: `RGB` y `Hex`, que contienen las estructuras `RGB` y `Hex` como valores asociados. Ahora puedes usar esta enumeración para representar colores más complejos en tu código.
+
+Ejemplo de uso de la enumeración `Color` con estructuras:
+
+```rust
+#[derive(Debug)]
+struct Pixel {
+    x: u32,
+    y: u32,
+    color: Color,
+}
+
+impl Pixel {
+    fn nuevo(x: u32, y: u32, color: Color) -> Self {
+        Self { x, y, color }
+    }
+
+    fn info(&self) {
+        println!("Posición: ({}, {})", self.x, self.y);
+        match &self.color {
+            Color::RGB(rgb) => println!("Color: RGB({}, {}, {})", rgb.r, rgb.g, rgb.b),
+            Color::Hex(hex) => println!("Color: Hex({})", hex.value),
+        }
+    }
+}
+
+fn main() {
+    let pixel1 = Pixel::nuevo(10, 20, Color::RGB(RGB { r: 255, g: 0, b: 0 }));
+    let pixel2 = Pixel::nuevo(20, 30, Color::Hex(Hex { value: String::from("#00FF00") }));
+    pixel1.info();
+    pixel2.info();
+}
+```
+
+
+
 

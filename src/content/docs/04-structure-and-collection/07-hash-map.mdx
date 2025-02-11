@@ -1,0 +1,122 @@
+---
+title: Mapas hash
+description: En esta lección, aprenderás cómo usar mapas hash en Rust. Aprenderás cómo definir mapas hash, cómo agregar y quitar elementos de un mapa hash, cómo acceder a los elementos de un mapa hash y cómo usar mapas hash en tu código.
+---
+
+En esta lección, aprenderás cómo usar mapas hash en Rust. Aprenderás cómo definir mapas hash, cómo agregar y quitar elementos de un mapa hash, cómo acceder a los elementos de un mapa hash y cómo usar mapas hash en tu código. Los mapas hash son una colección de elementos clave-valor que te permiten almacenar pares de valores juntos. Puedes usar mapas hash para almacenar una lista de elementos y acceder a ellos por clave. También puedes agregar y quitar elementos de un mapa hash según sea necesario.
+
+## Definición de mapas hash
+
+Los mapas hash en Rust se definen usando la macro `hashmap!` seguida de corchetes `{}` con los pares clave-valor separados por comas. Aquí tienes un ejemplo de cómo definir un mapa hash en Rust:
+
+```rust
+use std::collections::HashMap;
+
+let mut edades = hashmap! {
+    "Alex" => 30,
+    "John" => 25,
+    "Alice" => 28,
+};
+```
+
+En este ejemplo, hemos definido un mapa hash llamado `edades` con tres pares clave-valor: `"Alex" => 30`, `"John" => 25` y `"Alice" => 28`. El tipo de dato del mapa hash es `HashMap<&str, i32>`, que significa que el mapa hash contiene claves de tipo `&str` (cadena de texto) y valores de tipo `i32` (entero de 32 bits).
+
+## Acceso a los elementos de un mapa hash
+
+Puedes acceder a los elementos de un mapa hash usando la notación de corchetes `[]` seguida de la clave del elemento que quieres acceder. Aquí tienes un ejemplo de cómo acceder a los elementos del mapa hash `edades`:
+
+```rust
+println!("Edad de Alex: {}", edades["Alex"]);
+println!("Edad de John: {}", edades["John"]);
+```
+
+En este ejemplo, estamos accediendo a las edades de `Alex` y `John` en el mapa hash `edades` y mostrando sus valores en la consola.
+
+## Agregar y quitar elementos de un mapa hash
+
+Puedes agregar elementos a un mapa hash usando la notación de corchetes `[]` seguida de la clave y el valor que quieres agregar. Aquí tienes un ejemplo de cómo agregar un nuevo elemento al mapa hash `edades`:
+
+```rust
+edades["Bob"] = 35;
+
+// Uso de insert para agregar un nuevo elemento
+edades.insert("Pedro", 40);
+
+```
+
+En este ejemplo, estamos agregando un nuevo elemento con la clave `Bob` y el valor `35` al mapa hash `edades`. También puedes usar el método `insert()` para agregar un nuevo elemento al mapa hash.
+
+Puedes quitar elementos de un mapa hash usando el método `remove()`. Aquí tienes un ejemplo de cómo quitar un elemento del mapa hash `edades`:
+
+```rust
+edades.remove("Alice");
+```
+
+En este ejemplo, estamos quitando el elemento con la clave `Alice` del mapa hash `edades`.
+
+## Iterar sobre un mapa hash
+
+Puedes iterar sobre un mapa hash usando un bucle `for` y el método `iter()`. Aquí tienes un ejemplo de cómo iterar sobre el mapa hash `edades`:
+
+```rust
+for (nombre, edad) in edades.iter() {
+    println!("{} tiene {} años", nombre, edad);
+}
+```
+
+En este ejemplo, estamos iterando sobre el mapa hash `edades` y mostrando los nombres y edades de cada elemento en la consola.
+
+## Verificar si una clave existe en un mapa hash
+
+Puedes verificar si una clave existe en un mapa hash usando el método `contains_key()`. Aquí tienes un ejemplo de cómo verificar si la clave `Alice` existe en el mapa hash `edades`:
+
+```rust
+if edades.contains_key("Alice") {
+    println!("Alice está en el mapa hash");
+} else {
+    println!("Alice no está en el mapa hash");
+}
+```
+
+En este ejemplo, estamos verificando si la clave `Alice` existe en el mapa hash `edades` y mostrando un mensaje en la consola según el resultado.
+
+Los mapas hash son una forma eficiente de almacenar y acceder a datos en Rust. Puedes usar mapas hash para almacenar información estructurada y acceder a ella de forma rápida y sencilla. ¡Prueba a usar mapas hash en tu código y experimenta con diferentes operaciones para familiarizarte con ellos!
+
+```rust
+use std::collections::HashMap;
+
+fn main () {
+    let mut edades = HashMap::new();
+    edades.insert("Alex", 30);
+    edades.insert("John", 25);
+    edades.insert("Alice", 28);
+
+    println!("Edad de Alex: {}", edades["Alex"]);
+    println!("Edad de John: {}", edades["John"]);
+
+    edades.insert("Bob", 35);
+    edades.insert("Pedro", 40);
+
+    edades.remove("Alice");
+
+    for (nombre, edad) in edades.iter() {
+        println!("{} tiene {} años", nombre, edad);
+    }
+
+    if edades.contains_key("Alice") {
+        println!("Alice está en el mapa hash");
+    } else {
+        println!("Alice no está en el mapa hash");
+    }
+}
+``` 
+
+En este ejemplo, hemos definido un mapa hash `edades` con tres pares clave-valor: `"Alex" => 30`, `"John" => 25` y `"Alice" => 28`. Hemos accedido a las edades de `Alex` y `John` y las hemos mostrado en la consola. Luego, hemos agregado un nuevo elemento con la clave `Bob` y el valor `35` al mapa hash y hemos quitado el elemento con la clave `Alice`. Finalmente, hemos iterado sobre el mapa hash y hemos mostrado los nombres y edades de cada elemento en la consola. También hemos verificado si la clave `Alice` existe en el mapa hash y hemos mostrado un mensaje en la consola según el resultado.
+
+¡Prueba a ejecutar este código en tu entorno de desarrollo y experimenta con diferentes operaciones en el mapa hash! Puedes agregar más elementos, quitar elementos y verificar si ciertas claves existen en el mapa hash. ¡Diviértete explorando los mapas hash en Rust!
+
+## Conclusiones
+
+En esta lección, has aprendido cómo usar mapas hash en Rust. Has aprendido cómo definir mapas hash, cómo agregar y quitar elementos de un mapa hash, cómo acceder a los elementos de un mapa hash y cómo iterar sobre un mapa hash. Los mapas hash son una colección de elementos clave-valor que te permiten almacenar pares de valores juntos y acceder a ellos por clave. Puedes usar mapas hash para almacenar información estructurada y acceder a ella de forma rápida y sencilla. ¡Sigue practicando con mapas hash y experimenta con diferentes operaciones para familiarizarte con ellos!
+
+
