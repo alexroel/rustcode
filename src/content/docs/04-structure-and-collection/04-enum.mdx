@@ -1,0 +1,66 @@
+---
+title: Enumeraciones
+description: En esta lección, aprenderás cómo definir y usar enumeraciones en Rust. Aprenderás cómo definir enumeraciones, cómo asignar valores a los elementos de una enumeración y cómo usar enumeraciones en tu código.
+---
+
+En esta lección, aprenderás cómo definir y usar enumeraciones en Rust. Aprenderás cómo definir enumeraciones, cómo asignar valores a los elementos de una enumeración y cómo usar enumeraciones en tu código. Las enumeraciones son un tipo de dato que te permite definir un conjunto de valores posibles para una variable. Puedes usar enumeraciones para representar estados, opciones o categorías en tu código.
+
+## Definición de enumeraciones
+
+Las enumeraciones en Rust se definen usando la palabra clave `enum` seguida del nombre de la enumeración y una lista de elementos separados por comas. Cada elemento de la enumeración puede tener un valor asociado o no. Aquí tienes un ejemplo de cómo definir una enumeración en Rust:
+
+```rust
+enum Genero {
+    Masculino,
+    Femenino,
+    Otro,
+}
+```
+
+En este ejemplo, hemos definido una enumeración llamada `Genero` con tres elementos: `Masculino`, `Femenino` y `Otro`. Cada elemento de la enumeración representa un género y no tiene un valor asociado. Ahora puedes usar esta enumeración para representar géneros en tu código.
+
+Ejemplo de uso de la enumeración `Genero`:
+
+```rust
+#[derive(Debug)]
+struct Persona {
+    nombre: String,
+    edad: u8,
+    genero: Genero,
+}
+
+impl Persona {
+    fn nuevo(nombre: &str, edad: u8, genero: Genero) -> Self {
+        Self {
+            nombre: String::from(nombre),
+            edad,
+            genero,
+        }
+    }
+
+    fn info(&self) {
+        println!("Nombre: {}", self.nombre);
+        println!("Edad: {}", self.edad);
+        println!("Género: {:?}", self.genero);
+    }
+}
+
+fn main() {
+    let persona = Persona::nuevo("Alex", 30, Genero::Masculino);
+    persona.info();
+}
+```
+
+En este ejemplo, hemos definido una estructura `Persona` con tres campos: `nombre` de tipo `String`, `edad` de tipo `u8` y `genero` de tipo `Genero`. Hemos definido un método asociado `nuevo` en la estructura `Persona` para crear instancias de la estructura con los valores proporcionados. Hemos definido un método de instancia `info` en la estructura `Persona` para mostrar la información de la persona en la consola. Hemos usado un `match` para comparar el valor del género y mostrar el género correspondiente en la consola.
+
+## Enumeraciones con valores asociados
+
+Las enumeraciones en Rust pueden tener valores asociados a sus elementos. Puedes usar valores asociados para almacenar información adicional junto con el elemento de la enumeración. Aquí tienes un ejemplo de cómo definir una enumeración con valores asociados en Rust:
+
+```rust
+enum Color {
+    RGB(u8, u8, u8),
+    Hex(String),
+}
+```
+

@@ -1,0 +1,106 @@
+---
+title: Implementación de métodos
+description: En esta lección, aprenderás cómo implementar métodos en estructuras en Rust. Aprenderás cómo definir métodos para estructuras, cómo implementar métodos en estructuras y cómo llamar métodos en instancias de estructuras.
+---
+
+En esta lección, aprenderás cómo implementar métodos en estructuras en Rust. Aprenderás cómo definir métodos para estructuras, cómo implementar métodos en estructuras y cómo llamar métodos en instancias de estructuras.
+
+Los métodos en Rust son funciones que se definen dentro del contexto de una estructura o un enumerado. Los métodos permiten encapsular la lógica relacionada con una estructura o un enumerado y proporcionan una forma de interactuar con los datos de la estructura o el enumerado.
+
+- Métodos asociados: Son funciones que se definen en el contexto de una estructura o un enumerado, pero no tienen acceso a los datos de la estructura o el enumerado. Se definen usando la palabra clave `impl` seguida del nombre de la estructura o el enumerado y el nombre de la función.
+
+- Métodos de instancia: Son funciones que se definen en el contexto de una estructura o un enumerado y tienen acceso a los datos de la estructura o el enumerado. Se definen usando la palabra clave `impl` seguida del nombre de la estructura o el enumerado y el nombre de la función, y se accede a los datos de la estructura o el enumerado usando la palabra clave `self`.
+
+## Métodos asociados
+
+Los métodos asociados son funciones que se definen en el contexto de una estructura o un enumerado, pero no tienen acceso a los datos de la estructura o el enumerado. Los métodos asociados se definen usando la palabra clave `impl` seguida del nombre de la estructura o el enumerado y el nombre de la función.
+
+Aquí tienes un ejemplo de cómo definir un método asociado en una estructura en Rust:
+
+```rust
+#[derive(Debug)]
+struct Persona {
+    nombre: String,
+    edad: u8,
+}
+
+impl Persona {
+    fn nuevo(nombre: &str, edad: u8) -> Self {
+        Self {
+            nombre: String::from(nombre),
+            edad,
+        }
+    }
+}
+```
+
+En este ejemplo, hemos definido un método asociado llamado `nuevo` en la estructura `Persona`. El método `nuevo` toma dos parámetros: `nombre` de tipo `&str` y `edad` de tipo `u8`, y devuelve una instancia de la estructura `Persona` con los valores proporcionados.
+
+:::nota[Uso de `Self`]
+En Rust, puedes usar la palabra clave `Self` para referirte al tipo de la estructura o el enumerado en el que se está definiendo el método. En este ejemplo, estamos usando `Self` para referirnos al tipo de la estructura `Persona`.
+
+:::
+
+Puedes llamar a un método asociado en una estructura usando la notación de doble dos puntos `::`. Aquí tienes un ejemplo de cómo llamar al método `nuevo` en la estructura `Persona`:
+
+```rust
+let persona = Persona::nuevo("Alex", 30);
+
+println!("{:?}", persona);
+```
+
+En este ejemplo, estamos llamando al método `nuevo` en la estructura `Persona` con el nombre `Alex` y la edad `30` y almacenando el resultado en la variable `persona`. Luego, estamos imprimiendo la instancia de la estructura `Persona` en la consola usando el formato de depuración `{:?}`.
+
+## Métodos de instancia
+
+Los métodos de instancia son funciones que se definen en el contexto de una estructura o un enumerado y tienen acceso a los datos de la estructura o el enumerado. Los métodos de instancia se definen usando la palabra clave `impl` seguida del nombre de la estructura o el enumerado y el nombre de la función, y se accede a los datos de la estructura o el enumerado usando la palabra clave `self`.
+
+Aquí tienes un ejemplo de cómo definir un método de instancia en una estructura en Rust:
+
+```rust
+#[derive(Debug)]
+struct Persona {
+    nombre: String,
+    edad: u8,
+}
+
+impl Persona {
+    fn nuevo(nombre: &str, edad: u8) -> Self {
+        Self {
+            nombre: String::from(nombre),
+            edad,
+        }
+    }
+
+    fn info(&self) {
+        println!("Nombre: {}", self.nombre);
+        println!("Edad: {}", self.edad);
+    }
+}
+```
+
+En este ejemplo, hemos definido un método de instancia llamado `info` en la estructura `Persona`. El método `info` toma una referencia inmutable `&self` como primer parámetro y muestra el nombre y la edad de la persona en la consola.
+
+Puedes llamar a un método de instancia en una instancia de una estructura usando la notación de punto `.`. Aquí tienes un ejemplo de cómo llamar al método `info` en una instancia de la estructura `Persona`:
+
+```rust
+let persona = Persona::nuevo("Alex", 30); // Método asociado
+
+persona.info(); // Método de instancia
+```
+
+En este ejemplo, estamos llamando al método `nuevo` en la estructura `Persona` para crear una instancia de la estructura `Persona` con el nombre `Alex` y la edad `30`. Luego, estamos llamando al método `info` en la instancia de la estructura `Persona` para mostrar el nombre y la edad de la persona en la consola.
+
+:::nota[Referencia a `self`]
+En Rust, los métodos de instancia toman una referencia inmutable `&self` o una referencia mutable `&mut self` como primer parámetro. La referencia `&self` permite acceder a los datos de la estructura de forma inmutable, mientras que la referencia `&mut self` permite acceder a los datos de la estructura de forma mutable.
+
+:::
+
+## Conclusiones
+
+En Rust, puedes implementar métodos en estructuras para encapsular la lógica relacionada con los datos de la estructura y proporcionar una forma de interactuar con los datos. Los métodos asociados son funciones que se definen en el contexto de una estructura o un enumerado, pero no tienen acceso a los datos de la estructura o el enumerado. Los métodos de instancia son funciones que se definen en el contexto de una estructura o un enumerado y tienen acceso a los datos de la estructura o el enumerado. Puedes llamar a los métodos en instancias de estructuras usando la notación de punto `.`.
+
+
+
+
+

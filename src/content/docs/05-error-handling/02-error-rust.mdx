@@ -1,0 +1,38 @@
+---
+title: Errores irrecoperables
+description: Aprende más sobre mi proyecto en este sitio de documentación construido con Starlight.
+---
+
+En Rust, los errores irrecoverables son errores que detienen la ejecución de un programa y no se pueden recuperar. Estos errores se producen cuando ocurre una condición que no se puede manejar de manera segura, como un desbordamiento de pila o un índice fuera de rango. Cuando se produce un error irrecoverable, Rust aborta la ejecución del programa y muestra un mensaje de error que indica la causa del problema.
+
+## Ejemplo de error irrecoverable
+
+Aquí hay un ejemplo de un error irrecoverable en Rust:
+
+```rust
+fn main() {
+    let array = [1, 2, 3];
+
+    println!("El cuarto elemento: {}", array[3]);
+}
+```
+
+Este programa intenta acceder al cuarto elemento de un array de tres elementos, lo que resulta en un error irrecoverable. Cuando ejecutas este programa, Rust mostrará un mensaje de error que indica que se produjo un error de índice fuera de rango.
+
+## Uso de `panic!` para generar errores irrecoverables
+
+En Rust, puedes generar errores irrecoverables manualmente utilizando la macro `panic!`. La macro `panic!` detiene la ejecución del programa y muestra un mensaje de error. Aquí hay un ejemplo de cómo usar `panic!` para generar un error irrecoverable:
+
+```rust
+fn main() {
+    panic!("¡Esto es un error irrecoverable!");
+}
+```
+
+Cuando ejecutas este programa, Rust mostrará un mensaje de error que indica que se produjo un error irrecoverable con el mensaje "¡Esto es un error irrecoverable!".
+
+- `panic!` es una macro que se utiliza para generar errores irrecoverables en Rust. Cuando se llama a `panic!`, el programa se detiene y se muestra un mensaje de error.
+
+- En terminos generales, los errores irrecoperables se debe usar cuando un programa se encuentra en un estado que no se puede recuperar de manera segura, como un desbordamiento de pila o un índice fuera de rango.
+
+- Rust proporciona una serie de funciones y macros para manejar errores irrecoverables, como `panic!` y `unwrap`.

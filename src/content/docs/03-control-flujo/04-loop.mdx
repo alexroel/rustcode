@@ -25,7 +25,7 @@ fn main() {
 - En este ejemplo, la instrucción `println!()` se ejecuta repetidamente.
 - Como el ciclo no tiene una condición de salida y no hay una instrucción `break`, el programa continuará imprimiendo indefinidamente hasta que sea interrumpido manualmente.
 
-### Interrumpiendo un Ciclo
+## Interrumpiendo un Ciclo
 
 Para evitar que un ciclo `loop` se ejecute infinitamente, se puede utilizar la instrucción `break` para detenerlo cuando se cumpla una condición específica.
 
@@ -46,35 +46,9 @@ fn main() {
 - Este ciclo incrementa la variable `contador` en cada iteración.
 - Cuando `contador` llega a 5, el ciclo se interrumpe usando `break` y el programa deja de ejecutar el bucle.
 
-### Usando `continue`
+## Uso de `loop` como expresión
 
-La instrucción `continue` dentro de un ciclo permite saltar el resto del bloque de código actual y comenzar una nueva iteración.
-
-```rust
-fn main() {
-    let mut contador = 0;
-
-    loop {
-        contador += 1;
-
-        if contador % 2 == 0 {
-            continue;  // Salta los números pares
-        }
-
-        println!("Número impar: {}", contador);
-
-        if contador == 9 {
-            break;
-        }
-    }
-}
-```
-- El ciclo `loop` incrementa `contador` y usa `continue` para saltar a la siguiente iteración si el valor de `contador` es par.
-- De esta forma, solo los números impares son impresos.
-
-## Retornando Valores
-
-Una de las características más útiles de `loop` en Rust es que puede devolver un valor. Esto se logra utilizando `break` con un valor que es luego asignado a una variable.
+En Rust, el ciclo `loop` también se puede utilizar como una expresión, lo que significa que puede devolver un valor. Esto es útil cuando necesitas realizar una tarea repetitiva y obtener un resultado al final.
 
 ```rust
 fn main() {
@@ -83,55 +57,123 @@ fn main() {
     let resultado = loop {
         contador += 1;
 
-        if contador == 10 {
-            break contador * 2; // Devuelve el valor cuando el contador llega a 10
+        if contador == 5 {
+            break contador * 2;
         }
     };
 
-    println!("El resultado es: {}", resultado);
+    println!("Resultado: {}", resultado);
 }
 ```
-- Cuando `contador` llega a 10, el ciclo se interrumpe y se devuelve el valor `contador * 2`.
-- Este valor es luego asignado a la variable `resultado`, lo que permite usar el resultado fuera del ciclo.
 
-## Bucles Etiquetados
+- En este ejemplo, el ciclo `loop` incrementa el contador en cada iteración.
+- Cuando el contador llega a 5, el ciclo se interrumpe y devuelve el valor del contador multiplicado por 2.
+- El valor devuelto por el ciclo se asigna a la variable `resultado`, que luego se imprime en la pantalla.
 
-Rust permite etiquetar ciclos para diferenciar entre ciclos anidados y facilitar el control del flujo. Esto es especialmente útil cuando tienes varios ciclos anidados y necesitas controlar desde cuál de ellos romper o continuar.
+## Trabajando en nuestro juego
 
-```rust
+En nuestro juego vamos implementar un ciclo `loop` para que el jugador pueda jugar hasta adivinar el número secreto. Vamos a modificar el código anterior para incluir el ciclo `loop` y permitir que el jugador juegue varias veces.
+
+```diff lang="rs"
+use std::io::{stdin, stdout, Write};
+
+// Importar el crate rand
+use rand::random_range;
+
+
 fn main() {
-    let mut contador_externo = 0;
+    println!("Mi primer juego con Rust");
 
-    'ciclo_externo: loop {
-        let mut contador_interno = 0;
+    // Generar un número aleatorio entre 1 y 100
+    let secret_number = random_range(1..101);
+-    println!("El número secreto es: {}", secret_number);    
 
-        loop {
-            println!("Contador interno: {}", contador_interno);
++    loop {
+        let mut user_choese = String::new();
 
-            if contador_interno == 2 {
-                break;
-            }
+        print!("Ingres un número entre (0 y 100):");
+        // Vacia el bufer
+        stdout().flush().expect("No se pudo vaciar stdout"); 
 
-            if contador_externo == 3 {
-                break 'ciclo_externo; // Sale del ciclo externo
-            }
+        //Ingresa los datos desde teclado
+        stdin().read_line(&mut user_choese).expect("Error al leer la línea");
 
-            contador_interno += 1;
-        }
+        // Convertir de String a Integer
+        let user_choese:i32 = user_choese.trim().parse().expect("¡Ingrese un número por favor!");
 
-        contador_externo += 1;
-    }
++        if user_choese == secret_number {
++            println!("¡Felicidades! Has adivinado el número");
++            break;
++        } else if user_choese < secret_number {
++            println!("El número secreto es mayor");
++        } else {
++            println!("El número secreto es menor");
++        }
+        
++    }
 
-    println!("Contador externo ha terminado en: {}", contador_externo);
+-    println!("El número ingresado por el usaurio es: {}", user_choese);
+   
 }
 ```
-- El ciclo interno se ejecuta hasta que `contador_interno` llega a 2, pero si el ciclo externo alcanza un valor de 3, el programa rompe ambos ciclos utilizando la etiqueta `'ciclo_externo`.
-- Las etiquetas facilitan la gestión de ciclos complejos donde el control de flujo depende de múltiples niveles de anidación.
 
-## Conclusión
+- **Agrega un ciclo `loop`** alrededor del código existente para permitir que el jugador juegue varias veces.
 
-El ciclo `loop` en Rust es una herramienta flexible que te permite manejar iteraciones de código de manera simple y efectiva. Desde usos básicos para ejecutar bloques indefinidamente hasta casos más avanzados donde se requiere control de flujo, manejo de recursos y concurrente, `loop` es una parte esencial del ecosistema Rust.
+- **Agrega una condición `if-else`** para comparar el número ingresado por el jugador con el número secreto. Si el jugador adivina el número, imprime un mensaje de felicitaciones. Si no, imprime una pista para ayudar al jugador a adivinar.
 
-Con la capacidad de devolver valores, etiquetar ciclos y manejar situaciones concurrentes, `loop` en Rust te proporciona las bases para construir aplicaciones robustas que requieren una alta eficiencia en la ejecución de tareas repetitivas o servicios que deben permanecer activos a largo plazo.
+- **Elimina la impresión del número secreto** para que el jugador no pueda verlo.
+- **Elimina la impresión del número ingresado por el usuario** para evitar que el jugador vea su elección anterior.
 
-Por último, al aprender a combinar `loop` con otras características de Rust, como las expresiones y el manejo seguro de memoria, podrás escribir código más eficiente, legible y seguro para todo tipo de aplicaciones.
+## Uso de `match` en lugar de `if-else`
+
+En lugar de usar una serie de instrucciones `if-else` para comparar el número ingresado por el jugador con el número secreto, podríamos usar una expresión `match` para manejar los diferentes casos de manera más clara y concisa.
+
+```diff lang="rs"
+use std::io::{stdin, stdout, Write};
+
+// Importar el crate rand
+use rand::random_range;
+
+
+fn main() {
+    println!("Mi primer juego con Rust");
+
+    // Generar un número aleatorio entre 1 y 100
+    let secret_number = random_range(1..101);  
+
+    loop {
+        let mut user_choese = String::new();
+
+        print!("Ingres un número entre (0 y 100):");
+        // Vacia el bufer
+        stdout().flush().expect("No se pudo vaciar stdout"); 
+
+        //Ingresa los datos desde teclado
+        stdin().read_line(&mut user_choese).expect("Error al leer la línea");
+
+        // Convertir de String a Integer
+        let user_choese:i32 = user_choese.trim().parse().expect("¡Ingrese un número por favor!");
+
+-        if user_choese == secret_number {
+-            println!("¡Felicidades! Has adivinado el número");
+-            break;
+-        } else if user_choese < secret_number {
+-            println!("El número secreto es mayor");
+-        } else {
+-            println!("El número secreto es menor");
+-        }
+
++        match user_choese.cmp(&secret_number) {
++            Ordering::Less => println!("El número secreto es mayor"),
++            Ordering::Greater => println!("El número secreto es menor"),
++            Ordering::Equal => {
++                println!("¡Felicidades! Has adivinado el número");
++                break;
++            }
++        }    
+    }   
+}
+```
+
+
+

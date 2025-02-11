@@ -1,0 +1,191 @@
+---
+title: Práctica - Juego de adivina el número
+description: En esta práctica, implementaremos funciones a nuestro juego de adivinar el número.
+---
+
+En esta práctica, implementaremos funciones a nuestro juego de adivinar el número. El objetivo es refactorizar el código existente para que sea más modular y fácil de entender. También agregaremos algunas mejoras al juego, como la capacidad de elegir niveles de dificultad. 
+
+## Código existente
+
+Aquí está el código existente de nuestro juego de adivinar el número:
+
+```rust
+use std::io::{stdin, stdout, Write};
+
+// Importar el crate rand
+use rand::random_range;
+
+
+fn main() {
+    println!("Mi primer juego con Rust");
+
+    // Generar un número aleatorio entre 1 y 100
+    let secret_number = random_range(1..101);  
+
+    loop {
+        let mut user_choese = String::new();
+
+        print!("Ingres un número entre (0 y 100):");
+        // Vacia el bufer
+        stdout().flush().expect("No se pudo vaciar stdout"); 
+
+        //Ingresa los datos desde teclado
+        stdin().read_line(&mut user_choese).expect("Error al leer la línea");
+
+        // Convertir de String a Integer
+        let user_choese:i32 = user_choese.trim().parse().expect("¡Ingrese un número por favor!");
+
+        match user_choese.cmp(&secret_number) {
+            Ordering::Less => println!("El número secreto es mayor"),
+            Ordering::Greater => println!("El número secreto es menor"),
+            Ordering::Equal => {
+                println!("¡Felicidades! Has adivinado el número");
+                break;
+            }
+        }    
+    }   
+}
+```
+
+## Refactorización del código
+
+Para refactorizar el código, vamos definir una función llamada `play_game`, a esta función le pasaremos todo el bucle del juego. Aquí está el código refactorizado:
+
+```diff lang="rs"
+use std::io::{stdin, stdout, Write};
+
+// Importar el crate rand
+use rand::random_range;
+
++fn play_game(secret_number: u32, mut chance: u8 ) {
+    loop {
+        let mut user_choese = String::new();
+
+        print!("Ingres un número entre (0 y 100):");
+        // Vacia el bufer
+        stdout().flush().expect("No se pudo vaciar stdout"); 
+
+        //Ingresa los datos desde teclado
+        stdin().read_line(&mut user_choese).expect("Error al leer la línea");
+
+        // Convertir de String a Integer
+        let user_choese:i32 = user_choese.trim().parse().expect("¡Ingrese un número por favor!");
+
+        match user_choese.cmp(&secret_number) {
++            Ordering::Less => {
++                println!("El número secreto es mayor");
++                chance -= 1;
++            },
++            Ordering::Greater => {
++                println!("El número secreto es menor");
++                chance -= 1;
++            },
++            Ordering::Equal => {
++                println!("¡Felicidades! Has adivinado el número");
++                break;
++            }
+        }    
+    }
++}
+
+
+fn main() {
+    println!("Mi primer juego con Rust");
+
+    // Generar un número aleatorio entre 1 y 100
+    let secret_number = random_range(1..101);  
+
++    // Jugar el juego
++    play_game(secret_number, 5);
+       
+}
+```
+
+En este código, hemos movido todo el bucle del juego a la función `play_game`. La función `play_game` toma dos parámetros: el número secreto y el número de oportunidades que el jugador tiene para adivinar el número. Dentro de la función `play_game`, hemos agregado un contador de oportunidades que se decrementa cada vez que el jugador adivina un número incorrecto. Si el jugador se queda sin oportunidades, el juego termina.
+
+## Agregar niveles de dificultad
+
+Ahora, vamos modificar nuestra función `main` para que el jugador pueda elegir el nivel de dificultad del juego. Aquí está el código modificado:
+
+```diff lang="rs"
+use std::io::{stdin, stdout, Write};
+
+// Importar el crate rand
+use rand::random_range;
+
+fn play_game(secret_number: u32, mut chance: u8 ) {
+    loop {
+        let mut user_choese = String::new();
+
+        print!("Ingres un número entre (0 y 100):");
+        // Vacia el bufer
+        stdout().flush().expect("No se pudo vaciar stdout"); 
+
+        //Ingresa los datos desde teclado
+        stdin().read_line(&mut user_choese).expect("Error al leer la línea");
+
+        // Convertir de String a Integer
+        let user_choese:i32 = user_choese.trim().parse().expect("¡Ingrese un número por favor!");
+
+        match user_choese.cmp(&secret_number) {
+            Ordering::Less => {
+                println!("El número secreto es mayor");
+                chance -= 1;
+            },
+            Ordering::Greater => {
+                println!("El número secreto es menor");
+                chance -= 1;
+            },
+            Ordering::Equal => {
+                println!("¡Felicidades! Has adivinado el número");
+                break;
+            }
+        }    
+    }
+}
+
+
+fn main() {
+    println!("Mi primer juego con Rust");
+
+    // Generar un número aleatorio entre 1 y 100
+    let secret_number = random_range(1..101);  
+
+-    // Jugar el juego
+-    play_game(secret_number, 5);
+
++    loop{
++        println!("1. Jugar - Nivel Fácil");
++        println!("2. Jugar - Nivel Medio");
++        println!("3. Jugar - Nivel Difícil");
++        println!("4. Salir");
+
++        let mut option = String::new();
++        print!("Seleccione una opción:");
++        stdout().flush().expect("No se pudo vaciar stdout");
++        stdin().read_line(&mut option).expect("Error al leer la línea");
+
++        let option:u8 = option.trim().parse().expect("¡Ingrese un número por favor!");
+
++        match option {
++            1 => play_game(secret_number, 10),
++            2 => play_game(secret_number, 7),
++            3 => play_game(secret_number, 5),
++            4 => {
++                println!("Gracias por jugar");
++                break;
++            },
++            _ => println!("Opción inválida"),
++        }
++    }
+       
+}
+
+```
+
+Hasta ahora, hemos refactorizado nuestro código y agregado la capacidad de elegir niveles de dificultad al juego. Ahora, el jugador puede seleccionar entre tres niveles de dificultad: fácil, medio y difícil. Cada nivel de dificultad tiene un número diferente de oportunidades para adivinar el número secreto. Si el jugador elige la opción 4, el juego termina.
+
+## Conclusión
+
+En esta práctica, aprendimos a refactorizar nuestro código y agregar nuevas funcionalidades a nuestro juego de adivinar el número. La refactorización del código nos permite hacer nuestro código más modular y fácil de entender. La adición de niveles de dificultad al juego lo hace más interesante y desafiante para el jugador. Continúa practicando y mejorando tus habilidades de programación en Rust. ¡Buena suerte!
+

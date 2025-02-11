@@ -5,37 +5,17 @@ description: Aprende más sobre mi proyecto en este sitio de documentación cons
 
 En programación, a menudo encontramos situaciones en las que necesitamos salir de un bucle antes de que se complete su ejecución completa. En Rust, esto se puede lograr utilizando las palabras clave `break` y `continue`. En este artículo, exploraremos cómo funcionan estas palabras clave y cómo pueden hacer que nuestro código sea más eficiente y fácil de entender.
 
-## Ejemplo de `while`
-
-Consideremos el siguiente bucle `while` que realiza una suma acumulativa hasta que alcanzamos un valor específico:
-
-```rust
-let mut total = 0;
-let mut count = 1;
-
-while total < 20 {
-    total += count;
-    println!("Suma acumulativa: {}", total);
-    count += 1;
-}
-```
-
-En este código, utilizamos una variable `total` que se incrementa en cada iteración. Mientras `total` sea menor que 20, el bucle continuará ejecutándose. Aunque esto funciona, podemos hacerlo más simple.
-
 ## Uso de `break`
 
 Podemos reescribir el bucle utilizando la palabra clave `break`, que termina el bucle de manera más clara:
 
 ```rust
-let mut total = 0;
-let mut count = 1;
+let mut count = 0;
 
-loop {
-    total += count;
-    println!("Suma acumulativa: {}", total);
+while count < 10{
+    println!("Suma acumulativa: {}", count);
     
-    if total >= 20 { break; }
-    
+    if count >= 5 { break; }   
     count += 1;
 }
 ```
@@ -47,10 +27,13 @@ Aquí, utilizamos `loop` para crear un bucle infinito y luego usamos `break` par
 La palabra clave `continue` funciona de manera diferente. En lugar de terminar el bucle, `continue` salta a la siguiente iteración. Esto es útil si queremos omitir ciertos casos en una iteración. Por ejemplo, el siguiente código imprime todos los números del 1 al 10, pero omite los números que son divisibles por 3:
 
 ```rust
-for num in 1..11 {
-    if num % 3 == 0 { continue; }
+let mut count = 0;
 
-    println!("Número: {}", num);
+while count < 10{
+    println!("Suma acumulativa: {}", count);
+    
+    if count >= 5 { continue; }   
+    count += 1;
 }
 ```
 

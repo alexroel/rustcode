@@ -1,6 +1,6 @@
 ---
 title: Bucle While
-description: Aprende más sobre mi proyecto en este sitio de documentación construido con Starlight.
+description: Aprende a usar el ciclo while en Rust para repetir un bloque de código mientras una condición sea verdadera.
 ---
 
 El ciclo `while` en Rust permite repetir un bloque de código mientras una condición se mantenga verdadera. A diferencia de `loop`, que se ejecuta indefinidamente hasta que se use un `break`, el ciclo `while` solo continúa mientras la expresión booleana asociada sea verdadera. Esta característica lo hace útil para situaciones donde se conoce la condición de salida o cuando el número de iteraciones depende de factores dinámicos.
@@ -65,28 +65,6 @@ fn main() {
 - El ciclo incrementa `contador` en cada iteración.
 - Si el valor de `contador` es par, se salta la impresión y continúa con la siguiente iteración gracias a la instrucción `continue`.
 
-## Ciclo Infinito
-
-Aunque el ciclo `while` generalmente se usa con condiciones que eventualmente serán falsas, también puede utilizarse para crear ciclos infinitos con `while true`. En este caso, el ciclo se ejecutará indefinidamente, a menos que se use `break`.
-
-```rust
-fn main() {
-    let mut contador = 0;
-
-    while true {
-        contador += 1;
-
-        if contador == 5 {
-            println!("Rompiendo el ciclo...");
-            break; // Rompe el ciclo en la quinta iteración
-        }
-
-        println!("Contador: {}", contador);
-    }
-}
-```
-- El ciclo `while true` continúa indefinidamente hasta que se alcanza la condición `contador == 5`, momento en el que se usa `break` para detener el ciclo.
-- Este tipo de bucle es útil en ciertas aplicaciones donde el ciclo debe continuar hasta que ocurra un evento específico.
 
 ## Retornos
 

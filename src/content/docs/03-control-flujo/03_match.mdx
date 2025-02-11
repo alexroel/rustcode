@@ -1,6 +1,6 @@
 ---
 title: Condicional Match
-description: Aprende más sobre mi proyecto en este sitio de documentación construido con Starlight.
+description: Aprende a usar el bloque match en Rust para comparar valores con diferentes patrones y ejecutar código basado en la coincidencia.
 ---
 
 Rust es un lenguaje de programación que se preocupa mucho por evitar errores y facilitar que el código sea claro y fácil de escribir. Una de las herramientas más poderosas que tiene para esto es el bloque `match`. 
@@ -87,16 +87,16 @@ Al igual que el bloque `if-else`, `match` en Rust es una **expresión**, lo que 
 
 ```rust
 fn main() {
-    let numero = 5;
+    let calificacion = 85;
 
-    let mensaje = match numero {
-        1 => "Uno",
-        2 => "Dos",
-        3 => "Tres",
-        _ => "Otro número",
+    let mensaje = match calificacion {
+        90..=100 => "Excelente",
+        80..=89 => "Bueno",
+        70..=79 => "Aprobado",
+        _ => "Reprobado",
     };
 
-    println!("El número es: {}", mensaje);
+    println!("Calificación: {}", mensaje);
 }
 ```
 - El valor devuelto por cada brazo del `match` se asigna a la variable `mensaje`.
@@ -108,10 +108,7 @@ Rust permite optimizar la lógica condicional con `match`, especialmente cuando 
 
 ```rust
 fn main() {
-   
-
- let animal = "perro";
-
+    let animal = "perro";
     match animal {
         "gato" | "perro" | "ratón" => println!("Es un animal pequeño"),
         "elefante" | "jirafa" => println!("Es un animal grande"),

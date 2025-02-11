@@ -1,11 +1,12 @@
 ---
 title: Bucle For
-description: Aprende más sobre mi proyecto en este sitio de documentación construido con Starlight.
+description: Aprende a usar el ciclo for en Rust para iterar sobre rangos, colecciones y otros elementos iterables.
 ---
 import { Aside } from '@astrojs/starlight/components';
 import { Steps } from '@astrojs/starlight/components';
 
 El ciclo `for` en Rust es una herramienta poderosa que permite iterar sobre rangos, colecciones, y otros elementos iterables de manera eficiente. Rust optimiza el uso de `for` para recorrer secuencias de datos sin necesidad de índices explícitos, lo que lo hace fácil de usar y menos propenso a errores comunes como los desbordamientos de índices.
+
 Los **rangos** en Rust son una forma de representar un conjunto de valores secuenciales, como un intervalo de números. Se usan frecuentemente para iterar, realizar comparaciones o trabajar con segmentos específicos de datos. Los rangos pueden ser **inclusivos** (que incluyen el valor final) o **exclusivos** (que no lo incluyen).
 
 ## Rangos
@@ -86,26 +87,11 @@ fn main() {
 - Se imprimen los números del 1 al 5, a diferencia del rango excluyente.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-#### ¿Qué es un iterador en Rust?
-
-
-### Uso de `.enumerate()`
+## Uso de `.enumerate()`
 
 Cuando necesitas llevar un conteo del número de iteraciones, puedes usar el método `.enumerate()`. Este método agrega un índice a cada valor que se itera, permitiéndote rastrear la cantidad de veces que has iterado.
 
-#### Ejemplo con rangos:
+**Ejemplo con rangos:**
 
 ```rust
 for (indice, valor) in (5..10).enumerate() {
@@ -125,9 +111,24 @@ Este código produce el siguiente resultado:
 
 Observa que `.enumerate()` empieza contando desde 0, lo que es útil para llevar un seguimiento preciso de las iteraciones. Además, debes asegurarte de colocar paréntesis alrededor del rango `(5..10)`.
 
-#### Ejemplo con iteradores:
+## Iteradores
 
-También puedes usar `.enumerate()` con iteradores, como en el siguiente ejemplo:
+Los iteradores en Rust son una parte fundamental de la programación funcional y se utilizan en muchos contextos para trabajar con colecciones de datos. Los iteradores permiten recorrer secuencias de elementos de manera eficiente y segura, sin necesidad de preocuparse por los índices o los desbordamientos de memoria.
+
+**Ejemplo de iterar sobre us cadena de texto:**
+
+```rust
+let texto = "Hola, mundo!";
+let mut iterador = texto.chars();
+
+for caracter in iterador {
+    println!("{}", caracter);
+}
+```
+
+En este ejemplo, la cadena de texto `"Hola, mundo!"` se convierte en un iterador de caracteres usando el método `.chars()`. Luego, el bucle `for` itera sobre cada caracter de la cadena y lo imprime en la consola.
+
+También puedes usar `.enumerate()` y `.lines()` con iteradores para obtener información adicional sobre los elementos que estás recorriendo.
 
 ```rust
 let lineas = "hola\nmundo".lines();
@@ -136,7 +137,6 @@ for (num_linea, linea) in lineas.enumerate() {
     println!("{}: {}", num_linea, linea);
 }
 ```
-
 Este código genera:
 
 ```

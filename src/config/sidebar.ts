@@ -12,12 +12,12 @@ export const sidebar = [
       autogenerate: { directory: '03-control-flujo' },
     },
     {
-      label: 'Funciones',
-      autogenerate: { directory: '04-funciones' },
+      label: 'Estructuras y Colecciones',
+      autogenerate: { directory: '04-structure-and-collection' },
     },
     {
-      label: 'Colección de Datos',
-      autogenerate: { directory: '05-estructura-control' },
+      label: 'Manejo de errores',
+      autogenerate: { directory: '05-error-handling' },
     },
     {
       label: 'Comprendiendo la propiedad en Rust',

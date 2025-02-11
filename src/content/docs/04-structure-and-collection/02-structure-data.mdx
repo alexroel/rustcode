@@ -1,0 +1,77 @@
+---
+title: Estructuras
+description: Aqúi aprenderás cómo estructurar datos y como crear nuevos datos con estructuras en Rust.
+---
+
+En esta clase aprenderás cómo estructurar datos y cómo crear nuevos datos con estructuras en Rust. Aprenderás cómo definir estructuras, cómo crear instancias de estructuras y cómo acceder a los campos de una estructura. También aprenderás cómo crear métodos para estructuras y cómo implementar métodos en estructuras.
+
+## Definición de estructuras
+
+Las estructuras son un tipo de dato compuesto que te permite almacenar varios valores juntos. Puedes definir una estructura usando la palabra clave `struct` seguida del nombre de la estructura y una lista de campos. Cada campo tiene un nombre y un tipo de dato. Aquí tienes un ejemplo de cómo definir una estructura en Rust:
+
+```rust
+struct Persona {
+    nombre: String,
+    edad: u8,
+}
+```
+
+En este ejemplo, hemos definido una estructura llamada `Persona` con dos campos: `nombre` de tipo `String` y `edad` de tipo `u8`. Ahora puedes crear instancias de la estructura `Persona` y acceder a sus campos.
+
+## Creación de instancias de estructuras
+
+Puedes crear instancias de una estructura usando la palabra clave `let` seguida del nombre de la estructura y una lista de campos con sus valores. Aquí tienes un ejemplo de cómo crear una instancia de la estructura `Persona`:
+
+```rust
+let persona = Persona {
+    nombre: String::from("Alex"),
+    edad: 30,
+};
+```
+
+En este ejemplo, hemos creado una instancia de la estructura `Persona` con el nombre `Alex` y la edad `30`. Ahora puedes acceder a los campos de la estructura usando la notación de punto.
+
+## Acceso a los campos de una estructura
+
+Puedes acceder a los campos de una estructura usando la notación de punto seguida del nombre del campo. Aquí tienes un ejemplo de cómo acceder a los campos de la estructura `Persona`:
+
+```rust
+println!("Nombre: {}", persona.nombre);
+println!("Edad: {}", persona.edad);
+```
+
+En este ejemplo, estamos accediendo a los campos `nombre` y `edad` de la estructura `Persona` y mostrando sus valores en la consola.
+
+:::note[Debug una estructura]
+Puedes imprimir una estructura usando el formato de depuración `{:?}` para ver todos los campos de la estructura.
+
+```rust
+println!("{:?}", persona);
+```
+
+Para poder imprimir una estructura con el formato de depuración, debes implementar el trait `Debug` para la estructura. Aprenderás cómo hacerlo más adelante en esta clase. 
+
+```rust
+#[derive(Debug)]
+struct Persona {
+    nombre: String,
+    edad: u8,
+}
+```
+:::
+
+Las estructuras en Rust son similares a las clases en otros lenguajes de programación y te permiten definir tus propios tipos de datos con campos y métodos. En la siguiente sección, aprenderás cómo crear métodos para estructuras y cómo implementar métodos en estructuras.
+
+## Conclusiones
+
+En Rust, puedes definir tus propios tipos de datos con estructuras. Las estructuras te permiten agrupar varios valores juntos y acceder a ellos de forma conjunta. Puedes crear instancias de estructuras, acceder a los campos de una estructura y definir métodos para estructuras. Las estructuras son una parte fundamental de la programación en Rust y te permiten modelar tus datos de forma eficiente y segura. En la siguiente sección, aprenderás cómo crear métodos para estructuras y cómo implementar métodos en estructuras.
+
+
+
+
+
+
+
+
+
+
