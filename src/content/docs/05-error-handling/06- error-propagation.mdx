@@ -1,0 +1,82 @@
+---
+title: Propagación de errores
+description: Aprende a propagar errores en Rust. Propagación de errores es una técnica que te permite pasar errores de una función a otra para manejarlos de manera centralizada.
+---
+
+En Rust, la propagación de errores es una técnica que te permite pasar errores de una función a otra para manejarlos de manera centralizada. Esto es útil cuando quieres manejar errores en un solo lugar en lugar de manejarlos en cada función individualmente. La propagación de errores se realiza utilizando el operador `?`, que se coloca al final de una expresión que devuelve un `Result`. Si la expresión devuelve `Ok`, el valor se desempaqueta y se devuelve. Si la expresión devuelve `Err`, el error se propaga hacia arriba en la pila de llamadas.
+
+## Ejemplo de propagación de errores
+
+Aquí tienes un ejemplo de cómo propagar errores en Rust:
+
+```rust
+use std::{fs::File, io::{Error, Read}};
+
+fn read_file(path: &str) -> Result<String, Error> {
+    let file = File::open(path);
+
+    match file {
+        Ok(mut f) => {
+            let mut contents = String::new();
+            match f.read_to_string(&mut contents) {
+                Ok(_) => Ok(contents),
+                Err(e) => Err(e),
+            }
+        }
+        Err(e) => Err(e),
+    } 
+}
+
+
+
+fn main() {
+    match read_file("hola.txt") {
+        Ok(contents) => println!("Contenido del archivo: {}", contents),
+        Err(e) => eprintln!("Error al leer el archivo: {}", e),
+    }
+}
+```
+
+En este ejemplo, estamos leyendo el contenido de un archivo llamado `hola.txt`. La función `read_file` intenta abrir el archivo y leer su contenido. Si el archivo se abre correctamente y se lee correctamente, el contenido se devuelve como `Ok`. Si ocurre un error al abrir o leer el archivo, el error se devuelve como `Err`. En la función `main`, manejamos el resultado de `read_file` utilizando una instrucción `match`. Si el resultado es `Ok`, imprimimos el contenido del archivo. Si el resultado es `Err`, imprimimos un mensaje de error.
+
+## Uso de `?` para propagar errores
+
+En Rust, puedes utilizar el operador `?` para propagar errores de manera más concisa. Aquí tienes un ejemplo de cómo usar `?` para propagar errores en Rust:
+
+```rust
+
+use std::{fs::File, io::{Error, Read}};
+
+fn read_file(path: &str) -> Result<String, Error> {
+    let mut file = File::open(path)?;
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?;
+    Ok(contents)
+}
+
+fn main() {
+    match read_file("hola.txt") {
+        Ok(contents) => println!("Contenido del archivo: {}", contents),
+        Err(e) => eprintln!("Error al leer el archivo: {}", e),
+    }
+}
+```
+
+En este ejemplo, estamos leyendo el contenido de un archivo llamado `hola.txt` utilizando el operador `?` para propagar errores. La función `read_file` intenta abrir el archivo y leer su contenido. Si el archivo se abre correctamente y se lee correctamente, el contenido se devuelve como `Ok`. Si ocurre un error al abrir o leer el archivo, el error se propaga hacia arriba en la pila de llamadas. En la
+
+función `main`, manejamos el resultado de `read_file` utilizando una instrucción `match`. Si el resultado es `Ok`, imprimimos el contenido del archivo. Si el resultado es `Err`, imprimimos un mensaje de error.
+
+- `?` es un operador que se utiliza para propagar errores en Rust. Cuando se coloca al final de una expresión que devuelve un `Result`, el operador `?` desempaqueta el valor si es `Ok` o propaga el error si es `Err`.
+
+- La propagación de errores es una técnica que te permite pasar errores de una función a otra para manejarlos de manera centralizada. Esto es útil cuando quieres manejar errores en un solo lugar en lugar de manejarlos en cada función individualmente.
+
+- Rust proporciona una serie de funciones y macros para manejar errores, como `?`, `unwrap`, `expect`, `match`, y `if let`.
+
+Este es un ejemplo simple de cómo propagar errores en Rust utilizando el operador `?`. Puedes utilizar esta técnica para manejar errores de manera centralizada en tu código.
+
+## Conclusión
+
+En este tutorial, aprendiste cómo propagar errores en Rust utilizando el operador `?`. La propagación de errores es una técnica que te permite pasar errores de una función a otra para manejarlos de manera centralizada. Esto es útil cuando quieres manejar errores en un solo lugar en lugar de manejarlos en cada función individualmente. ¡Espero que hayas encontrado útil este tutorial! Si tienes alguna pregunta o comentario, no dudes en dejar un comentario a continuación.
+
+
+

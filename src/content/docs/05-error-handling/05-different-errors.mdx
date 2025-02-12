@@ -1,0 +1,54 @@
+---
+title: Haciendo coincidir diferentes errores
+description: Aprende a hacer coincidir diferentes errores en Rust.  
+---
+
+En Rust, puedes hacer coincidir diferentes errores en una sola instrucción `match`. Esto es útil cuando quieres manejar diferentes errores de la misma manera. Por ejemplo, si quieres imprimir un mensaje de error para diferentes errores, puedes hacerlo en una sola instrucción `match`. Aquí tienes un ejemplo:
+
+```rust
+use std::fs::File;
+use std::io::ErrorKind;
+
+fn main() {
+    let file = File::open("hola.txt");
+
+    match file {
+        Ok(_) => println!("El archivo fue abierto correctamente"),
+        Err(ref e) if e.kind() == ErrorKind::NotFound => {
+            println!("El archivo no fue encontrado: {}", e);
+        },
+        Err(ref e) if e.kind() == ErrorKind::PermissionDenied => {
+            println!("No tienes permisos para abrir el archivo: {}", e);
+        },
+        Err(e) => {
+            println!("Error: {}", e);
+        },
+    }
+}
+```
+
+En este ejemplo, estamos intentando abrir un archivo llamado `hola.txt`. Si el archivo se abre correctamente, imprimimos un mensaje de éxito. Si el archivo no se encuentra, imprimimos un mensaje de error que dice "El archivo no fue encontrado". Si no tienes permisos para abrir el archivo, imprimimos un mensaje de error que dice "No tienes permisos para abrir el archivo". Si ocurre cualquier otro error, imprimimos un mensaje de error genérico.
+
+- File::open("hola.txt") intenta abrir el archivo `hola.txt`.
+
+- ErrorKind: Es un tipo de error que representa diferentes tipos de errores de E/S. En este caso, estamos comprobando si el error es de tipo `NotFound` o `PermissionDenied`.
+
+- match file: Hace coincidir el resultado de `File::open("hola.txt")` con diferentes patrones.
+
+- Ok(_): Si el archivo se abre correctamente, imprimimos un mensaje de éxito.
+
+- Err(ref e) if e.kind() == ErrorKind::NotFound: Si el error es de tipo `NotFound`, imprimimos un mensaje de error.
+
+- Err(ref e) if e.kind() == ErrorKind::PermissionDenied: Si el error es de tipo `PermissionDenied`, imprimimos un mensaje de error.
+
+- Err(e): Si ocurre cualquier otro error, imprimimos un mensaje de error genérico.
+
+Este es un ejemplo simple de cómo hacer coincidir diferentes errores en Rust. Puedes usar esta técnica para manejar diferentes errores de la misma manera en tu código.
+
+
+## Conclusión
+
+En este tutorial, aprendiste cómo hacer coincidir diferentes errores en Rust. Esto te permite manejar diferentes errores de la misma manera en una sola instrucción `match`. Esta es una técnica útil que puedes usar para simplificar tu código y hacerlo más legible. ¡Espero que hayas encontrado útil este tutorial! Si tienes alguna pregunta o comentario, no dudes en dejar un comentario a continuación.
+
+
+

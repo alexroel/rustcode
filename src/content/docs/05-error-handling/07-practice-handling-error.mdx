@@ -1,0 +1,331 @@
+---
+title: Práctica - Manejo de errores
+description: Aprende a manejar errores en Rust con esta práctica de programación.
+---
+
+En esta práctica, aplicarás el manejo de error en le proyecto anterios de la práctica anterior. Le agregaremos el manejo de errores y tambine guardaremos los datos en un archivo.
+
+La práctica anterior era un programa que permitía registrar empleados y mostrar la lista de empleados registrados. En esta práctica, agregarás manejo de errores al programa y guardarás los datos de los empleados en un archivo.
+
+## Código base del proyecto
+
+Aquí tienes el código base del proyecto:
+
+```rust
+use std::io::{stdin, stdout, Write};
+use std::collections::HashMap;
+
+// Enumeración para tipo de contrato
+#[derive(Debug)]
+enum ContractType {
+    TiempoCompleto,
+    MedioTiempo,
+    Temporal,
+}
+
+// Estructura para empleado
+#[derive(Debug)]
+struct Employee {
+    name: String,
+    age: u8,
+    salary: f64,
+    contract: ContractType,
+}
+
+// Implementación de métodos para la estructura Employee
+impl Employee {
+    // Método constructor
+    fn new(name: String, age: u8, salary: f64, contract: ContractType) -> Employee{
+        Employee {
+            name,
+            age,
+            salary,
+            contract,
+        }
+    }
+}
+
+// Función para ingresar datos por teclado
+fn input(prompt: &str) -> String {
+    print!("{}", prompt);
+    stdout().flush().unwrap();
+    let mut input_data = String::new();
+    stdin().read_line(&mut input_data).expect("Error al leer la entrada");
+    input_data.trim().to_string()
+}
+
+fn main() {
+    // Creamos un HashMap para almacenar empleados
+    let mut employees: HashMap<u32, Employee> = HashMap::new();
+
+    loop {
+        // Mostramos el menú
+        println!("1. Agregar empleado");
+        println!("2. Eliminar empleado");
+        println!("3. Mostrar empleados");
+        println!("4. Salir");
+
+        // Solicitamos una opción al usuario
+        let option = input("Ingrese una opción: ");
+
+        // Convertimos la opción a un número entero
+        let option = option.parse::<u8>().unwrap();
+
+        // Realizamos una acción dependiendo de la opción seleccionada
+        match option {
+            1 => {
+                // Solicitamos los datos del empleado
+                let name = input("Nombre del empleado: ");
+                let age = input("Edad del empleado: ").parse::<u8>().unwrap();
+                let salary = input("Salario del empleado: ").parse::<f64>().unwrap();
+                let contract = input("Tipo de contrato (1: Tiempo completo, 2: Medio tiempo, 3: Temporal): ").parse::<u8>().unwrap();
+
+                // Creamos un nuevo empleado
+                let contract_type = match contract {
+                    1 => ContractType::TiempoCompleto,
+                    2 => ContractType::MedioTiempo,
+                    3 => ContractType::Temporal,
+                    _ => ContractType::TiempoCompleto,
+                };
+                let employee = Employee::new(name, age, salary, contract_type);
+
+                // Agregamos el empleado al HashMap
+                let id = employees.len() as u32 + 1;
+                employees.insert(id, employee);
+
+            },
+            2 => {
+                // Solicitamos el ID del empleado a eliminar
+                let id = input("Ingrese el ID del empleado a eliminar: ").parse::<u32>().unwrap();
+
+                // Eliminamos el empleado del HashMap
+                employees.remove(&id);
+            },
+            3 => {
+                // Mostramos los empleados ordenados por ID
+                println!("\nLista de empleados:");
+
+                println!("\n------------------------------------------------------------");
+                for (id, employee) in employees.iter() {
+                    println!("ID: {} - Nombre: {} - Edad: {} - Salario: {} - Contrato: {:?}", id, employee.name, employee.age, employee.salary, employee.contract);
+                    println!("------------------------------------------------------------");
+                }
+                println!();
+            },
+            4 => {
+                // Salimos del programa
+                println!("Saliendo del programa...");
+                break;
+            },
+            _ => {
+                println!("Opción no válida");
+            }
+        }
+    }
+
+}
+
+```
+
+## Tareas 
+
+1. Agrega manejo de errores al programa para evitar que se cierre inesperadamente. Puedes utilizar la instrucción `match` para manejar los errores y mostrar un mensaje de error al usuario.
+
+2. Guarda los datos de los empleados en un archivo de texto. Puedes utilizar la biblioteca estándar de Rust para trabajar con archivos. Almacena los datos en un formato legible, como CSV o JSON.
+
+3. Modifica el programa para que cargue los datos de los empleados desde el archivo al inicio del programa. De esta manera, los datos de los empleados se conservarán entre
+
+## Solución
+
+Puedes encontrar la solución a esta práctica: 
+
+1. Agregar el siguiente código en `Cargo.toml`:
+
+```toml
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+```
+
+2. Modificar el código de `main.rs`:
+
+```rust
+use std::io::{stdin, stdout, Write};
+use std::collections::HashMap;
+use serde::{Serialize, Deserialize};
+use std::fs;
+
+// Enumeración para tipo de contrato
+#[derive(Debug, Serialize, Deserialize)]
+enum ContractType {
+    TiempoCompleto,
+    MedioTiempo,
+    Temporal,
+}
+
+// Estructura para empleado
+#[derive(Debug, Serialize, Deserialize)]
+struct Employee {
+    name: String,
+    age: u8,
+    salary: f64,
+    contract: ContractType,
+}
+
+// Implementación de métodos para la estructura Employee
+impl Employee {
+    // Método constructor
+    fn new(name: String, age: u8, salary: f64, contract: ContractType) -> Employee {
+        Employee {
+            name,
+            age,
+            salary,
+            contract,
+        }
+    }
+}
+
+// Función para ingresar datos por teclado
+fn input(prompt: &str) -> String {
+    print!("{}", prompt);
+    stdout().flush().unwrap();
+
+    let mut input_data = String::new();
+    match stdin().read_line(&mut input_data) {
+        Ok(_) => input_data.trim().to_string(),
+        Err(_) => {
+            println!("Error al leer la entrada");
+            String::new()
+        }
+    }
+}
+
+// Función para guardar empleados en un archivo JSON
+fn save_to_json(employees: &HashMap<u32, Employee>) {
+    let json_data = serde_json::to_string_pretty(employees).unwrap();
+    fs::write("employees.json", json_data).expect("No se pudo guardar el archivo JSON");
+}
+
+// Función para cargar empleados desde un archivo JSON
+fn load_from_json() -> HashMap<u32, Employee> {
+    match fs::read_to_string("employees.json") {
+        Ok(content) => serde_json::from_str(&content).unwrap_or_else(|_| HashMap::new()),
+        Err(_) => HashMap::new(),
+    }
+}
+
+fn main() {
+    // Cargamos empleados desde el archivo JSON
+    let mut employees: HashMap<u32, Employee> = load_from_json();
+
+    loop {
+        // Mostramos el menú
+        println!("1. Agregar empleado");
+        println!("2. Eliminar empleado");
+        println!("3. Mostrar empleados");
+        println!("4. Guardar y salir");
+
+        // Solicitamos una opción al usuario
+        let option = input("Ingrese una opción: ");
+
+        // Convertimos la opción a un número entero
+        let option = match option.parse::<u8>() {
+            Ok(option) => option,
+            Err(_) => {
+                println!("Opción no válida: Debe ingresar un número entero");
+                continue;
+            }
+        };
+
+        // Realizamos una acción dependiendo de la opción seleccionada
+        match option {
+            1 => {
+                // Solicitamos los datos del empleado
+                let name = input("Nombre del empleado: ");
+                let age = match input("Edad del empleado: ").parse::<u8>() {
+                    Ok(age) => age,
+                    Err(_) => {
+                        println!("Edad no válida: Debe ingresar un número entero");
+                        continue;
+                    }
+                };
+                let salary = match input("Salario del empleado: ").parse::<f64>() {
+                    Ok(salary) => salary,
+                    Err(_) => {
+                        println!("Salario no válido: Debe ingresar un número real");
+                        continue;
+                    }
+                };
+
+                let contract = match input("Tipo de contrato (1: Tiempo completo, 2: Medio tiempo, 3: Temporal): ").parse::<u8>() {
+                    Ok(contract) => contract,
+                    Err(_) => {
+                        println!("Tipo de contrato no válido: Debe ingresar un número entero");
+                        continue;
+                    }
+                };
+
+                // Creamos un nuevo empleado
+                let contract_type = match contract {
+                    1 => ContractType::TiempoCompleto,
+                    2 => ContractType::MedioTiempo,
+                    3 => ContractType::Temporal,
+                    _ => {
+                        println!("Tipo de contrato no válido. Se asignará 'Tiempo completo' por defecto.");
+                        ContractType::TiempoCompleto
+                    }
+                };
+                let employee = Employee::new(name, age, salary, contract_type);
+
+                // Agregamos el empleado al HashMap
+                let id = employees.len() as u32 + 1;
+                employees.insert(id, employee);
+            }
+            2 => {
+                // Solicitamos el ID del empleado a eliminar
+                let id = match input("Ingrese el ID del empleado a eliminar: ").parse::<u32>() {
+                    Ok(id) => id,
+                    Err(_) => {
+                        println!("ID no válido: Debe ingresar un número entero");
+                        continue;
+                    }
+                };
+
+                if employees.remove(&id).is_none() {
+                    println!("Empleado no encontrado");
+                } else {
+                    println!("Empleado eliminado con éxito.");
+                }
+            }
+            3 => {
+                // Mostramos los empleados ordenados por ID
+                println!("\nLista de empleados:");
+
+                println!("\n------------------------------------------------------------");
+                for (id, employee) in &employees {
+                    println!("ID: {} - Nombre: {} - Edad: {} - Salario: {} - Contrato: {:?}", id, employee.name, employee.age, employee.salary, employee.contract);
+                    println!("------------------------------------------------------------");
+                }
+                println!();
+            }
+            4 => {
+                // Guardamos los empleados en un archivo JSON y salimos del programa
+                // Antes de guardar ordenamos los empleados por ID
+                employees = employees.into_iter().collect(); // Convertimos el HashMap en un Vector
+                save_to_json(&employees);
+                println!("Datos guardados en employees.json. Saliendo del programa...");
+                break;
+            }
+            _ => {
+                println!("Opción no válida");
+            }
+        }
+    }
+}
+
+```
+
+## Conclusión
+
+En esta práctica, aprendiste a manejar errores en Rust y a guardar datos en un archivo. Implementaste el manejo de errores en un programa que registra empleados y guardas los datos de los empleados en un archivo JSON. Esta práctica te ayudará a comprender cómo manejar errores y guardar datos en Rust. ¡Espero que hayas encontrado útil esta práctica! Si tienes alguna pregunta o comentario, no dudes en dejar un comentario a continuación.
+

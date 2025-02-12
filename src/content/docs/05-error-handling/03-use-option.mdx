@@ -1,0 +1,54 @@
+---
+title: Uso de Option
+description: Aprende a usar Option para manejar errores en Rust. Option es un tipo de dato que representa la posibilidad de que un valor no exista.
+---
+
+La biblioteca estándar de Rust proporciona un tipo de dato llamado `Option` que se utiliza para manejar errores. `Option` es un tipo de dato genérico que representa la posibilidad de que un valor no exista. En Rust, `Option` es un tipo de dato que puede contener un valor o no contener nada. `Option` es un tipo de dato muy útil para manejar errores en Rust.
+
+En muchos otros lenguajes de programación se utiliza un valor especial como `null` o `undefined` para representar la ausencia de un valor. Sin embargo, en Rust, se utiliza el tipo de dato `Option` para representar la posibilidad de que un valor no exista. `Option` es un tipo de dato que puede contener un valor o no contener nada.
+
+## Presentación de Option
+
+El tipo de dato `Option` se define en la biblioteca estándar de Rust de la siguiente manera:
+
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+```
+
+`Option` es un tipo de dato genérico que puede contener un valor de cualquier tipo `T`. `Option` tiene dos variantes: `Some(T)` y `None`. La variante `Some(T)` representa la posibilidad de que un valor exista, mientras que la variante `None` representa la posibilidad de que un valor no exista.
+
+## Uso de Option
+
+Para utilizar `Option` en Rust, puedes llamar al método `get` en un array o en un vector para obtener un valor en una posición específica. El método `get` devuelve un `Option` que puede contener un valor o no contener nada. Puedes utilizar un `match` para manejar los dos casos posibles: si el valor existe, puedes hacer algo con él, y si el valor no existe, puedes manejar el error de manera segura y eficiente.
+
+```rust
+
+fn main() {
+    let array = [1, 2, 3, 4, 5];
+
+    let result = array.get(0);
+
+    match result {
+        Some(value) => println!("El valor es: {}", value),
+        None => println!("No se encontró ningún valor"),
+    }
+
+}
+
+``` 
+
+En este ejemplo, se crea un array de enteros y se llama al método `get` para obtener el valor en la posición `0` del array. El método `get` devuelve un `Option` que puede contener un valor o no contener nada. Luego, se utiliza un `match` para manejar los dos casos posibles: si el valor existe, se imprime el valor, y si el valor no existe, se imprime un mensaje de error.
+
+:::note
+`Option` es un tipo de dato muy útil para manejar errores en Rust. Puedes utilizar `Option` para representar la posibilidad de que un valor no exista y manejar los errores de manera segura y eficiente.
+:::
+
+## Conclusión
+
+En resumen, `Option` es un tipo de dato genérico que se utiliza para manejar errores en Rust. `Option` es un tipo de dato que puede contener un valor o no contener nada. `Option` es un tipo de dato muy útil para manejar errores de manera segura y eficiente en Rust. Puedes utilizar `Option` para representar la posibilidad de que un valor no exista y manejar los errores de manera segura y eficiente.
+
+
+

@@ -13,7 +13,7 @@ Aquí hay un ejemplo de un error irrecoverable en Rust:
 fn main() {
     let array = [1, 2, 3];
 
-    println!("El cuarto elemento: {}", array[3]);
+    array[3]; // Error: índice fuera de rango
 }
 ```
 
@@ -36,3 +36,61 @@ Cuando ejecutas este programa, Rust mostrará un mensaje de error que indica que
 - En terminos generales, los errores irrecoperables se debe usar cuando un programa se encuentra en un estado que no se puede recuperar de manera segura, como un desbordamiento de pila o un índice fuera de rango.
 
 - Rust proporciona una serie de funciones y macros para manejar errores irrecoverables, como `panic!` y `unwrap`.
+
+:::note[Siguimiento de errores]
+
+Cuando se produce un error irrecoverable en Rust, el programa se detiene y se muestra un mensaje de error que indica la causa del problema. Puedes utilizar la función `backtrace` para obtener más información sobre el error y rastrear su origen.
+
+Ejemplo:
+
+```rust
+fn main() {
+    let array = [1, 2, 3];
+
+    array[3]; // Error: índice fuera de rango
+}
+```
+
+En este ejemplo, se produce un error irrecoverable debido a un índice fuera de rango. Rust mostrará un mensaje de error que indica que se produjo un error de índice fuera de rango y proporcionará información sobre el origen del error.
+
+```shell
+export RUST_BACKTRACE=1; cargo run
+``` 
+
+Con la variable de entorno `RUST_BACKTRACE` puedes obtener más información sobre el error y rastrear su origen. 
+
+:::
+
+
+:::tip[Consejo]
+
+Cuando se producen errores irrecoverables en Rust, es importante proporcionar mensajes de error claros y descriptivos para ayudar a los desarrolladores a identificar y solucionar problemas. Puedes utilizar la macro `panic!` para generar mensajes de error personalizados y detallados.
+
+Ejemplo:
+
+```rust
+fn main() {
+    panic!("¡Esto es un error irrecoverable!");
+}
+```
+
+En este ejemplo, se genera un error irrecoverable con el mensaje "¡Esto es un error irrecoverable!". Este mensaje de error ayudará a los desarrolladores a identificar y solucionar el problema de manera más eficiente.
+
+:::
+
+:::caution[Advertencia]
+
+Los errores irrecoverables en Rust detienen la ejecución del programa y no se pueden recuperar. Por lo tanto, es importante manejar los errores de manera adecuada para evitar que se produzcan errores irrecoverables en tu código.
+
+:::
+
+:::danger[Peligro]
+
+Los errores irrecoverables en Rust pueden ser difíciles de depurar y solucionar, ya que detienen la ejecución del programa y no proporcionan información sobre la causa del problema. Por lo tanto, es importante manejar los errores de manera adecuada para evitar que se produzcan errores irrecoverables en tu código.
+
+:::
+
+
+## Conclusión
+
+En resumen, los errores irrecoverables en Rust son errores que detienen la ejecución de un programa y no se pueden recuperar. Estos errores se producen cuando ocurre una condición que no se puede manejar de manera segura, como un desbordamiento de pila o un índice fuera de rango. Puedes generar errores irrecoverables manualmente utilizando la macro `panic!`, que detiene la ejecución del programa y muestra un mensaje de error. Es importante proporcionar mensajes de error claros y descriptivos para ayudar a los desarrolladores a identificar y solucionar problemas de manera eficiente.

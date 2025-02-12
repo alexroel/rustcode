@@ -1,0 +1,90 @@
+---
+title: Uso de Result
+description: Aprende a usar Result para manejar errores y resultados en Rust. Result es un tipo de dato que representa el resultado de una operación que puede fallar.
+---
+
+Result es un tipo de dato que representa el resultado de una operación que puede fallar. Result es un tipo genérico que tiene dos variantes: `Ok` y `Err`. `Ok` representa un resultado exitoso y `Err` representa un error.
+
+El tipo de dato `Result` es muy común en Rust y se utiliza para manejar errores y resultados en Rust. En este tutorial, aprenderás a usar `Result` para manejar errores y resultados en Rust.
+
+## Presentación de Result
+
+El tipo de dato `Result` se define en la biblioteca estándar de Rust de la siguiente manera:
+
+```rust
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+```
+
+`Result` es un tipo de dato genérico que puede contener un valor de tipo `T` o un error de tipo `E`. `Result` tiene dos variantes: `Ok(T)` y `Err(E)`. La variante `Ok(T)` representa un resultado exitoso y contiene un valor de tipo `T`, mientras que la variante `Err(E)` representa un error y contiene un valor de tipo `E`.
+
+## Uso de Result
+
+Para usar `Result` en Rust, puedes llamar a una función que puede devolver un `Result` exitoso o un `Result` con un error. Puedes utilizar un `match` para manejar los dos casos posibles: si el resultado es exitoso, puedes hacer algo con él, y si el resultado es un error, puedes manejar el error de manera segura y eficiente.
+
+```rust
+
+fn divide(a: i32, b: i32) -> Result<i32, String> {
+    if b == 0 {
+        return Err("No se puede dividir por cero".to_string());
+    }
+
+    Ok(a / b)
+}
+
+fn main() {
+    let result = divide(10, 2);
+
+    match result {
+        Ok(value) => println!("El resultado es: {}", value),
+        Err(error) => println!("Error: {}", error),
+    }
+}
+
+```
+
+En este ejemplo, se define una función `divide` que toma dos enteros `a` y `b` y devuelve un `Result<i32, String>`. Si `b` es igual a `0`, la función devuelve un `Result` con un error que contiene un mensaje de error. Si `b` no es igual a `0`, la función devuelve un `Result` exitoso que contiene el resultado de la división de `a` por `b`.
+
+Luego, en la función `main`, se llama a la función `divide` con los valores `10` y `2`. El resultado de la función `divide` es un `Result` que puede ser exitoso o contener un error. Se utiliza un `match` para manejar los dos casos posibles: si el resultado es exitoso, se imprime el resultado, y si el resultado contiene un error, se imprime el mensaje de error.
+
+:::note
+`Result` es un tipo de dato muy útil para manejar errores y resultados en Rust. Puedes utilizar `Result` para representar el resultado de una operación que puede fallar y manejar los errores de manera segura y eficiente.
+:::
+
+## Atajos para panic en caso de error: unwrap y expect
+
+En Rust, puedes utilizar los métodos `unwrap` y `expect` para generar errores irrecoverables de manera más concisa. Estos métodos se utilizan para desempaquetar un `Result` y generar un error irrecoverable si el resultado es `Err`. Aquí tienes un ejemplo de cómo utilizar `unwrap` y `expect`:
+
+- `unwrap`: Desempaqueta un `Result` y genera un error irrecoverable si el resultado es `Err`.
+
+- `expect`: Desempaqueta un `Result` y genera un error irrecoverable con un mensaje personalizado si el resultado es `Err`.
+
+```rust
+fn divide(a: i32, b: i32) -> Result<i32, String> {
+    if b == 0 {
+        return Err("No se puede dividir por cero".to_string());
+    }
+
+    Ok(a / b)
+}
+
+fn main() {
+    let result = divide(10, 0);
+
+    let value = result.unwrap();
+    println!("El resultado es: {}", value);
+
+    let result = divide(10, 0);
+
+    let value = result.expect("Error al dividir por cero");
+    println!("El resultado es: {}", value);
+}
+```
+
+En este ejemplo, se define una función `divide` que toma dos enteros `a` y `b` y devuelve un `Result<i32, String>`. Si `b` es igual a `0`, la función devuelve un `Result` con un error que contiene un mensaje de error. Si `b` no es igual a `0`, la función devuelve un `Result` exitoso que contiene el resultado de la división de `a` por `b`.
+
+## Conclusión
+
+En resumen, `Result` es un tipo de dato genérico que se utiliza para manejar errores y resultados en Rust. `Result` es un tipo de dato que puede contener un valor exitoso o un error. `Result` es un tipo de dato muy útil para manejar errores y resultados de manera segura y eficiente en Rust. Puedes utilizar `Result` para representar el resultado de una operación que puede fallar y manejar los errores de manera segura y eficiente.
