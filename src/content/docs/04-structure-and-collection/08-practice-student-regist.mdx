@@ -38,6 +38,127 @@ Para completar esta práctica, sigue los siguientes pasos:
 
 Aquí tienes un ejemplo de cómo podría verse la solución de esta práctica:
 
+```rust
+use std::io::{stdin, stdout, Write};
+use std::collections::HashMap;
+
+// Enumeración para tipo de contrato
+#[derive(Debug)]
+enum ContractType {
+    TiempoCompleto,
+    MedioTiempo,
+    Temporal,
+}
+
+// Estructura para empleado
+#[derive(Debug)]
+struct Employee {
+    name: String,
+    age: u8,
+    salary: f64,
+    contract: ContractType,
+}
+
+// Implementación de métodos para la estructura Employee
+impl Employee {
+    // Método constructor
+    fn new(name: String, age: u8, salary: f64, contract: ContractType) -> Employee{
+        Employee {
+            name,
+            age,
+            salary,
+            contract,
+        }
+    }
+}
+
+// Función para ingresar datos por teclado
+fn input(prompt: &str) -> String {
+    print!("{}", prompt);
+    stdout().flush().unwrap();
+    let mut input_data = String::new();
+    stdin().read_line(&mut input_data).expect("Error al leer la entrada");
+    input_data.trim().to_string()
+}
+
+fn main() {
+    // Creamos un HashMap para almacenar empleados
+    let mut employees: HashMap<u32, Employee> = HashMap::new();
+
+    loop {
+        // Mostramos el menú
+        println!("1. Agregar empleado");
+        println!("2. Eliminar empleado");
+        println!("3. Mostrar empleados");
+        println!("4. Salir");
+
+        // Solicitamos una opción al usuario
+        let option = input("Ingrese una opción: ");
+
+        // Convertimos la opción a un número entero
+        let option = option.parse::<u8>().unwrap();
+
+        // Realizamos una acción dependiendo de la opción seleccionada
+        match option {
+            1 => {
+                // Solicitamos los datos del empleado
+                let name = input("Nombre del empleado: ");
+                let age = input("Edad del empleado: ").parse::<u8>().unwrap();
+                let salary = input("Salario del empleado: ").parse::<f64>().unwrap();
+                let contract = input("Tipo de contrato (1: Tiempo completo, 2: Medio tiempo, 3: Temporal): ").parse::<u8>().unwrap();
+
+                // Creamos un nuevo empleado
+                let contract_type = match contract {
+                    1 => ContractType::TiempoCompleto,
+                    2 => ContractType::MedioTiempo,
+                    3 => ContractType::Temporal,
+                    _ => ContractType::TiempoCompleto,
+                };
+                let employee = Employee::new(name, age, salary, contract_type);
+
+                // Agregamos el empleado al HashMap
+                let id = employees.len() as u32 + 1;
+                employees.insert(id, employee);
+
+            },
+            2 => {
+                // Solicitamos el ID del empleado a eliminar
+                let id = input("Ingrese el ID del empleado a eliminar: ").parse::<u32>().unwrap();
+
+                // Eliminamos el empleado del HashMap
+                employees.remove(&id);
+            },
+            3 => {
+                // Mostramos los empleados ordenados por ID
+                println!("\nLista de empleados:");
+
+                println!("\n------------------------------------------------------------");
+                for (id, employee) in employees.iter() {
+                    println!("ID: {} - Nombre: {} - Edad: {} - Salario: {} - Contrato: {:?}", id, employee.name, employee.age, employee.salary, employee.contract);
+                    println!("------------------------------------------------------------");
+                }
+                println!();
+            },
+            4 => {
+                // Salimos del programa
+                println!("Saliendo del programa...");
+                break;
+            },
+            _ => {
+                println!("Opción no válida");
+            }
+        }
+    }
+    
+}
+```
+
+En este ejemplo, hemos definido una estructura `Employee` para representar a un empleado con los campos `name`, `age`, `salary` y `contract`. También hemos definido una enumeración `ContractType` para representar el tipo de contrato del empleado. Luego, hemos implementado métodos para la estructura `Employee`, incluyendo un método constructor `new` para crear nuevos empleados.
+
+En la función `main`, hemos creado un `HashMap` llamado `employees` para almacenar empleados. Luego, hemos implementado un bucle infinito que muestra un menú y solicita al usuario que seleccione una opción. Dependiendo de la opción seleccionada, el programa realiza una acción específica, como agregar un empleado, eliminar un empleado, mostrar la lista de empleados o salir del programa.
+
+Puedes ejecutar este programa en tu entorno de desarrollo local para probarlo y ver cómo funciona. ¡Buena suerte! 🚀
+
 
 
 
