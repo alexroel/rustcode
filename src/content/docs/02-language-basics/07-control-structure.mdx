@@ -1,0 +1,300 @@
+---
+title: Estructuras de control
+description: En Rust, las estructuras de control te permiten controlar el flujo de ejecución de un programa. Puedes usar estructuras de control como `if`, `else`, `loop`, `while` y `for` para tomar decisiones y repetir tareas en tu programa.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Es importante poder controlar el flujo de ejecución de un programa para tomar decisiones y repetir tareas. En Rust, puedes utilizar estructuras de control como `if`, `else`, `loop`, `while` y `for` para controlar el flujo de ejecución de tu programa. En este capítulo, exploraremos las diferentes estructuras de control en Rust y cómo se utilizan.
+
+## Estructura `if` y `else`
+
+La estructura `if` en Rust te permite ejecutar un bloque de código si una condición es verdadera. Puedes usar la estructura `if` de forma independiente o combinarla con la estructura `else` para ejecutar un bloque de código alternativo si la condición es falsa. La sintaxis de la estructura `if` en Rust es la siguiente:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let numero = 5;
+
+            if numero > 0 {
+                println!("El número es positivo");
+            } else {
+                println!("El número es negativo o cero");
+            }
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        El número es positivo
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos declarado una variable `numero` con el valor `5`. Luego, utilizamos la estructura `if` para verificar si el número es mayor que `0`. Si la condición es verdadera, se imprime "El número es positivo". Si la condición es falsa, se imprime "El número es negativo o cero".
+
+## Estructura `match`
+
+La estructura `match` en Rust te permite comparar un valor con una serie de patrones y ejecutar un bloque de código basado en el patrón que coincida. La estructura `match` es similar a un `switch` en otros lenguajes de programación, pero es más poderosa y segura. La sintaxis de la estructura `match` en Rust es la siguiente:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let n = 3;
+
+            match n {
+                1 => println!("Uno"),
+                2 => {
+                    println!("Dos");
+                },
+                3 => println!("Tres"),
+                _ => println!("Es otro número"),
+            }
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Tres
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos declarado una variable `n` con el valor `3`. Luego, utilizamos la estructura `match` para comparar el valor de `n` con diferentes patrones. Si el valor de `n` coincide con un patrón, se ejecuta el bloque de código correspondiente. En este caso, el valor de `n` es `3`, por lo que se imprime "Tres".
+
+:::note
+El patrón `_` en la estructura `match` se utiliza como un comodín para capturar cualquier otro valor que no coincida con los patrones especificados. Es similar a un `default` en un `switch` en otros lenguajes de programación.
+
+Uso de `{}` para bloques de código en la estructura `match`: Puedes utilizar `{}` para crear bloques de código en la estructura `match` si necesitas ejecutar múltiples instrucciones en un patrón específico.
+:::
+
+## Estructura `match` como expresión
+
+En Rust, la estructura `match` también se puede utilizar como una expresión para asignar un valor a una variable basado en el patrón que coincida. La estructura `match` como expresión es útil cuando quieres asignar diferentes valores a una variable basada en diferentes patrones. La sintaxis de la estructura `match` como expresión en Rust es la siguiente:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let n = 3;
+
+            let texto = match n {
+                1 => "Uno",
+                2 => "Dos",
+                3 => "Tres",
+                _ => "Es otro número",
+            };
+
+            println!("{}", texto);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Tres
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos declarado una variable `n` con el valor `3`. Luego, utilizamos la estructura `match` como expresión para asignar un valor a la variable `texto` basado en el valor de `n`. En este caso, el valor de `n` es `3`, por lo que la variable `texto` se asigna a `"Tres"`.
+
+## Estructura `match` con rangos
+
+En Rust, puedes utilizar rangos en la estructura `match` para comparar un valor con un rango de valores. Los rangos son útiles cuando quieres comparar un valor con múltiples valores consecutivos. La sintaxis de la estructura `match` con rangos en Rust es la siguiente:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let n = 5;
+
+            match n {
+                1..=5 => println!("El número está entre 1 y 5"), 
+                6...10 => println!("El número está entre 6 y 10"), 
+                _ => println!("El número está fuera del rango"),
+            }
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        El número está entre 1 y 5
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos declarado una variable `n` con el valor `5`. Luego, utilizamos la estructura `match` con rangos para comparar el valor de `n` con diferentes rangos de valores. Si el valor de `n` está dentro de un rango específico, se ejecuta el bloque de código correspondiente. En este caso, el valor de `n` es `5`, por lo que se imprime "El número está entre 1 y 5".
+
+## Estructura `match`con condiciones
+
+En Rust, puedes utilizar condiciones en la estructura `match` para comparar un valor con una condición booleana. Las condiciones son útiles cuando quieres comparar un valor con una expresión más compleja. La sintaxis de la estructura `match` con condiciones en Rust es la siguiente:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let n = 5;
+
+            match n {
+                n if n % 2 == 0 => println!("El número es par"),
+                n if n % 2 != 0 => println!("El número es impar"),
+                _ => println!("El número es cero"),
+            }
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        El número es impar
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos declarado una variable `n` con el valor `5`. Luego, utilizamos la estructura `match` con condiciones para comparar el valor de `n` con una condición booleana. Si la condición es verdadera, se ejecuta el bloque de código correspondiente. En este caso, el valor de `n` es `5`, que es impar, por lo que se imprime "El número es impar".
+
+## Estructura `loop`
+
+La estructura `loop` en Rust te permite ejecutar un bloque de código de forma indefinida hasta que se cumpla una condición de salida. Puedes utilizar la palabra clave `break` para salir del bucle `loop` cuando se cumple una condición específica. La estructura `loop` es útil cuando quieres repetir una tarea de forma indefinida. La sintaxis de la estructura `loop` en Rust es la siguiente:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let mut contador = 0;
+
+            loop {
+                println!("Contador: {}", contador);
+                contador += 1;
+
+                if contador == 5 {
+                    break;
+                }
+            }
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Contador: 0
+        Contador: 1
+        Contador: 2
+        Contador: 3
+        Contador: 4
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos declarado una variable `contador` con el valor `0`. Luego, utilizamos la estructura `loop` para imprimir el valor del contador y aumentarlo en `1` en cada iteración. Utilizamos la palabra clave `break` para salir del bucle cuando el contador alcanza el valor `5`.
+
+## Estructura `while`
+
+La estructura `while` en Rust te permite ejecutar un bloque de código mientras se cumpla una condición específica. Puedes utilizar la estructura `while` para repetir una tarea hasta que se cumpla una condición de salida. La sintaxis de la estructura `while` en Rust es la siguiente:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let mut contador = 0;
+
+            while contador < 5 {
+                println!("Contador: {}", contador);
+                contador += 1;
+            }
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Contador: 0
+        Contador: 1
+        Contador: 2
+        Contador: 3
+        Contador: 4
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos declarado una variable `contador` con el valor `0`. Luego, utilizamos la estructura `while` para imprimir el valor del contador y aumentarlo en `1` en cada iteración. El bucle `while` se ejecuta mientras el contador sea menor que `5`.
+
+## Estructura `for`
+
+La estructura `for` en Rust te permite iterar sobre una colección de elementos, como un rango de valores, una matriz o un vector. Puedes utilizar la estructura `for` para ejecutar un bloque de código para cada elemento de la colección. La sintaxis de la estructura `for` en Rust es la siguiente:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let numeros = [1, 2, 3, 4, 5];
+
+            for numero in numeros {
+                println!("Número: {}", numero);
+            }
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Número: 1
+        Número: 2
+        Número: 3
+        Número: 4
+        Número: 5
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos declarado una matriz `numeros` con los valores `[1, 2, 3, 4, 5]`. Luego, utilizamos la estructura `for` para iterar sobre los elementos de la matriz e imprimir cada número en la consola.
+
+:::note
+Tamibén puedes utilizar la estructura `for` con un rango de valores para iterar sobre un rango específico de números. Por ejemplo, `for i in 0..5` itera sobre los números del `0` al `4`.
+:::
+
+## Estructura `for` con `enumerate`
+
+La estructura `for` en Rust también te permite utilizar el método `enumerate()` para obtener el índice y el valor de cada elemento de una colección. Puedes utilizar el método `enumerate()` para obtener el índice de cada elemento mientras iteras sobre la colección. La sintaxis de la estructura `for` con `enumerate()` en Rust es la siguiente:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let numeros = [1, 2, 3, 4, 5];
+
+            for (indice, numero) in numeros.iter().enumerate() {
+                println!("Índice: {}, Número: {}", indice, numero);
+            }
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Índice: 0, Número: 1
+        Índice: 1, Número: 2
+        Índice: 2, Número: 3
+        Índice: 3, Número: 4
+        Índice: 4, Número: 5
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos declarado una matriz `numeros` con los valores `[1, 2, 3, 4, 5]`. Luego, utilizamos la estructura `for` con el método `enumerate()` para obtener el índice y el valor de cada elemento de la matriz e imprimirlos en la consola.
+
+:::note
+La importancia de uso de `iter()` en `numeros.iter().enumerate()`: El método `enumerate()` se utiliza en combinación con el método `iter()` para obtener un iterador sobre los elementos de la colección. El método `iter()` se utiliza para crear un iterador sobre la colección, que luego se puede utilizar con el método `enumerate()` para obtener el índice y el valor de cada elemento.
+:::
+
+
+## Conclusión
+
+En este capítulo, hemos explorado las diferentes estructuras de control en Rust, como `if`, `else`, `match`, `loop`, `while` y `for`. Hemos aprendido cómo utilizar estas estructuras de control para controlar el flujo de ejecución de un programa, tomar decisiones y repetir tareas. Con estos conocimientos, estarás listo para utilizar las estructuras de control en tus programas de Rust y controlar el flujo de ejecución de manera efectiva.
+
+
+
+
+
+
+
+
+
+

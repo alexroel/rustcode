@@ -1,0 +1,369 @@
+---
+title: "Práctica: Juego de Adivinanzas"
+description: "En esta práctica, aplicarás los conceptos de entrada y salida de datos, conversiones de tipos y generación de números aleatorios en Rust para crear un juego de adivinanzas. El objetivo del juego es adivinar un número aleatorio generado por el programa en un número limitado de intentos."
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+En esta práctica, aplicarás los conceptos de entrada y salida de datos, conversiones de tipos y generación de números aleatorios en Rust para crear un juego de adivinanzas. El objetivo del juego es adivinar un número aleatorio generado por el programa en un número limitado de intentos.
+
+## Descripción del juego
+
+El juego de adivinanzas funciona de la siguiente manera:
+
+1. El programa genera un número aleatorio entre 1 y 100.
+2. El jugador tiene un número limitado de intentos para adivinar el número generado.
+3. Después de cada intento, el programa le indica al jugador si el número adivinado es mayor, menor o igual al número generado.
+4. Si el jugador adivina el número correctamente, el programa muestra un mensaje de felicitaciones y el número de intentos realizados.
+5. Si el jugador no adivina el número en el número máximo de intentos, el programa muestra un mensaje de derrota y el número generado.
+
+## Resultado esperado
+
+Al final de esta práctica, habrás implementado un juego de adivinanzas en Rust que cumple con los siguientes requisitos:
+
+1. El programa genera un número aleatorio entre 1 y 100.
+2. El jugador tiene un menú de opciones para jugar o salir del juego.
+    - Nivel de dificultad: Fácil (10 intentos), Medio (7 intentos), Difícil (5 intentos).
+    - Salir del juego.
+
+3. El programa le indica al jugador si el número adivinado es mayor, menor o igual al número generado después de cada intento.
+
+4. Si el jugador adivina el número correctamente, el programa muestra un mensaje de felicitaciones y el número de intentos realizados.
+
+5. Si el jugador no adivina el número en el número máximo de intentos, el programa muestra un mensaje de derrota y el número generado.
+
+Salida de ejemplo:
+
+```bash
+
+!Adivina el número secreto!
+----------------------------------------------
+1. Jugar - Nivel Fácil (10 intentos)
+2. Jugar - Nivel Medio (7 intentos)
+3. Jugar - Nivel Difícil (5 intentos)
+4. Salir
+Seleccione una opción: 2
+
+----------------------------------------------
+Intentos restantes: 7
+Ingrese un número: 50
+El número secreto es menor!
+
+----------------------------------------------
+Intentos restantes: 6
+Ingrese un número: 25
+El número secreto es menor!
+
+----------------------------------------------
+Intentos restantes: 5
+Ingrese un número: 15
+El número secreto es menor!
+
+----------------------------------------------
+Intentos restantes: 4
+Ingrese un número: 20
+El número secreto es menor!
+
+----------------------------------------------
+Intentos restantes: 3
+Ingrese un número: 10
+El número secreto es mayor!
+
+----------------------------------------------
+Intentos restantes: 2
+Ingrese un número: 13
+El número secreto es menor!
+
+----------------------------------------------
+Intentos restantes: 1
+Ingrese un número: 12
+¡Felicidades! Has adivinado el número secreto!
+
+!Adivina el número secreto!
+----------------------------------------------
+1. Jugar - Nivel Fácil (10 intentos)
+2. Jugar - Nivel Medio (7 intentos)
+3. Jugar - Nivel Difícil (5 intentos)
+4. Salir
+Seleccione una opción: 4
+Gracias por jugar!
+
+```
+
+## Uso de una librería(crate) externa
+
+Para generar números aleatorios en Rust, puedes utilizar la librería externa `rand`, también conocida como *crate*. Para agregar la dependencia de `rand` a tu proyecto, podemos ir a la página de [crates.io](https://crates.io/crates/rand) y buscar la documentación de la librería. En la sección de *Cargo.toml*, encontrarás la versión más reciente de la librería y cómo agregarla a tu proyecto.
+
+Para agregar la dependencia de `rand` a tu proyecto, hay dos formas de hacerlo:
+
+1. Agregar la dependencia manualmente al archivo `Cargo.toml`:
+
+```toml
+[dependencies]
+rand = "0.9.0"
+```
+
+2. Utilizar el comando `cargo add` para agregar la dependencia automáticamente:
+
+<Tabs>
+    <TabItem label="Cargo add" icon="seti:powershell">
+        ```bash
+        cargo add rand
+        ```
+    </TabItem>
+
+    <TabItem label="Cargo.toml" icon="document">
+        ```toml
+        [dependencies]
+        rand = "0.9.0"
+        ```
+    </TabItem>
+</Tabs>
+
+
+## Generar un número aleatorio
+
+Para generar un número aleatorio en Rust, puedes utilizar la función `random_range` de la librería `rand`. Esta función toma un rango de valores y genera un número aleatorio dentro de ese rango. Por ejemplo, para generar un número aleatorio entre 1 y 100, puedes hacer lo siguiente:
+
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        use rand::random_range;
+
+        fn main() {
+            let numero_secreto = random_range(1..100);
+            println!("Número aleatorio: {}", numero_secreto);
+        }
+        ```
+    </TabItem>
+
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Número aleatorio: 42
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos importado la función `random_range` de la librería `rand` y hemos generado un número aleatorio entre 1 y 100. Luego, hemos mostrado el número aleatorio generado en la consola.
+
+## Implementación del juego
+
+Ahora que sabes cómo generar un número aleatorio en Rust, puedes comenzar a implementar el juego de adivinanzas. Aquí tienes una guía paso a paso para implementar el juego:
+
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        use rand::random_range;
+
+        use std::io::{stdin, stdout, Write};
+
+        fn input(prompt: &str) -> String {
+            print!("{}", prompt);
+            stdout().flush().unwrap();
+
+            let mut valor = String::new();
+            stdin().read_line(&mut valor).unwrap();
+
+            valor.trim().to_string()
+        }
+
+        fn juagar_juego(num_secreto: i32, mut _intentos: u8) {
+            loop {
+                println!("\n----------------------------------------------");
+                println!("Intentos restantes: {}", _intentos);
+                let num_escojido:i32 = input("Ingrese un número: ").parse().unwrap();
+
+                if num_escojido == num_secreto {
+                    println!("\n----------------------------------------------");
+                    println!("¡Felicidades! ¡Has adivinado el número secreto!");
+                    break;
+                } else if num_escojido < num_secreto {
+                    println!("El número secreto es mayor.");
+                    _intentos -= 1;
+                } else {
+                    println!("El número secreto es menor.");
+                    _intentos -= 1;
+                }
+
+                if _intentos == 0 {
+                    println!("\n----------------------------------------------");
+                    println!("¡GAME OVER!");
+                    println!("El número secreto era: {}", num_secreto);
+                    break;
+                }
+
+            }
+        }
+
+        fn main() {
+            // Gerar um número aleatório entre 1 e 100
+            let num_secreto = random_range(1..100);
+
+            loop {
+                println!("\n!Adivina el número secreto!");
+                println!("----------------------------------------------");
+
+                println!("1. Jugar - Nivel Fácil (10 intentos)");
+                println!("2. Jugar - Nivel Medio (7 intentos)");
+                println!("3. Jugar - Nivel Difícil (5 intentos)");
+                println!("4. Salir");
+
+                let opcion = input("Seleccione una opción: ");
+
+                match opcion.as_str() {
+                    "1" => juagar_juego(num_secreto, 10),
+                    "2" => juagar_juego(num_secreto, 7),
+                    "3" => juagar_juego(num_secreto, 5),
+                    "4" => {
+                        println!("Gracias por jugar!");
+                        break;
+                    },
+                    _ => println!("Opción inválida!"),
+                }
+            }
+
+            
+        }
+
+        ```
+    </TabItem>
+
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        !Adivina el número secreto!
+        ----------------------------------------------
+        1. Jugar - Nivel Fácil (10 intentos)
+        2. Jugar - Nivel Medio (7 intentos)
+        3. Jugar - Nivel Difícil (5 intentos)
+        4. Salir
+        Seleccione una opción: 3
+
+        ----------------------------------------------
+        Intentos restantes: 5
+        Ingrese un número: 50
+        El número secreto es menor!
+
+        ----------------------------------------------
+        Intentos restantes: 4
+        Ingrese un número: 25
+        El número secreto es mayor!
+        
+        ----------------------------------------------
+        Intentos restantes: 3
+        Ingrese un número: 35
+        El número secreto es mayor!
+
+        ----------------------------------------------
+        Intentos restantes: 2
+        Ingrese un número: 45
+        El número secreto es menor!
+
+        ----------------------------------------------
+        Intentos restantes: 1
+        Ingrese un número: 40
+        ¡Felicidades! Has adivinado el número secreto!
+
+        !Adivina el número secreto!
+        ----------------------------------------------
+        1. Jugar - Nivel Fácil (10 intentos)
+        2. Jugar - Nivel Medio (7 intentos)
+        3. Jugar - Nivel Difícil (5 intentos)
+        4. Salir
+        Seleccione una opción: 4
+        Gracias por jugar!
+        ```
+    </TabItem>
+</Tabs>
+
+
+En este código, hemos implementado el juego de adivinanzas en Rust utilizando las funciones `input` y `juagar_juego`. La función `input` se encarga de leer la entrada del usuario desde la consola, mientras que la función `juagar_juego` implementa la lógica del juego de adivinanzas. La función `main` es la función principal que inicia el juego y maneja las opciones del menú.
+
+## Uso de Ordering
+
+Ordering es un tipo de enumeración en Rust que representa el resultado de una comparación entre dos valores. Los posibles valores de Ordering son: 
+
+- `Less`: El primer valor es menor que el segundo.
+- `Greater`: El primer valor es mayor que el segundo.
+- `Equal`: Los dos valores son iguales.
+
+El tipo de enumeración `Ordering` se utiliza comúnmente en Rust para comparar valores y tomar decisiones basadas en el resultado de la comparación. En el juego de adivinanzas, podemos utilizar el tipo `Ordering` para comparar el número adivinado por el jugador con el número secreto y mostrar un mensaje apropiado.
+
+**Modifica el código anterior para utilizar el tipo `Ordering` en lugar de comparaciones directas.**
+
+```diff lang="rs"
+use std::io::{stdin, stdout, Write};
+
+use rand::random_range;
+
++use std::cmp::Ordering;
+
+...
+
+fn juagar_juego(num_secreto: i32, mut _intentos: u8) {
+    loop {
+        println!("\n----------------------------------------------");
+        println!("Intentos restantes: {}", _intentos);
+        let num_escojido:i32 = input("Ingrese un número: ").parse().unwrap();
+
+-        if num_escojido == num_secreto {
+-            println!("\n----------------------------------------------");
+-            println!("¡Felicidades! ¡Has adivinado el número secreto!");
+-            break;
+-        } else if num_escojido < num_secreto {
+-            println!("El número secreto es mayor.");
+-            _intentos -= 1;
+-        } else {
+-            println!("El número secreto es menor.");
+-            _intentos -= 1;
+-        }
+
++        match num_escojido.cmp(&num_secreto) {
++            Ordering::Less => { // El primer número es menor que el segundo
++                println!("El número secreto es mayor!");
++                _intentos -= 1;
++            },
++            Ordering::Greater => { // El primer número es mayor que el segundo
++                println!("El número secreto es menor!");
++               _intentos -= 1;
++            },
++            Ordering::Equal => { // Ambos números son iguales
++                println!("\n----------------------------------------------");
++                println!("¡Felicidades! Has adivinado el número secreto!");
++                break;
++            }
++        }
+
+        if _intentos == 0 {
+            println!("\n----------------------------------------------");
+            println!("¡GAME OVER!");
+            println!("El número secreto era: {}", num_secreto);
+            break;
+        }
+
+    }
+}
+
+...
+
+```
+
+En este código, hemos modificado la función `juagar_juego` para utilizar el tipo `Ordering` en lugar de comparaciones directas para comparar el número adivinado por el jugador con el número secreto. Hemos utilizado el método `cmp` para comparar los dos números y hemos utilizado un `match` para manejar los diferentes resultados de la comparación.
+
+:::note
+Al utilizar el tipo `Ordering` en Rust, puedes escribir un código más seguro y legible al manejar las comparaciones entre valores de forma más explícita y concisa.
+
+El tema de enumeraciones y tipos de datos en Rust es fundamental para escribir código seguro y eficiente. Más adelante, exploraremos más sobre enumeraciones y cómo utilizarlas en Rust para escribir código más robusto y modular.
+:::
+
+¡Felicidades! Has implementado con éxito un juego de adivinanzas en Rust utilizando conceptos como entrada y salida de datos, conversiones de tipos, generación de números aleatorios y el tipo `Ordering`. Ahora puedes jugar y disfrutar del juego de adivinanzas que has creado.
+
+¡Diviértete jugando y sigue explorando los conceptos de Rust!
+
+
+
+
+
+
+

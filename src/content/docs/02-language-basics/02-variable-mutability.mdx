@@ -1,0 +1,166 @@
+---
+title: Variables y Mutabilidad
+description: En Rust, las variables son inmutables por defecto, lo que significa que no puedes cambiar su valor una vez que se ha asignado. Sin embargo, puedes hacer que una variable sea mutable agregando la palabra clave `mut` antes de su nombre.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+El tema de variables es fundamental en cualquier lenguaje de programación, ya que nos permite almacenar y manipular datos en la memoria. En este capítulo, aprenderemos cómo declarar variables en Rust y tambien entenderemos como funcionan la variables en Rust.
+
+## Declarar Variables
+
+En Rust, puedes declarar una variable usando la palabra clave `let`, seguida del nombre de la variable y el tipo de dato. Por ejemplo, para declarar una variable entera llamada `x`, puedes escribir:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let x: i32 = 5;
+        println!("{}", x);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        5
+        ```
+    </TabItem>
+</Tabs>
+
+
+
+En este ejemplo, hemos declarado una variable `x` de tipo `i32` (entero de 32 bits) y le hemos asignado el valor `5`.
+
+:::note
+Rust es un lenguaje de programación estáticamente tipado, lo que significa que debes especificar el tipo de dato de cada variable al declararla. Esto ayuda al compilador a realizar verificaciones de tipo en tiempo de compilación y a prevenir errores comunes en tiempo de ejecución.
+:::
+
+## Variables sin especificar el tipo de dato
+
+En Rust, puedes omitir el tipo de dato de una variable y dejar que el compilador infiera el tipo automáticamente. Por ejemplo, puedes declarar una variable `y` sin especificar el tipo de dato de la siguiente manera:
+
+
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let y = 10;
+        println!("{y}");
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        5
+        ```
+    </TabItem>
+</Tabs>
+
+En este caso, el compilador infiere que `y` es de tipo `i32` (entero de 32 bits) basado en el valor `10` que le hemos asignado. Esta característica de Rust se llama *inferencia de tipo* y es útil para escribir código más conciso y legible.
+
+## Mutabilidad de Variables
+
+En Rust, las variables son inmutables por defecto, lo que significa que no puedes cambiar su valor una vez que se ha asignado. Por ejemplo, si intentas cambiar el valor de una variable inmutable, obtendrás un error de compilación:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let x = 5;
+        println!("{}", x);
+        x = 10; // Error: no se puede asignar dos veces a una variable inmutable
+        println!("{}", x);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        error[E0384]: cannot assign twice to immutable variable `x`
+        ```
+    </TabItem>
+</Tabs>
+
+Para hacer que una variable sea mutable, puedes agregar la palabra clave `mut` antes de su nombre. Por ejemplo, para declarar una variable mutable `x`, puedes escribir:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let mut x = 5;
+        println!("{}", x);
+        x = 10;
+        println!("{}", x);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        5
+        10
+        ```
+    </TabItem>
+</Tabs>
+
+En este caso, hemos declarado una variable `x` como mutable usando la palabra clave `mut`, lo que nos permite cambiar su valor después de la asignación.
+
+:::note
+Es una buena práctica hacer que las variables sean inmutables por defecto y solo hacerlas mutables cuando sea necesario. Esto ayuda a prevenir errores y a escribir código más seguro y fácil de razonar.
+:::
+
+## Redefinir Variables (Shadowing)
+
+En Rust, puedes redefinir una variable existente usando el mismo nombre, lo que se conoce como *shadowing*. Esto te permite cambiar el tipo de dato de una variable y reutilizar el mismo nombre. Por ejemplo, puedes redefinir la variable `x` de la siguiente manera:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let x = 5;
+        println!("{}", x);
+        let x = "hola";
+        println!("{}", x);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        5
+        hola
+        ```
+    </TabItem>
+</Tabs>
+
+En este caso, hemos redefinido la variable `x` como una cadena de texto (`&str`) después de haberla declarado como un entero (`i32`). Esto es posible gracias al shadowing, que crea una nueva variable con el mismo nombre pero con un tipo de dato diferente.
+
+:::note
+El shadowing es útil para reutilizar nombres de variables y para cambiar el tipo de dato de una variable sin tener que cambiar su nombre. Sin embargo, ten en cuenta que la variable original sigue existiendo en un ámbito superior y no se puede acceder a ella una vez que ha sido sombreada.
+:::
+
+## Constantes en Rust
+
+En Rust, puedes declarar constantes usando la palabra clave `const`, seguida del nombre de la constante y su valor. A diferencia de las variables, las constantes deben tener un tipo de dato explícito y no pueden ser sombreadas. Por ejemplo, puedes declarar una constante `PI` de la siguiente manera:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        const PI: f64 = 3.14159;
+        println!("{}", PI);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        3.14159
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos declarado una constante `PI` de tipo `f64` (número de punto flotante de 64 bits) y le hemos asignado el valor `3.14159`. Las constantes en Rust son útiles para valores que no cambian durante la ejecución del programa y que deben ser conocidos en tiempo de compilación.
+
+:::note
+A diferencia de las variables, las constantes en Rust no tienen un ámbito específico y pueden ser declaradas en cualquier parte del código, incluyendo el ámbito global. Esto las hace útiles para definir valores globales y compartidos en un programa.
+:::
+
+## Conclusión
+
+En este capítulo, hemos aprendido cómo declarar variables en Rust y cómo hacer que una variable sea mutable. También hemos explorado el concepto de shadowing y cómo se puede utilizar para redefinir variables con el mismo nombre. Además, hemos visto cómo declarar constantes en Rust y cuáles son las diferencias entre variables y constantes.
+
+En el próximo capítulo, exploraremos los tipos de datos en Rust y cómo se pueden utilizar para almacenar diferentes tipos de valores en una variable.
+
+
+
+
+
+
+
+ 

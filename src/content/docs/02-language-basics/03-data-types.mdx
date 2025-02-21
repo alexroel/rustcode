@@ -1,0 +1,231 @@
+---
+title: Tipos de datos en Rust
+description: "En Rust, cada valor tiene un tipo de dato asociado que define cómo se almacena y se manipula en la memoria. Los tipos de datos en Rust se dividen en dos categorías principales: tipos primitivos y tipos compuestos."
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Es fundamental compreder como trabajar con los tipos en diferentes lenguajes de programación, ya que nos permite almacenar y manipular datos en la memoria. En este capítulo, aprenderemos sobre los tipos de datos en Rust y cómo se utilizan en la programación.
+
+Rust es un lenguaje de programación estáticamente tipado, lo que significa que cada valor tiene un tipo de dato asociado que se conoce en tiempo de compilación. Los tipos de datos en Rust se dividen en dos categorías principales: tipos primitivos y tipos compuestos.
+
+## Tipos Primitivos
+
+Los tipos primitivos en Rust son los tipos de datos básicos que se utilizan para representar valores simples. Estos tipos de datos son los bloques de construcción fundamentales de cualquier programa en Rust. A continuación, se muestran algunos de los tipos primitivos más comunes en Rust:
+
+### Enteros con signo y sin signo
+
+Los enteros son números enteros que pueden ser positivos o negativos. En Rust, los enteros se dividen en dos categorías: enteros con signo y enteros sin signo. Los enteros con signo representan números enteros que pueden ser positivos, negativos o cero, mientras que los enteros sin signo representan números enteros que son siempre positivos o cero.
+
+Los enteros con signo en Rust se representan con los siguientes tipos de datos:
+
+- `i8`: Entero de 8 bits con signo (-128 a 127)
+- `i16`: Entero de 16 bits con signo (-32,768 a 32,767)
+- `i32`: Entero de 32 bits con signo (-2,147,483,648 a 2,147,483,647)
+- `i64`: Entero de 64 bits con signo (-9,223,372,036,854,775,808 a 9,223,372,036,854,775,807)
+- `i128`: Entero de 128 bits con signo
+- `isize`: Entero con signo del tamaño de un puntero
+
+Ejemplo de enteros con signo:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let x: i8 = -5;
+        let y: isize = 100;
+
+        println!("{}", x);
+        println!("{}", y);
+
+        // Para saber el tamaño de un tipo de dato en Rust
+        println!("Tamaño maximo de i8: {}", i8::MAX);
+        println!("Tamaño minimo de i8: {}", i8::MIN);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        5
+        100
+        Tamaño maximo de i8: 127
+        Tamaño minimo de i8: -128
+        ```
+    </TabItem>
+</Tabs>
+
+Los enteros sin signo en Rust se representan con los siguientes tipos de datos:
+
+- `u8`: Entero de 8 bits sin signo (0 a 255)
+- `u16`: Entero de 16 bits sin signo (0 a 65,535)
+- `u32`: Entero de 32 bits sin signo (0 a 4,294,967,295)
+- `u64`: Entero de 64 bits sin signo (0 a 18,446,744,073,709,551,615)
+- `u128`: Entero de 128 bits sin signo
+- `usize`: Entero sin signo del tamaño de un puntero
+
+Ejemplo de enteros sin signo:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let x: u8 = 5;
+        let y: usize = 100;
+
+        println!("{}", x);
+        println!("{}", y);
+
+        // Para saber el tamaño de un tipo de dato en Rust
+        println!("Tamaño maximo de u8: {}", u8::MAX);
+        println!("Tamaño minimo de u8: {}", u8::MIN);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        5
+        100
+        Tamaño maximo de u8: 255
+        Tamaño minimo de u8: 0
+        ```
+    </TabItem>
+</Tabs>
+
+### Punto flotante
+
+Los números de punto flotante son números reales que pueden tener una parte entera y una parte fraccionaria. En Rust, los números de punto flotante se representan con los siguientes tipos de datos:
+
+- `f32`: Número de punto flotante de 32 bits
+- `f64`: Número de punto flotante de 64 bits 
+
+Ejemplo de números de punto flotante:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let x: f32 = 3.14;
+        let y: f64 = 3.14159;
+
+        println!("{}", x);
+        println!("{}", y);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        3.14
+        3.14159
+        ```
+    </TabItem>
+</Tabs>
+
+## Tipos Booleanos
+
+Los valores booleanos representan la verdad o la falsedad de una expresión. En Rust, los valores booleanos se representan con el tipo de dato `bool`, que puede tener dos valores posibles: `true` o `false`.
+
+Ejemplo de valores booleanos:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let x: bool = true;
+        let y: bool = false;
+
+        println!("{}", x);
+        println!("{}", y);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        true
+        false
+        ```
+    </TabItem>
+</Tabs>
+
+## Tipo de Carácter
+
+Los caracteres en Rust se representan con el tipo de dato `char`, que puede almacenar un solo carácter Unicode. Los caracteres en Rust se definen entre comillas simples (`'`) y pueden representar cualquier carácter Unicode, incluyendo letras, números, símbolos y emojis.
+
+Ejemplo de caracteres: 
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let x: char = 'A';
+        let y: char = '😊';
+
+        println!("{}", x);
+        println!("{}", y);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        A
+        😊
+        ```
+    </TabItem>
+</Tabs>
+
+## Tipo Array
+
+Los arrays en Rust son colecciones de elementos del mismo tipo que tienen una longitud fija y se almacenan en la memoria de forma contigua. Los arrays en Rust se representan con la siguiente sintaxis:
+
+```rust
+let array_name: [type; size] = [value1, value2, value3, ...];
+```
+
+Donde `type` es el tipo de dato de los elementos del array, `size` es la longitud del array y `value1`, `value2`, `value3`, etc., son los valores de los elementos del array.
+
+Ejemplo de arrays:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let numeros: [i32; 5] = [1, 2, 3, 4, 5];
+
+        println!("{:?}", numeros);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        [1, 2, 3, 4, 5]
+        ```
+    </TabItem>
+</Tabs>
+
+:::note
+Los arrays en Rust son útiles para almacenar una colección de elementos del mismo tipo en una sola estructura de datos. Puedes acceder a los elementos de un array utilizando la notación de corchetes `[]` seguida del índice del elemento.
+:::
+
+## Tipos tupla
+
+Las tuplas en Rust son colecciones de elementos de diferentes tipos que tienen una longitud fija y se almacenan en la memoria de forma contigua. Las tuplas en Rust se representan con la siguiente sintaxis:
+
+```rust
+let tuple_name: (type1, type2, type3, ...) = (value1, value2, value3, ...);
+```
+
+Donde `type1`, `type2`, `type3`, etc., son los tipos de datos de los elementos de la tupla y `value1`, `value2`, `value3`, etc., son los valores de los elementos de la tupla.
+
+Ejemplo de tuplas:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let tupla: (i32, f64, char) = (42, 3.14, 'A');
+
+        println!("{:?}", tupla);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        (42, 3.14, 'A')
+        ```
+    </TabItem>
+</Tabs>
+
+:::note
+Las tuplas en Rust son útiles para agrupar valores de diferentes tipos en una sola estructura de datos. Puedes acceder a los elementos de una tupla utilizando la notación de puntos `(.)` seguida del índice del elemento.
+:::
+
+
+## Conclusión
+
+En este capítulo, hemos aprendido sobre los tipos de datos en Rust y cómo se utilizan en la programación. Hemos explorado los tipos primitivos más comunes en Rust, como enteros, números de punto flotante, valores booleanos, caracteres, arrays y tuplas. Cada tipo de dato en Rust tiene un propósito específico y se utiliza para representar diferentes tipos de valores en la memoria.
+

@@ -1,0 +1,168 @@
+---
+title: Funciones 
+description: Las funciones son bloques de código que realizan una tarea específica. En Rust, puedes definir funciones utilizando la palabra clave `fn` seguida del nombre de la función, los parámetros y el tipo de retorno.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Las funciones son bloques de código que realizan una tarea específica. En Rust, puedes definir funciones utilizando la palabra clave `fn` seguida del nombre de la función, los parámetros y el tipo de retorno. En este capítulo, aprenderás cómo definir y llamar funciones en Rust, cómo especificar los parámetros y el tipo de retorno de una función, y cómo utilizar funciones para modularizar tu código y reutilizarlo en diferentes partes de tu programa.
+
+## Definición de funciones
+
+En Rust, puedes definir funciones utilizando la palabra clave `fn`, seguida del nombre de la función y los parámetros entre paréntesis. Aquí tienes un ejemplo de una función simple que imprime un mensaje de saludo:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn saludar() {
+            println!("Hola desde la función saludar!");
+        }
+
+        fn main() {
+            saludar();
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Hola desde la función saludar!
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos definido una función `saludar` que imprime un mensaje de saludo en la consola. Luego, hemos llamado a la función `saludar` desde la función `main` para ejecutarla. Cuando ejecutas este programa, verás el mensaje `Hola desde la función saludar!` impreso en la consola.
+
+## Parámetros de funciones
+
+Las funciones en Rust pueden tener parámetros que les permiten recibir valores de entrada y realizar operaciones en función de esos valores. Puedes especificar los parámetros de una función entre paréntesis, separados por comas. Aquí tienes un ejemplo de una función que devuelve un mensaje de saludo personalizado:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn saludar(nombre: &str) {
+            println!("Hola, {}!", nombre);
+        }
+
+        fn main() {
+            saludar("Juan");
+            saludar("María");
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Hola, Juan!
+        Hola, María!
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos definido una función `saludar` que toma un parámetro `nombre` de tipo `&str` (una referencia a una cadena de texto) y lo utiliza para imprimir un mensaje de saludo personalizado. Luego, hemos llamado a la función `saludar` dos veces con diferentes nombres para imprimir mensajes de saludo personalizados en la consola.
+
+## Tipo de retorno de funciones
+
+Las funciones en Rust pueden tener un tipo de retorno que especifica el tipo de valor que devuelven. Puedes especificar el tipo de retorno de una función utilizando una flecha (`->`) seguida del tipo de dato que devuelve la función. Aquí tienes un ejemplo de una función que devuelve un mensaje de saludo personalizado:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn saludar(nombre: &str) -> String {
+            let mensaje = format!("Hola, {}!", nombre);
+            mensaje
+        }
+
+        fn main() {
+            let saludo_juan = saludar("Juan");
+            let saludo_maria = saludar("María");
+
+            println!("{}", saludo_juan);
+            println!("{}", saludo_maria);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Hola, Juan!
+        Hola, María!
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos definido una función `saludar` que toma un parámetro `nombre` de tipo `&str` y devuelve un mensaje de saludo personalizado como una cadena de texto (`String`).
+
+:::note
+En Rust, el valor de retorno de una función es la última expresión evaluada en la función. No es necesario utilizar la palabra clave `return` para devolver un valor de una función, ya que Rust infiere automáticamente el valor de retorno basado en la última expresión evaluada.
+
+Y no necesario usar `;` al final de la expresión que se va a retornar. Si se coloca `;` se considera que la expresión no retorna nada y te dará un error.
+:::
+
+## Uso de `return` en funciones
+
+En Rust, puedes utilizar la palabra clave `return` para devolver un valor de una función de forma explícita. Esto puede ser útil cuando quieres devolver un valor antes de que se haya evaluado la última expresión de la función. Aquí tienes un ejemplo de una función que utiliza `return` para devolver un valor de forma explícita antes de la última expresión:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn sumar(a: i32, b: i32) -> i32 {
+            return a + b;
+            a * b // Esta expresión no se evaluará
+        }
+
+        fn main() {
+            let resultado = sumar(5, 3);
+            println!("La suma es: {}", resultado);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        La suma es: 8
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos definido una función `sumar` que toma dos parámetros `a` y `b` de tipo `i32` y devuelve la suma de los dos valores. Hemos utilizado la palabra clave `return` para devolver el valor de la suma de forma explícita antes de que se evalúe la expresión `a * b`.
+
+:::note
+
+Cuando utilizas la palabra clave `return` en una función, debes tener en cuenta que la expresión que se evalúa después de `return` no se ejecutará. Por lo tanto, si quieres devolver un valor de forma explícita utilizando `return`, asegúrate de que sea la última expresión evaluada en la función.
+
+:::
+
+## Funciones con múltiples valores de retorno
+
+En Rust, puedes devolver múltiples valores de una función utilizando tuplas. Una tupla es un tipo de dato que puede contener varios valores de diferentes tipos. Aquí tienes un ejemplo de una función que devuelve múltiples valores de una tupla:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn dividir(a: i32, b: i32) -> (i32, i32) {
+            (a / b, a % b)
+        }
+
+        fn main() {
+            let (cociente, resto) = dividir(10, 3);
+            println!("Cociente: {}, Resto: {}", cociente, resto);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Cociente: 3, Resto: 1
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos definido una función `dividir` que toma dos parámetros `a` y `b` de tipo `i32` y devuelve una tupla con el cociente y el resto de la división de `a` entre `b`. Luego, hemos desestructurado la tupla devuelta en la función `main` para obtener los valores del cociente y el resto y los hemos impreso en la consola.
+
+## Conclusión
+
+Las funciones son una parte fundamental de la programación en Rust y te permiten modularizar tu código y reutilizarlo en diferentes partes de tu programa. En este capítulo, has aprendido cómo definir y llamar funciones en Rust, cómo especificar los parámetros y el tipo de retorno de una función, y cómo utilizar funciones para devolver valores de forma explícita y devolver múltiples valores utilizando tuplas. Con estos conceptos, estarás listo para utilizar funciones en tus programas de Rust y escribir código más modular y reutilizable.
+
+
+
+
+
+
+
+

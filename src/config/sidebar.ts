@@ -4,23 +4,55 @@ export const sidebar = [
       autogenerate: { directory: '01-intro-rust' },
     },
     {
-      label: 'Variables y Tipos de Datos',
-      autogenerate: { directory: '02-variables-datas' },
+      label: 'Fundamentos del lenguaje',
+      autogenerate: { directory: '02-language-basics' },
     },
     {
-      label: 'Control de flujo',
-      autogenerate: { directory: '03-control-flujo' },
+      label: 'Propiedad y gestión de memoria', 
+      autogenerate: { directory: '03-ownership-memory' },
     },
     {
-      label: 'Estructuras y Colecciones',
-      autogenerate: { directory: '04-structure-and-collection' },
+      label: 'Tipos compuestos y manejo de datos', 
+      autogenerate: { directory: '04-composite-type' },
     },
     {
-      label: 'Manejo de errores',
-      autogenerate: { directory: '05-error-handling' },
+      label: 'Genéricos y tipos parametrizados',
+      autogenerate: { directory: '05-generics' },
     },
     {
-      label: 'Comprendiendo la propiedad en Rust',
-      autogenerate: { directory: '06-comprendiendo-la-propiedad' },
+      label: 'Manejo de errores y seguridad',
+      autogenerate: { directory: '06-error-handling' },
     },
+    {
+      label: 'Programación funcional',
+      autogenerate: { directory: '07-functional-programming' },
+    },
+    {
+      label: 'Concurrencia y paralelismo',
+      autogenerate: { directory: '08-concurrency' },
+    },
+    {
+      label: 'Macros y metaprogramación',
+      autogenerate: { directory: '09-macros' },
+    },
+    {
+      label: 'Módulos y paquetes',
+      autogenerate: { directory: '10-modules' },
+    },
+    {
+      label: 'Base de datos con Diesel',
+      autogenerate: { directory: '11-diesel' },
+    },
+    {
+      label: 'Testing automatizado',
+      autogenerate: { directory: '12-testing' },
+    },
+    {
+      label: 'App web con Actix Web',
+      autogenerate: { directory: '13-actix-web' },
+    },
+    {
+      label: 'Despliegue y optimización',
+      autogenerate: { directory: '14-deployment' },
+    }
 ];

@@ -1,0 +1,401 @@
+---
+title: Cadena de caracteres
+description: En Rust, las cadenas de caracteres son una secuencia de caracteres Unicode que se utilizan para representar texto. En este capítulo, aprenderemos sobre los diferentes tipos de cadenas de caracteres en Rust y cómo trabajar con ellas.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Las cadenas de caracteres son una parte fundamental de cualquier lenguaje de programación, ya que se utilizan para representar texto y datos de texto. En Rust, las cadenas de caracteres son una secuencia de caracteres Unicode que se utilizan para representar texto. En este capítulo, aprenderemos sobre los diferentes tipos de cadenas de caracteres en Rust y cómo trabajar con ellas.
+
+## Cadenas de caracteres con `&str`
+
+En Rust, las cadenas de caracteres se pueden representar de varias formas. La forma más común de representar una cadena de caracteres es con el tipo `&str`, que es una *rebanada* de una cadena de caracteres. Las cadenas de caracteres `&str` son inmutables y se almacenan en la memoria de forma estática. Puedes crear una cadena de caracteres `&str` de la siguiente manera:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let saludo:&str = "¡Hola, mundo!"; // Por defecto es &str 
+        println!("{}", saludo);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        ¡Hola, mundo!
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos creado una cadena de caracteres `&str` llamada `saludo` que contiene el texto `"¡Hola, mundo!"`. La cadena de caracteres `&str` se almacena en la memoria de forma estática y se puede imprimir en la consola utilizando el macro `println!`.
+
+Para que esta cadena sea mutable, puedes usar `mut` antes de la variable, pero parece que estas modificando el valor de la variable, pero en realidad estas creando un nueva referencia a la cadena de caracteres en otras palabras estas creando un nuevo `&str`:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let mut saludo:&str = "¡Hola, mundo!"; // Por defecto es &str 
+        println!("{}", saludo);
+
+        saludo = "¡Hola, Rust!";
+        println!("{}", saludo);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        ¡Hola, mundo!
+        ```
+    </TabItem>
+</Tabs>
+
+## Cadenas de caracteres con `String`
+
+Otra forma de representar cadenas de caracteres en Rust es con el tipo `String`, que es una cadena de caracteres dinámica que se puede modificar en tiempo de ejecución. Las cadenas de caracteres `String` se almacenan en la memoria de forma dinámica y se pueden modificar en tiempo de ejecución. Puedes crear una cadena de caracteres `String` de la siguiente manera:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let mut saludo = String::from("¡Hola, mundo!");
+        println!("{}", saludo);
+
+        saludo.push_str(" ¡Hola, Rust!");
+        println!("{}", saludo);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        ¡Hola, mundo!
+        ¡Hola, mundo! ¡Hola, Rust!
+        ```
+    </TabItem>
+</Tabs>
+
+- `::from` es un método asociado de la estructura `String` que convierte una cadena de caracteres `&str` en una cadena de caracteres `String`. 
+
+En este ejemplo, hemos creado una cadena de caracteres `String` llamada `saludo` que contiene el texto `"¡Hola, mundo!"`. La cadena de caracteres `String` se almacena en la memoria de forma dinámica y se puede modificar en tiempo de ejecución utilizando el método `push_str`.
+
+**Crear una cadena de caracteres vacía**
+
+Puedes crear una cadena de caracteres `String` vacía utilizando el método `::new` de la estructura `String`:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let mut saludo = String::new();
+        println!("{}", saludo);
+
+        saludo.push_str("¡Hola, mundo!");
+        println!("{}", saludo);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+
+        ¡Hola, mundo!
+        ```
+    </TabItem>
+</Tabs>
+
+## Diferencias entre `&str` y `String`
+
+Las cadenas de caracteres `&str` y `String` tienen algunas diferencias clave en Rust:
+
+- **Inmutabilidad:** Las cadenas de caracteres `&str` son inmutables, lo que significa que no se pueden modificar una vez que se han creado. Las cadenas de caracteres `String`, por otro lado, son mutables y se pueden modificar en tiempo de ejecución.
+
+- **Almacenamiento en memoria:** Las cadenas de caracteres `&str` se almacenan en la memoria de forma estática, mientras que las cadenas de caracteres `String` se almacenan en la memoria de forma dinámica.
+
+- **Propiedad:** Las cadenas de caracteres `&str` son *rebanadas* de una cadena de caracteres existente, mientras que las cadenas de caracteres `String` son propietarias de su contenido y pueden modificarlo en tiempo de ejecución.
+
+En general, las cadenas de caracteres `&str` se utilizan para representar texto estático que no cambia, mientras que las cadenas de caracteres `String` se utilizan para representar texto dinámico que puede cambiar en tiempo de ejecución.
+
+## Métodos de cadenas de caracteres
+
+Las cadenas de caracteres en Rust tienen varios métodos útiles que puedes utilizar para trabajar con ellas. Algunos de los métodos más comunes son:
+
+### `len`
+
+El método `len` devuelve la longitud de una cadena de caracteres en bytes. Puedes utilizar este método para obtener la longitud de una cadena de caracteres `&str` o `String`:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let saludo = "¡Hola, mundo!";
+        println!("Longitud de la cadena: {}", saludo.len());
+
+        let saludo = String::from("¡Hola, mundo!");
+        println!("Longitud de la cadena: {}", saludo.len());
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Longitud de la cadena: 13
+        Longitud de la cadena: 13
+        ```
+    </TabItem>
+</Tabs>
+
+### `is_empty`
+
+El método `is_empty` devuelve `true` si una cadena de caracteres está vacía y `false` si contiene algún carácter. Puedes utilizar este método para verificar si una cadena de caracteres `&str` o `String` está vacía:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let saludo = "";
+        println!("¿La cadena está vacía?: {}", saludo.is_empty());
+
+        let saludo = String::from("");
+        println!("¿La cadena está vacía?: {}", saludo.is_empty());
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        ¿La cadena está vacía?: true
+        ¿La cadena está vacía?: true
+        ```
+    </TabItem>
+</Tabs>
+
+### `contains`
+
+El método `contains` devuelve `true` si una cadena de caracteres contiene una subcadena específica y `false` si no la contiene. Puedes utilizar este método para buscar una subcadena en una cadena de caracteres `&str` o `String`:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let saludo = "¡Hola, mundo!";
+        println!("¿La cadena contiene 'Hola'?: {}", saludo.contains("Hola"));
+
+        let saludo = String::from("¡Hola, mundo!");
+        println!("¿La cadena contiene 'Hola'?: {}", saludo.contains("Hola"));
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        ¿La cadena contiene 'Hola'?: true
+        ¿La cadena contiene 'Hola'?: true
+        ```
+    </TabItem>
+</Tabs>
+
+### `replace`
+
+El método `replace` reemplaza todas las ocurrencias de una subcadena específica por otra subcadena. Puedes utilizar este método para reemplazar una subcadena en una cadena de caracteres `String`:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let saludo = String::from("¡Hola, mundo!");
+        let nuevo_saludo = saludo.replace("Hola", "Adiós");
+        println!("{}", nuevo_saludo);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        ¡Adiós, mundo!
+        ```
+    </TabItem>
+</Tabs>
+
+### `to_uppercase` y `to_lowercase`
+
+Los métodos `to_uppercase` y `to_lowercase` convierten todos los caracteres de una cadena de caracteres a mayúsculas o minúsculas, respectivamente. Puedes utilizar estos métodos para convertir una cadena de caracteres `&str` o `String` a mayúsculas o minúsculas:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let saludo = "¡Hola, mundo!";
+        println!("{}", saludo.to_uppercase());
+
+        let saludo = String::from("¡Hola, mundo!");
+        println!("{}", saludo.to_lowercase());
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        ¡HOLA, MUNDO!
+        ¡hola, mundo!
+        ```
+    </TabItem>
+</Tabs>
+
+### `trim`
+
+El método `trim` elimina los espacios en blanco al principio y al final de una cadena de caracteres. Puedes utilizar este método para eliminar los espacios en blanco de una cadena de caracteres `&str` o `String`:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let saludo = "  ¡Hola, mundo!  ";
+        println!("{}", saludo.trim());
+
+        let saludo = String::from("  ¡Hola, mundo!  ");
+        println!("{}", saludo.trim());
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        ¡Hola, mundo!
+        ¡Hola, mundo!
+        ```
+    </TabItem>
+</Tabs>
+
+## Métodos de `String`
+
+Además de los métodos comunes de las cadenas de caracteres, el tipo `String` en Rust tiene varios métodos adicionales que puedes utilizar para trabajar con cadenas de caracteres dinámicas. Algunos de los métodos más comunes de `String` son:
+
+### `push`
+
+El método `push` agrega un carácter al final de una cadena de caracteres `String`. Puedes utilizar este método para agregar un carácter a una cadena de caracteres `String`:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let mut saludo = String::from("¡Hola, mundo!");
+        saludo.push('!');
+        println!("{}", saludo);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        ¡Hola, mundo!!
+        ```
+    </TabItem>
+</Tabs>
+
+### `pop`
+
+El método `pop` elimina el último carácter de una cadena de caracteres `String` y devuelve el carácter eliminado. Puedes utilizar este método para eliminar el último carácter de una cadena de caracteres `String`:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let mut saludo = String::from("¡Hola, mundo!");
+        let ultimo_caracter = saludo.pop();
+        println!("{}", saludo);
+        println!("{}", ultimo_caracter.unwrap());
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        ¡Hola, mundo
+        !
+        ```
+    </TabItem>
+</Tabs>
+
+### `clear`
+
+El método `clear` elimina todos los caracteres de una cadena de caracteres `String`, dejándola vacía. Puedes utilizar este método para vaciar una cadena de caracteres `String`:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let mut saludo = String::from("¡Hola, mundo!");
+        saludo.clear();
+        println!("{}", saludo);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        ""
+        ```
+    </TabItem>
+</Tabs>
+
+### `push_str`
+
+El método `push_str` agrega una cadena de caracteres `&str` al final de una cadena de caracteres `String`. Puedes utilizar este método para agregar una cadena de caracteres `&str` a una cadena de caracteres `String`:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let mut saludo = String::from("¡Hola, mundo!");
+        saludo.push_str(" ¡Hola, Rust!");
+        println!("{}", saludo);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        ¡Hola, mundo! ¡Hola, Rust!
+        ```
+    </TabItem>
+</Tabs>
+
+### `insert_str`
+
+El método `insert_str` inserta una cadena de caracteres `&str` en una posición específica de una cadena de caracteres `String`. Puedes utilizar este método para insertar una cadena de caracteres `&str` en una posición específica de una cadena de caracteres `String`:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let mut saludo = String::from("¡Hola, mundo!");
+        saludo.insert_str(5, " Rust");
+        println!("{}", saludo);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        ¡Hola Rust, mundo!
+        ```
+    </TabItem>
+</Tabs>
+
+### `remove`
+
+El método `remove` elimina un carácter en una posición específica de una cadena de caracteres `String` y devuelve el carácter eliminado. Puedes utilizar este método para eliminar un carácter en una posición específica de una cadena de caracteres `String`:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let mut saludo = String::from("¡Hola, mundo!");
+        let caracter_eliminado = saludo.remove(5);
+        println!("{}", saludo);
+        println!("{}", caracter_eliminado);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        ¡Hola mundo!
+        ,
+        ```
+    </TabItem>
+</Tabs> 
+
+### `replace_range`
+
+El método `replace_range` reemplaza una subcadena en una posición específica de una cadena de caracteres `String` con otra subcadena. Puedes utilizar este método para reemplazar una subcadena en una posición específica de una cadena de caracteres `String`:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let mut saludo = String::from("¡Hola, mundo!");
+        saludo.replace_range(5..10, "Rust");
+        println!("{}", saludo);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        ¡Hola Rust!
+        ```
+    </TabItem>
+</Tabs>
+
+Estos son solo algunos de los métodos útiles que puedes utilizar para trabajar con cadenas de caracteres en Rust. Puedes consultar la [documentación oficial de Rust](https://doc.rust-lang.org/std/string/struct.String.html) para obtener más información sobre los métodos disponibles para las cadenas de caracteres `String`.
+
+## Conclusión
+
+En este capítulo, hemos aprendido sobre los diferentes tipos de cadenas de caracteres en Rust y cómo trabajar con ellas. Hemos visto cómo representar cadenas de caracteres con `&str` y `String`, y hemos explorado los métodos útiles que puedes utilizar para trabajar con cadenas de caracteres en Rust. Con este conocimiento, estarás listo para trabajar con cadenas de caracteres en tus proyectos de Rust y aprovechar al máximo las capacidades del lenguaje.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

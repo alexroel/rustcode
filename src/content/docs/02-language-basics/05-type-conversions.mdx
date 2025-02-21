@@ -1,0 +1,95 @@
+---
+title: Conversiones de tipo
+description: En Rust, puedes convertir entre diferentes tipos de datos utilizando funciones de conversión incorporadas. Esto te permite convertir un tipo de dato en otro para realizar operaciones o comparaciones específicas.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Cuando trabajas con variables en Rust, a menudo necesitas convertir entre diferentes tipos de datos. Por ejemplo, puedes necesitar convertir un número entero en un número de punto flotante para realizar cálculos matemáticos, o convertir una cadena en un número entero para realizar operaciones aritméticas.
+
+En Rust, puedes convertir entre diferentes tipos de datos de dos maneras: utilizando `as` para conversiones explícitas o mediate métodos incorporados. En este capítulo, exploraremos cómo realizar conversiones de tipo en Rust.
+
+## Conversión usando `as`
+
+En Rust, puedes realizar conversiones de tipo explícitas utilizando el operador `as`. Este operador te permite convertir un tipo de dato en otro de manera explícita. Por ejemplo, puedes convertir un número entero en un número de punto flotante de la siguiente manera:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let x: i32 = 42;
+        let y: f64 = 40.5;
+
+        let suma:f64 = x as f64 + y;
+        println!("La suma es: {}", suma);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        La suma es: 82.5
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos declarado dos variables `x` y `y` de tipo `i32` y `f64`, respectivamente. Luego, hemos convertido la variable `x` de tipo `i32` a tipo `f64` utilizando el operador `as` y la hemos sumado a la variable `y`. El resultado de la suma es `82.5`.
+
+:::note
+El operador `as` es Rust es útil para realizar conversiones entre tipos numéricos compatibles, como enteros y números de punto flotante. Sin embargo, debes tener en cuenta que algunas conversiones pueden causar pérdida de precisión o desbordamiento, por lo que es importante tener en cuenta los límites de los tipos de datos al realizar conversiones.
+:::
+
+## Conversión de tipo incorporada
+
+En Rust, puedes convertir entre diferentes tipos de datos utilizando funciones de conversión incorporadas. Estas funciones te permiten convertir un tipo de dato en otro de manera segura y eficiente. Algunas de las funciones de conversión incorporadas más comunes en Rust son:
+
+- `parse`: Convierte una cadena en un tipo de dato numérico.
+- `to_string`: Convierte un tipo de dato en una cadena.
+- `as_str`: Convierte un tipo de dato en una referencia a una cadena.
+
+Por ejemplo, puedes convertir una cadena en un número entero utilizando el método `parse` de la siguiente manera:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let numero_str = "42";
+        let numero:i32 = numero_str.parse().expect("No se pudo convertir a número");
+        println!("El número es: {}", numero);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        El número es: 42
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos declarado una variable `numero_str` que contiene una cadena `"42"`. Luego, hemos convertido esta cadena en un número entero utilizando el método `parse` y lo hemos almacenado en la variable `numero`. El resultado de la conversión es `42`.
+
+:::note
+Cuando utilizas funciones de conversión incorporadas en Rust, es importante manejar los posibles errores que puedan ocurrir durante la conversión. Puedes utilizar el método `expect` para manejar los errores de manera segura y mostrar un mensaje de error personalizado en caso de que la conversión falle.
+:::
+
+Uso de `to_string` para convertir un número en una cadena:
+
+<Tabs>  
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        let numero = 42;
+        let numero_str = numero.to_string();
+        println!("El número es: {}", numero_str);
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        El número es: 42
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos declarado una variable `numero` que contiene un número entero `42`. Luego, hemos convertido este número en una cadena utilizando el método `to_string` y lo hemos almacenado en la variable `numero_str`. El resultado de la conversión es `"42"`.
+
+
+## Conclusión
+
+En este capítulo, hemos explorado cómo realizar conversiones de tipo en Rust utilizando el operador `as` y funciones de conversión incorporadas. Hemos aprendido cómo convertir entre diferentes tipos de datos de manera segura y eficiente, y cómo manejar los posibles errores que puedan ocurrir durante la conversión. Con estos conocimientos, estarás listo para trabajar con diferentes tipos de datos en Rust y realizar conversiones según sea necesario.
+
+
+

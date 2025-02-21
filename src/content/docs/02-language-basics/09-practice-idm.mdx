@@ -1,0 +1,383 @@
+---
+title: "Práctica: Índice de Masa Corporal"
+description: "En esta práctica, aplicarás los conceptos aprendidos en Rust para calcular el índice de masa corporal (IMC) de una persona. El IMC es una medida de la grasa corporal basada en la altura y el peso de una persona. Es una forma común de determinar si una persona tiene un peso saludable."
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+En esta práctica, aplicarás los conceptos aprendidos en Rust para calcular el índice de masa corporal (IMC) de una persona. El IMC es una medida de la grasa corporal basada en la altura y el peso de una persona. Es una forma común de determinar si una persona tiene un peso saludable.
+
+## Descripción del problema
+
+El índice de masa corporal (IMC) se calcula dividiendo el peso de una persona en kilogramos por el cuadrado de su altura en metros. La fórmula para calcular el IMC es la siguiente:
+
+- IMC = peso / (altura * altura)
+
+Donde:
+- `peso` es el peso de la persona en kilogramos.
+- `altura` es la altura de la persona en metros.
+
+El IMC se clasifica en diferentes categorías según el valor calculado:
+
+- Bajo peso: `IMC < 18.5`
+- Peso normal: `18.5 <= IMC < 25`
+- Sobrepeso: `25 <= IMC < 30`
+- Obesidad: `IMC >= 30`
+
+## Resulatdo esperado
+
+Al final de esta práctica, habrás implementado un programa en Rust que solicita al usuario qie ingrese una opción: 
+
+1. Calcular IMC
+2. Salir
+
+Si el usuario selecciona la opción `1`, el programa solicitará al usuario que ingrese su nombre, peso en kilogramos y altura en metros. Luego, calculará el IMC de la persona y mostrará el informe con el resultado.
+
+:::note
+- El programa debe cerrarse si el usuario selecciona la opción `2`.
+- El programa debe mostrar un mensaje de error si el usuario ingresa un valor inválido para el peso o la altura.
+- El programa debe mostrar el resultado del IMC con dos decimales.
+- El programa debe mostrar un mesaje si igresa un valor negativo para el peso o la altura.
+:::
+
+
+```bash
+Calcula el índice de masa corporal.
+------------------------------------------
+
+1. Calcular IMC
+2. Salir
+
+Ingresa una opción: 1
+
+------------------------------------------
+Ingresa tu nombre: Alex
+Ingresa tu peso en kg: 69  
+Ingresa tu altura en metros: 1.68
+
+------------------------------------------
+Hola, Alex! aquí está tu información:
+Peso: 69 kilogramos. 
+Altura: 1.68 metros.
+
+Tu índice de masa corporal es 24.45, tienes un peso normal.
+
+------------------------------------------
+Calcula el índice de masa corporal.
+------------------------------------------
+
+1. Calcular IMC
+2. Salir
+
+Ingresa una opción: 2
+```
+
+## Crear un nuevo proyecto
+
+Para comenzar, crea un nuevo proyecto Rust utilizando el comando `cargo new imc` en tu terminal. Esto creará un nuevo directorio llamado `imc` con la estructura de un proyecto Rust.
+
+```bash
+cargo new imc
+cd imc
+```
+
+## Entrada de datos
+
+Para solicitar al usuario que ingrese datos, puedes utilizar la macro `read_line` de Rust para leer una línea de entrada desde la consola. Aquí tienes un ejemplo de cómo puedes leer una línea de entrada y convertirla a un número entero:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        use std::io::stdin;
+
+        fn main() {
+            let mut nombre = String::new();
+            println!("Ingresa tu nombre:");
+            stdin().read_line(&mut nombre).expect("No se pudo leer el nombre");
+            
+            println!("Hola, {}!", nombre);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Ingresa tu nombre:
+        Alex
+        Hola, Alex!
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos importado el módulo `io` de la biblioteca estándar de Rust y hemos utilizado la función `read_line` para leer una línea de entrada desde la consola y almacenarla en una variable `nombre`. Luego, hemos impreso un mensaje de saludo con el nombre ingresado por el usuario.
+
+- `use std::io::stdin;`: Importa la función `stdin` del módulo `io` de la biblioteca estándar de Rust.
+- `stdin().read_line(&mut nombre).expect("No se pudo leer el nombre");`: Lee una línea de entrada desde la consola y la almacena en la variable `nombre`. La función `expect` maneja cualquier error que pueda ocurrir durante la lectura de la línea de entrada.
+- `println!("Hola, {}!", nombre);`: Imprime un mensaje de saludo con el nombre ingresado por el usuario.
+
+## Uso de macro `print!`
+
+Para mostrar mensajes en la consola sin un salto de línea al final, puedes utilizar la macro `print!` en lugar de `println!`. Aquí tienes un ejemplo de cómo puedes utilizar la macro `print!` para mostrar un mensaje sin un salto de línea al final:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            print!("Hola, ");
+            print!("Alex!");
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Hola, Alex!
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos utilizado la macro `print!` para imprimir dos mensajes consecutivos en la consola sin un salto de línea al final.
+
+## Lipieza del buffer de entrada
+
+Para ultilizar el macro `print!` y `read_line` en conjunto, es necesario limpiar el buffer de entrada después de leer una línea de entrada. Puedes hacer esto llamando a la función `clear` en el buffer de entrada. Aquí tienes un ejemplo de cómo puedes limpiar el buffer de entrada después de leer una línea de entrada:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        use std::io::{stdin, stdout, Write};
+
+        fn main() {
+            let mut nombre = String::new();
+            
+            print!("Ingresa tu nombre: ");
+            stdout().flush().unwrap();
+            stdin().read_line(&mut nombre).expect("No se pudo leer el nombre");
+            let nombre = nombre.trim();
+
+            println!("Hola, {}!", nombre);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Ingresa tu nombre: Alex
+        Hola, Alex!
+        ```
+    </TabItem>
+</Tabs>
+
+
+## Función para entrada de datos
+
+Para simplificar la entrada de datos en tu programa, puedes crear una función que solicite al usuario que ingrese un valor y lo devuelva como resultado. Aquí tienes un ejemplo de cómo puedes crear una función `input` que solicita al usuario que ingrese un valor y lo devuelve como resultado:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        use std::io::{stdin, stdout, Write};
+
+        fn input(prompt: &str) -> String {
+            print!("{}", prompt);
+            stdout().flush().unwrap();
+            
+            let mut valor = String::new();
+            stdin().read_line(&mut valor).expect("No se pudo leer el valor");
+            let valor = valor.trim().to_string();
+
+            valor
+        }
+
+        fn main() {
+            let nombre = input("Ingresa tu nombre: ");
+            println!("Hola, {}!", nombre);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Ingresa tu nombre: Alex
+        Hola, Alex!
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos creado una función `input` que toma un parámetro `prompt` que especifica el mensaje que se mostrará al usuario. La función solicita al usuario que ingrese un valor y lo devuelve como resultado. Luego, hemos utilizado la función `input` para solicitar al usuario que ingrese su nombre y mostrar un mensaje de saludo con el nombre ingresado.
+
+## Menú de opciones
+
+Para implementar un menú de opciones en tu programa, puedes utilizar un bucle `loop` que solicite al usuario que ingrese una opción y realice una acción en función de la opción seleccionada. Aquí tienes un ejemplo de cómo puedes implementar un menú de opciones en tu programa:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        use std::io::{stdin, stdout, Write};
+
+        fn input(prompt: &str) -> String {
+            print!("{}", prompt);
+            stdout().flush().unwrap();
+            
+            let mut valor = String::new();
+            stdin().read_line(&mut valor).expect("No se pudo leer el valor");
+            let valor = valor.trim().to_string();
+
+            valor
+        }
+
+        fn main() {
+            loop {
+                println!("\nCalcula el índice de masa corporal.");
+                println!("------------------------------------------");
+                println!("1. Calcular IMC");
+                println!("2. Salir");
+                
+                let opcion = input("Ingresa una opción: ");
+                
+                match opcion.as_str() {
+                    "1" => println!("Calculando IMC..."),
+                    "2" => {
+                        println!("Saliendo del programa...");
+                        break;
+                    },
+                    _ => println!("Opción inválida."),
+                }
+            }
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+
+        Calcula el índice de masa corporal.
+        ------------------------------------------
+        1. Calcular IMC
+        2. Salir
+        Ingresa una opción: 1
+        Calculando IMC...
+
+        Calcula el índice de masa corporal.
+        ------------------------------------------
+        1. Calcular IMC
+        2. Salir
+        Ingresa una opción: 2
+        Saliendo del programa...
+        ```
+    </TabItem> 
+</Tabs>
+
+En este ejemplo, hemos utilizado un bucle `loop` para solicitar al usuario que ingrese una opción y realizar una acción en función de la opción seleccionada. Hemos utilizado una instrucción `match` para comparar la opción ingresada por el usuario y realizar una acción en función de la opción seleccionada.
+
+## Calcular IMC 
+
+Para calcular el índice de masa corporal (IMC) de una persona, puedes solicitar al usuario que ingrese su peso y altura, calcular el IMC utilizando la fórmula proporcionada y mostrar el resultado en la consola. Aquí tienes un ejemplo de cómo puedes calcular el IMC de una persona, Para esto vamos a crear una función `calcular_imc` que pida al usuario su peso y altura y calcule el IMC.
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        use std::io::{stdin, stdout, Write};
+
+        fn input(prompt: &str) -> String {
+            print!("{}", prompt);
+            stdout().flush().unwrap();
+            
+            let mut valor = String::new();
+            stdin().read_line(&mut valor).expect("No se pudo leer el valor");
+            let valor = valor.trim().to_string();
+
+            valor
+        }
+
+        fn info(nombre: &str, peso: f32, altura: f32, imc: f32, estado: &str) {
+            println!("\n------------------------------------------\n");
+            println!("Hola, {}! aquí está tu informe:", nombre);
+            println!("Peso: {} kilogramos. \nAltura: {} metros.", peso, altura);
+            println!("\nTu índice de masa corporal es {:.2}, tienes {}.", imc, estado);
+            println!("\n------------------------------------------");
+        }
+
+        fn calcular_imc() {
+            println!("\n------------------------------------------");
+            let nombre = input("Ingresa tu nombre: ");
+            let peso = input("Ingresa tu peso en kg: ");
+            let altura = input("Ingresa tu altura en metros: ");
+
+            // Convertir peso y altura a números
+            let peso: f32 = peso.parse().expect("No se pudo convertir a número");
+            let altura: f32 = altura.parse().expect("No se pudo convertir a número");
+
+            if peso < 0.0 || altura < 0.0 {
+                println!("El peso y la altura deben ser valores positivos.");
+                return;
+            }
+
+            // Calcular IMC(índice de masa corporal)
+            let imc = peso / (altura * altura);
+
+            match imc {
+                0.0..=18.4=>info(nombre, peso, altura, imc, "Bajo peso"),
+                18.5..=24.9=>info(nombre, peso, altura, imc, "Peso normal"),
+                25.0..=29.9=>info(nombre, peso, altura, imc, "Sobrepeso"),
+                _=>info(nombre, peso, altura, imc, "Obesidad"),
+            }
+        }
+
+        fn main() {
+            loop {
+                println!("\nCalcula el índice de masa corporal.");
+                println!("------------------------------------------");
+                println!("1. Calcular IMC");
+                println!("2. Salir");
+                
+                let opcion = input("Ingresa una opción: ");
+                
+                match opcion.as_str() {
+                    "1" => calcular_imc(),
+                    "2" => {
+                        println!("Saliendo del programa...");
+                        break;
+                    },
+                    _ => println!("Opción inválida."),
+                }
+            }
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+
+        Calcula el índice de masa corporal.
+        ------------------------------------------
+        1. Calcular IMC
+        2. Salir
+        Ingresa una opción: 1
+
+        ------------------------------------------
+        Ingresa tu nombre: Alex
+        Ingresa tu peso en kg: 69
+        Ingresa tu altura en metros: 1.68
+
+        ------------------------------------------
+        Hola, Alex! aquí está tu información:
+        Peso: 69 kilogramos.
+        Altura: 1.68 metros.
+
+        Tu índice de masa corporal es 24.45, tienes Peso normal.
+
+        ------------------------------------------
+        Calcula el índice de masa corporal.
+        ------------------------------------------
+        1. Calcular IMC
+        2. Salir
+        Ingresa una opción: 2
+        Saliendo del programa...
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos creado una función `calcular_imc` que solicita al usuario que ingrese su nombre, peso y altura, convierte los valores ingresados a números y calcula el IMC de la persona. Luego, hemos utilizado una instrucción `match` para clasificar el IMC en diferentes categorías y mostrar el resultado en la consola.
+
+
+
+
+
+
+
+
