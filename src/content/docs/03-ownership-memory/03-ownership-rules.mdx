@@ -1,0 +1,198 @@
+---
+title: Reglas de Ownership
+description: Aprende a usar el bloque match en Rust para comparar valores con diferentes patrones y ejecutar código basado en la coincidencia.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+En Rust, el sistema de Ownership es una de las características principales que permite un manejo seguro y eficiente de la memoria sin necesidad de un recolector de basura.
+
+En el artículo anterior, vimos que cada valor en Rust tiene un único propietario, pero ¿cómo funciona esto en la práctica? Para entenderlo mejor, repasemos las tres reglas fundamentales del Ownership y cómo afectan la forma en que escribimos código en Rust.
+
+## Reglas fundamentales de Ownership
+
+Las reglas de Ownership en Rust son simples y fáciles de recordar. Aquí están las tres reglas fundamentales que debes tener en cuenta:
+
+- Cada valor en Rust tiene un único propietario.
+- Solo puede haber un propietario a la vez.
+- Cuando el propietario sale del ámbito, el valor se libera automáticamente.
+
+Estas reglas son la base del sistema de Ownership en Rust y garantizan que no haya fugas de memoria ni errores de acceso a la memoria en tiempo de ejecución.
+
+## Cada valor tiene un único propietario
+
+En Rust, cada valor tiene un único propietario que es responsable de liberar la memoria cuando ya no se necesita. Esto significa que no hay fugas de memoria ni problemas de acceso a la memoria en tiempo de ejecución.
+
+Por ejemplo, considera el siguiente código:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let mensaje = String::from("Hola, Rust!"); // `mensaje` es el propietario
+
+            let otro_mensaje = mensaje; // ❌ Aquí `mensaje` pierde la propiedad
+
+            println!("{}", mensaje); // ❌ ERROR: `mensaje` ya no es válido
+
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        error[E0382]: use of moved value: `mensaje`
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, `mensaje` es el propietario del valor `String::from("Hola, Rust!")`. Cuando asignamos `mensaje` a `otro_mensaje`, `mensaje` pierde la propiedad del valor y ya no es válido. Por lo tanto, al intentar imprimir `mensaje`, obtenemos un error de compilación.
+
+Ahora el propietario del valor es `otro_mensaje`, y podemos imprimirlo sin problemas:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let mensaje = String::from("Hola, Rust!"); // `mensaje` es el propietario
+
+            let otro_mensaje = mensaje; // `otro_mensaje` es el propietario
+
+            println!("{}", otro_mensaje); // ✅ Imprime `Hola, Rust!`
+
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Hola, Rust!
+        ```
+    </TabItem>
+</Tabs>
+
+## Solo puede haber un propietario a la vez
+
+En Rust, solo puede haber un propietario a la vez para cada valor. Esto significa que no puedes tener dos propietarios para el mismo valor, ya que eso podría causar problemas de acceso a la memoria en tiempo de ejecución.
+
+Por ejemplo, considera el siguiente código:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let texto = String::from("Rust es genial!");
+            
+            let texto1 = texto;
+            let texto2 = texto; // ❌ ERROR: `texto` ya no es válido
+            
+            println!("{}", texto1);
+            println!("{}", texto2);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        error[E0382]: use of moved value: `mensaje`
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, `texto` es el propietario del valor `String::from("Rust es genial!")`. Cuando asignamos `texto` a `texto1`, `texto` pierde la propiedad del valor y ya no es válido. Por lo tanto, al intentar asignar `texto` a `texto2`, obtenemos un error de compilación.
+
+## Cuando el propietario sale del ámbito, el valor se libera automáticamente
+
+En Rust, cuando el propietario de un valor sale del ámbito, el valor se libera automáticamente y la memoria se libera. Esto significa que no tienes que preocuparte por liberar la memoria manualmente ni por fugas de memoria.
+
+Por ejemplo, considera el siguiente código:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let mensaje = String::from("Hola, Rust!");
+
+            {
+                let otro_mensaje = mensaje;
+                println!("{}", otro_mensaje);
+            }
+
+            // `otro_mensaje` sale del ámbito y se libera automáticamente
+            // `mensaje` también sale del ámbito y se libera automáticamente
+            println!("{}", mensaje); // ❌ ERROR: `mensaje` ya no es válido porque se liberó automáticamente
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Hola, Rust!
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, `mensaje` es el propietario del valor `String::from("Hola, Rust!")`. Cuando asignamos `mensaje` a `otro_mensaje` dentro de un bloque, `otro_mensaje` se convierte en el propietario del valor. Al salir del bloque, `otro_mensaje` sale del ámbito y se libera automáticamente, y el valor también se libera.
+
+Por lo tanto, al intentar imprimir `mensaje` fuera del bloque, obtenemos un error de compilación porque `mensaje` ya no es válido.
+
+## Clonación y copia de valores
+
+En Rust, puedes clonar un valor para crear una copia independiente del mismo. Esto es útil cuando quieres tener dos propietarios para el mismo valor sin perder la propiedad original.
+
+Por ejemplo, considera el siguiente código:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let mensaje = String::from("Hola, Rust!");
+
+            let otro_mensaje = mensaje.clone(); // Clona el valor de `mensaje`
+
+            println!("{}", mensaje);
+            println!("{}", otro_mensaje);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Hola, Rust!
+        Hola, Rust!
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, `mensaje` es el propietario del valor `String::from("Hola, Rust!")`. Al clonar el valor de `mensaje` en `otro_mensaje`, ambos valores son propietarios independientes del mismo valor y pueden imprimirse sin problemas.
+
+Además de la clonación, algunos tipos de datos en Rust implementan el trait `Copy`, que permite copiar valores en lugar de moverlos. Esto es útil para tipos de datos simples como enteros y booleanos, que son copiados en lugar de moverse.
+
+Por ejemplo, considera el siguiente código:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let x = 42;
+            let y = x; // Copia el valor de `x`
+
+            println!("{}", x);
+            println!("{}", y);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        42
+        42
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, `x` es el propietario del valor `42`. Al asignar `x` a `y`, el valor se copia en lugar de moverse, ya que el tipo `i32` implementa el trait `Copy`. Por lo tanto, ambos valores son propietarios independientes del mismo valor y pueden imprimirse sin problemas.
+
+## Conclusión
+
+Las reglas de Ownership en Rust son simples pero poderosas, y garantizan un manejo seguro y eficiente de la memoria sin necesidad de un recolector de basura. Al seguir estas reglas, puedes escribir código en Rust que sea seguro, rápido y fácil de entender.
+
+
+
+
+
+

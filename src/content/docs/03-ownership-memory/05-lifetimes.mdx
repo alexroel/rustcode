@@ -1,0 +1,184 @@
+---
+title: Tiempo de Vida (Lifetimes)
+description: Aprende a usar anotaciones de tiempo de vida en Rust para gestionar la duración de las referencias. 
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+En Rust, el tiempo de vida (lifetimes) es una característica que nos permite gestionar la duración de las referencias en nuestro código. Las anotaciones de tiempo de vida nos permiten especificar la relación entre las referencias y los valores a los que apuntan, evitando problemas de seguridad y garantizando que las referencias sean válidas en tiempo de ejecución.
+
+En este artículo, aprenderemos qué son los tiempos de vida en Rust, cómo funcionan y cómo usarlos en nuestro código. 
+
+Supongamos que una función toma una referencia como argumento y devuelve otra referencia. Por ejemplo, la función recibe una referencia mutable y devuelve un mensaje modificado, en este ejemplo no es necesario especificar el tiempo de vida ya que Rust puede inferirlo automáticamente:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn modificar_mensaje(mensaje: &mut String) -> &String {
+            mensaje.push_str(" Rust!");
+            mensaje
+        }
+
+        fn main() {
+            let mut mensaje = String::from("Hola,");
+            let mensaje_modificado = modificar_mensaje(&mut mensaje);
+
+            println!("El mensaje es: {}", mensaje_modificado);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        El mensaje es: Hola, Rust!
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, la función `modificar_mensaje` toma una referencia mutable `mensaje` y devuelve una referencia a `mensaje`. Rust puede inferir automáticamente el tiempo de vida de la referencia devuelta, ya que depende de la referencia pasada como argumento.
+
+Sin embargo, en algunos casos, Rust no puede inferir automáticamente el tiempo de vida de las referencias, por lo que necesitamos especificarlo manualmente. Para esto, usamos anotaciones de tiempo de vida en Rust.
+
+## Por qué es necesario pasar una referencia a una función
+
+En Rust, las referencias son una forma de acceder a un valor sin transferir su propiedad. Cuando pasamos una referencia a una función, estamos permitiendo que la función acceda al valor sin transferir la propiedad. Esto es útil cuando queremos modificar un valor sin transferir su propiedad.
+
+Por ejemplo, considera el siguiente código, Tenemos una función que devuelve el caracter mas largo de dos strings: Si no pasamos una referencia a la función, la propiedad del string se transferiría a la función y no podríamos usar el string después de llamar a la función:
+
+Sin usar anotaciones
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn mas_largo(s1: String, s2: String) -> String {
+            if s1.len() > s2.len() {
+                s1
+            } else {
+                s2
+            }
+        }
+
+        fn main() {
+            let s1 = String::from("Lenguaje");
+            let s2 = String::from("Rust");
+
+            let c = mas_largo(s1, s2);
+
+            // Error al intentar usar s1 y s2 después de llamar a la función
+            //println!("Palabra 1: {}", s1); 
+            //println!("Palabra 2: {}", s2);
+
+            println!("La palabra más larga es: {}", c);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        La palabra más larga es: Lenguaje
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, la función `mas_largo` toma dos `String` como argumentos y devuelve una `String`. Al pasar los `String` a la función, transferimos la propiedad de los `String` a la función, lo que significa que no podemos usar los `String` después de llamar a la función.
+
+Para evitar este problema, podemos pasar referencias a los `String` en lugar de los `String` directamente. Esto nos permite acceder a los `String` sin transferir su propiedad y seguir usándolos después de llamar a la función.
+
+:::note
+Si intentamos compilar el código siguiente obtendremos un error de compilación:
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn mas_largo(s1: &String, s2: &String) -> &String {
+            if s1.len() > s2.len() {
+                s1
+            } else {
+                s2
+            }
+        }
+
+        fn main() {
+            let s1 = String::from("Lenguaje");
+            let s2 = String::from("Rust");
+
+            let c = mas_largo(&s1, &s2);
+
+            // Error al intentar usar s1 y s2 después de llamar a la función
+            //println!("Palabra 1: {}", s1); 
+            //println!("Palabra 2: {}", s2);
+
+            println!("La palabra más larga es: {}", c);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        error[E0106]: missing lifetime specifier
+        ```
+    </TabItem>
+</Tabs>
+
+En este caso, Rust nos pide que especifiquemos el tiempo de vida de las referencias devueltas por la función `mas_largo`. Para solucionar este problema, necesitamos usar anotaciones de tiempo de vida en Rust.
+
+### ⚠ ¿Qué está mal?
+
+- Rust no sabe si la referencia devuelta pertenece a `s1` o `s2`.
+- Como no se especifica un lifetime, Rust no puede verificar que la referencia devuelta siga siendo válida cuando `c` se usa en main.
+- Esto causa un error de lifetime en la compilación.
+:::
+
+## Anotaciones de tiempo de vida
+
+Las anotaciones de tiempo de vida en Rust nos permiten especificar la relación entre las referencias y los valores a los que apuntan. Las anotaciones de tiempo de vida se definen usando el símbolo de comillas (`'`) seguido de un nombre de tiempo de vida.
+
+Por ejemplo, considera el siguiente código, en el que usamos anotaciones de tiempo de vida para especificar el tiempo de vida de las referencias devueltas por la función `mas_largo`:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn mas_largo<'a>(s1: &'a String, s2: &'a String) -> &'a String {
+            if s1.len() > s2.len() {
+                s1
+            } else {
+                s2
+            }
+        }
+
+        fn main() {
+            let s1 = String::from("Lenguaje");
+            let s2 = String::from("Rust");
+
+            let c = mas_largo(&s1, &s2);
+
+            println!("Palabra 1: {}", s1);
+            println!("Palabra 2: {}", s2);
+            println!("La palabra más larga es: {}", c);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        La palabra más larga es: Lenguaje
+        ```
+    </TabItem>
+</Tabs> 
+
+### 🛠 Explicación de la solución
+
+¿Qué significa `'a` en `fn mas_largo<'a>(...) -> &'a String`?
+
+- `'a` es un tiempo de vida genérico que especifica que las referencias `s1` y `s2` tienen el mismo tiempo de vida.
+- Las referencias `s1` y `s2` deben vivir al menos tanto tiempo como la referencia devuelta por la función `mas_largo`.
+- Así, Rust puede garantizar que la referencia devuelta sigue siendo válida cuando se usa en `main`.
+
+Al especificar el tiempo de vida `'a`, estamos indicando a Rust que las referencias `s1` y `s2` tienen el mismo tiempo de vida que la referencia devuelta por la función `mas_largo`. Esto permite a Rust verificar que las referencias siguen siendo válidas cuando se usan en `main`.
+
+## Conclusión
+
+En resumen, los tiempos de vida en Rust nos permiten gestionar la duración de las referencias en nuestro código. Al usar anotaciones de tiempo de vida, podemos especificar la relación entre las referencias y los valores a los que apuntan, evitando problemas de seguridad y garantizando que las referencias sean válidas en tiempo de ejecución.
+
+
+
+
+
+
+
+

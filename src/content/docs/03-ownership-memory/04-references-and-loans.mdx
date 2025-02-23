@@ -1,0 +1,182 @@
+---
+title: Referencias y Préstamos
+description: Aprende a usar referencias y préstamos en Rust para acceder a los valores sin transferir la propiedad. 
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+En el artículo anterior, aprendimos sobre las reglas de Ownership y cómo afectan nuestro código. Vimos que en Rust, cada valor solo puede tener un único propietario, lo que evita problemas de administración de memoria.
+
+Pero, ¿qué pasa si queremos compartir un valor sin transferir su propiedad? Para esto, Rust nos permite usar referencias (&) y préstamos (&mut). En este artículo, aprenderemos cómo funcionan las referencias y los préstamos en Rust y cómo usarlos en nuestro código.
+
+## ¿Qué son las referencias (&)?
+
+Una referencia en Rust nos permite acceder a un valor sin ser su propietario. Esto significa que podemos leer un valor sin transferir su ownership(Propiedad) a otra variable. Las referencias se crean usando el operador `&` seguido del nombre de la variable.
+
+Por ejemplo, considera el siguiente código:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let mensaje = String::from("Hola, Rust!");
+
+            // Crear una referencia a `mensaje`
+            let referencia = &mensaje;
+
+            println!("El mensaje es: {}", referencia);
+            println!("El mensaje es: {}", mensaje);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        El mensaje es: Hola, Rust!
+        El mensaje es: Hola, Rust!
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, creamos una referencia `referencia` al valor `mensaje` usando el operador `&`. Luego, podemos imprimir el valor de `mensaje` y `referencia` sin problemas.
+
+En Rust multiple referencias a un valor son permitidas, por lo que podemos crear múltiples referencias a un valor sin problemas:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let mensaje = String::from("Hola, Rust!");
+
+            // Crear una referencia a `mensaje`
+            let ref1 = &mensaje;
+            let ref2 = &mensaje;
+
+            println!("El mensaje es: {}", ref1);
+            println!("El mensaje es: {}", ref2);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        El mensaje es: Hola, Rust!
+        El mensaje es: Hola, Rust!
+        ```
+    </TabItem>
+</Tabs>
+
+**¿Porque funcionan las referencias?**
+
+Las referencias inmutables no pueden modificar el valor original, lo que significa que es seguro tener varias referencias al mismo tiempo. Rust garantiza que no habrá problemas de concurrencia o mutabilidad al usar referencias inmutables.
+
+## ¿Qué son los préstamos (&mut)?
+
+Los préstamos en Rust nos permiten acceder y modificar un valor sin ser su propietario. Los préstamos ocurren cuando creamos una referencia mutable a un valor usando el operador `&mut`.
+
+Por ejemplo, considera el siguiente código:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let mut mensaje = String::from("Hola, Rust!");
+
+            // Crear un préstamo mutable a `mensaje`
+            let prestamo = &mut mensaje;
+
+            // Modificar el valor de `mensaje` a través del préstamo
+            prestamo.push_str(", ¿Cómo estás?");
+
+            println!("El mensaje es: {}", prestamo);
+
+            println!("El mensaje original es: {}", mensaje); // `mensaje` ya no contiene el valor original porque fue modificado a través del préstamo
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        El mensaje es: Hola, Rust!, ¿Cómo estás?
+        El mensaje original es: Hola, Rust!, ¿Cómo estás?
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, creamos un préstamo mutable `prestamo` a la variable `mensaje` usando el operador `&mut`. Luego, modificamos el valor de `mensaje` a través del préstamo usando el método `push_str`. Finalmente, podemos imprimir el valor de `prestamo` y `mensaje` sin problemas.
+
+:::note
+Los préstamos mutables solo permiten una referencia mutable a la vez. Esto evita problemas de concurrencia y mutabilidad en Rust. Si intentamos crear múltiples préstamos mutables a un valor, obtendremos un error de compilación. 
+
+Por ejemplo, considera el siguiente código:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let mut mensaje = String::from("Hola, Rust!");
+
+            // Crear un préstamo mutable a `mensaje`
+            let prestamo1 = &mut mensaje;
+            let prestamo2 = &mut mensaje; // ❌ ERROR: Ya existe un préstamo mutable a `mensaje`
+
+            prestamo1.push_str(", ¿Cómo estás?");
+            prestamo2.push_str(", ¿Cómo estás?");
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        error[E0499]: cannot borrow `mensaje` as mutable more than once at a time
+        ```
+    </TabItem>
+</Tabs>
+::: 
+
+
+Pero podemos tener múltiples referencias mutables en diferentes ámbitos sin problemas:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main() {
+            let mut mensaje = String::from("Hola, Rust!");
+
+            // Crear un préstamo mutable a `mensaje`
+            {
+                let prestamo1 = &mut mensaje;
+                prestamo1.push_str(", ¿Cómo estás?");
+            }
+
+            let prestamo2 = &mut mensaje;
+            prestamo2.push_str(", El leguaje más seguro!");
+
+            println!("El mensaje es: {}", mensaje);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        El mensaje es: Hola, Rust!, ¿Cómo estás?, El leguaje más seguro!
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, creamos dos préstamos mutables `prestamo1` y `prestamo2` a la variable `mensaje` en diferentes ámbitos. Luego, modificamos el valor de `mensaje` a través de ambos préstamos sin problemas. 
+
+## Reglas de referencias y préstamos
+
+Rust tiene reglas estrictas para el uso de referencias y préstamos para garantizar la seguridad y evitar problemas de concurrencia y mutabilidad. Algunas de las reglas importantes son:
+
+- No puedes tener una referencia mutable y una referencia inmutable al mismo valor al mismo tiempo.
+- No puedes tener múltiples referencias mutables al mismo valor al mismo tiempo.
+- No puedes tener una referencia mutable a un valor y luego crear una referencia inmutable al mismo valor.
+- No puedes tener una referencia mutable a un valor y luego crear una referencia mutable a través de otra referencia inmutable.
+
+Estas reglas garantizan que no habrá problemas de concurrencia, mutabilidad o seguridad al usar referencias y préstamos en Rust.
+
+## Conclusión
+
+Las referencias y los préstamos son una parte fundamental del sistema de Ownership en Rust. Nos permiten acceder a los valores sin transferir la propiedad, lo que evita problemas de concurrencia y mutabilidad en nuestro código. Al seguir las reglas de referencias y préstamos, podemos escribir código seguro y eficiente en Rust.
+
+
+
+
+

@@ -1,0 +1,100 @@
+---
+title: ¿Qué es el Ownership?
+description: Aprende sobre el Ownership en Rust y por qué es importante para la seguridad y el rendimiento del lenguaje.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Rust es un lenguaje de programación diseñado para ofrecer seguridad y alto rendimiento sin necesidad de un recolector de basura (garbage collector). Para lograr esto, introduce un sistema de administración de memoria llamado Ownership (propiedad), que permite un control preciso sobre los recursos sin sacrificar eficiencia.
+
+Si vienes de lenguajes como Python, JavaScript o Java, donde la memoria se gestiona automáticamente, Ownership puede parecer un concepto extraño al principio. Sin embargo, es una de las características clave que hacen de Rust un lenguaje seguro y eficiente.
+
+## ¿Por qué es importante el Ownership?
+En lenguajes como C o C++, los programadores deben gestionar manualmente la asignación y liberación de memoria, lo que puede llevar a errores como:
+
+- **Fugas de memoria** (no liberar memoria correctamente).
+- **Uso de memoria no válida** (leer o escribir en memoria liberada).
+- **Condiciones de carrera** en programas concurrentes.
+
+Rust evita estos problemas al aplicar reglas estrictas de ownership en tiempo de compilación, asegurando que los recursos sean utilizados de manera segura.
+
+## Conceptos clave del Ownership
+Cada valor en Rust tiene un propietario (owner), y las reglas básicas del Ownership son:
+
+1. Cada valor en Rust tiene un único propietario.
+2. Cuando el propietario sale del ámbito (scope), el valor se libera automáticamente.
+3. No se puede tener más de un propietario al mismo tiempo.
+
+Estas reglas garantizan que los valores se liberan de la memoria de manera segura y eficiente, sin fugas de memoria ni condiciones de carrera.
+
+✨ Ejemplo de Ownership en Rust:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main(){
+            let s = String::from("Hola, mundo!");
+            println!("{}", s); 
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Hola, mundo!
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos creado un `String` llamado `s` y lo hemos impreso en la consola. Cuando `s` sale del ámbito, el valor se libera automáticamente, siguiendo las reglas de Ownership.
+
+✨ Podemos crear un ambito dentro de main para ver como se libera la memoria:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main(){
+            {
+                let s = String::from("Hola, mundo!");
+                println!("{}", s);
+            }
+            // println!("{}", s); // Error: value borrowed here after move
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Hola, mundo!
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos creado un ámbito interno dentro de `main` donde se crea y se imprime el `String` `s`. Cuando el ámbito interno termina, `s` se libera automáticamente, evitando fugas de memoria.
+
+## Movimiento de Ownership(Ownership transfer)
+
+En Rust, el Ownership de un valor puede ser transferido a otra variable mediante una operación de "movimiento". Esto significa que el valor original ya no es válido después de la transferencia, evitando así problemas de duplicación o uso después de liberado.
+
+✨ Ejemplo de movimiento de Ownership en Rust:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        fn main(){
+            let s1 = String::from("Hola, mundo!");
+            let s2 = s1; // Movimiento de Ownership
+            // println!("{}", s1); // Error: value borrowed here after move
+            println!("{}", s2);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Hola, mundo!
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos transferido el Ownership de `s1` a `s2` mediante la operación de movimiento. Después de la transferencia, `s1` ya no es válido y no se puede utilizar, evitando así problemas de duplicación o uso después de liberado.
+
+
+
