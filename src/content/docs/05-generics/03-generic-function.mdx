@@ -1,0 +1,83 @@
+---
+title: Funciones genéricas
+description: En este tutorial, aprenderás cómo definir funciones genéricas en Rust. Las funciones genéricas te permiten escribir código flexible y reutilizable que puede trabajar con diferentes tipos de datos.
+---
+
+En Rust, puedes definir funciones genéricas que pueden trabajar con diferentes tipos de datos sin tener que especificarlos de antemano. Esto te permite escribir código flexible y reutilizable que puede adaptarse a diferentes situaciones. En este tutorial, aprenderás cómo definir funciones genéricas en Rust y cómo utilizarlas en tu código.
+
+Ejemplo de función no genérica sin usar Traits:
+
+```rust
+fn mayor(a: i32, b: i32) -> i32 {
+    if a > b { a } else { b }
+}
+
+fn main() {
+    let x = 5;
+    let y = 10;
+
+    println!("El número mayor es: {}", mayor(x, y));
+}
+```
+
+En este caso, la función `mayor` toma dos argumentos de tipo `i32` y devuelve un valor de tipo `i32`. Si queremos que esta función funcione con otros tipos de datos, tendríamos que escribir una función para cada tipo de dato, lo que resultaría en código repetitivo y difícil de mantener.
+
+## Definición de funciones genéricas
+
+Para evitar esto, podemos utilizar genéricos para definir una función que pueda trabajar con diferentes tipos de datos. Aquí tienes un ejemplo de cómo definir una función genérica en Rust:
+
+```rust
+fn mayor<T: PartialOrd>(a: T, b: T) -> T {
+    if a > b { a } else { b }
+}
+
+fn main() {
+    let x = 5;
+    let y = 10;
+
+    println!("El número mayor es: {}", mayor(x, y));
+
+    let a = 5.5;
+    let b = 10.5;
+
+    println!("El número mayor es: {}", mayor(a, b));
+}
+```
+
+En este ejemplo, hemos definido una función genérica `mayor` que toma dos argumentos de tipo `T` y devuelve un valor de tipo `T`. La restricción `T: PartialOrd` indica que `T` debe implementar el trait `PartialOrd`, que permite comparar valores de tipo `T`.
+
+Al llamar a la función `mayor`, Rust infiere automáticamente el tipo de dato en función de los argumentos que se le pasan. En el primer caso, `x` y `y` son de tipo `i32`, por lo que Rust infiere que `T` es `i32`. En el segundo caso, `a` y `b` son de tipo `f64`, por lo que Rust infiere que `T` es `f64`.
+
+## Funciones genéricas con múltiples tipos de datos
+
+También puedes definir funciones genéricas que trabajen con múltiples tipos de datos. Aquí tienes un ejemplo de cómo definir una función genérica que toma dos argumentos de diferentes tipos y devuelve un valor de tipo `T`:
+
+```rust
+fn intercambiar<T, U>(a: T, b: U) -> (U, T) {
+    (b, a)
+}
+
+fn main() {
+    let x = 5;
+    let y = 10.5;
+
+    let (y, x) = intercambiar(x, y);
+
+    println!("x = {}, y = {}", x, y);
+}
+``` 
+
+En este ejemplo, hemos definido una función genérica `intercambiar` que toma dos argumentos de tipo `T` y `U` y devuelve una tupla `(U, T)`. Al llamar a la función `intercambiar`, Rust infiere automáticamente los tipos de datos en función de los argumentos que se le pasan.
+
+## Conclusión
+
+Las funciones genéricas te permiten escribir código flexible y reutilizable que puede trabajar con diferentes tipos de datos. Al utilizar genéricos, puedes evitar la repetición de código y escribir funciones que se adaptan automáticamente a diferentes situaciones. Esperamos que este tutorial te haya ayudado a entender cómo definir funciones genéricas en Rust y cómo utilizarlas en tu código.
+
+
+
+
+
+
+
+
+

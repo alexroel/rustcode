@@ -88,11 +88,59 @@ let persona = Persona::nuevo("Alex", 30); // Método asociado
 persona.info(); // Método de instancia
 ```
 
+Ejemplo completo:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        #[derive(Debug)]
+        struct Persona {
+            nombre: String,
+            edad: u8,
+        }
+
+        impl Persona {
+            // Método asociado
+            fn nuevo(nombre: &str, edad: u8) -> Self {
+                Self {
+                    nombre: String::from(nombre),
+                    edad,
+                }
+            }
+
+            // Método de instancia
+            fn info(&self) {
+                println!("Nombre: {}", self.nombre);
+                println!("Edad: {}", self.edad);
+            }
+        }
+
+        fn main() {
+            let persona = Persona::nuevo("Alex", 30); // Método asociado
+
+            persona.info(); // Método de instancia
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Nombre: Alex
+        Edad: 30
+        ```
+    </TabItem>
+</Tabs>
+
 En este ejemplo, estamos llamando al método `nuevo` en la estructura `Persona` para crear una instancia de la estructura `Persona` con el nombre `Alex` y la edad `30`. Luego, estamos llamando al método `info` en la instancia de la estructura `Persona` para mostrar el nombre y la edad de la persona en la consola.
 
 :::note[Referencia a `self`]
 En Rust, los métodos de instancia toman una referencia inmutable `&self` o una referencia mutable `&mut self` como primer parámetro. La referencia `&self` permite acceder a los datos de la estructura de forma inmutable, mientras que la referencia `&mut self` permite acceder a los datos de la estructura de forma mutable.
 :::
+
+## Diferencias entre métodos asociados y métodos de instancia
+
+- Los métodos asociados son funciones que se definen en el contexto de una estructura o un enumerado, pero no tienen acceso a los datos de la estructura o el enumerado. Se definen usando la palabra clave `impl` seguida del nombre de la estructura o el enumerado y el nombre de la función.
+
+- Los métodos de instancia son funciones que se definen en el contexto de una estructura o un enumerado y tienen acceso a los datos de la estructura o el enumerado. Se definen usando la palabra clave `impl` seguida del nombre de la estructura o el enumerado y el nombre de la función, y se accede a los datos de la estructura o el enumerado usando la palabra clave `self`.
 
 ## Conclusiones
 

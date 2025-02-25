@@ -1,0 +1,70 @@
+---
+title: Enumeraciones genéricas
+description: En este tutorial, aprenderás cómo definir enumeraciones genéricas en Rust. Las enumeraciones genéricas te permiten escribir código flexible y reutilizable que puede trabajar con diferentes tipos de datos.
+---
+
+En Rust, puedes definir enumeraciones genéricas que trabajen con diferentes tipos de datos. Las enumeraciones genéricas te permiten escribir código flexible y reutilizable que se adapta automáticamente a diferentes situaciones. En este tutorial, aprenderás cómo definir enumeraciones genéricas en Rust y cómo utilizarlas en tu código.
+
+## Definición de enumeraciones genéricas
+
+Para definir una enumeración genérica en Rust, puedes utilizar el mismo enfoque que con las funciones y estructuras genéricas. Aquí tienes un ejemplo de cómo definir una enumeración genérica en Rust:
+
+```rust
+
+enum Resultado<T, E> {
+    Ok(T),
+    Err(E),
+}
+
+fn main() {
+    let exito: Resultado<i32, &str> = Resultado::Ok(5);
+    let error: Resultado<i32, &str> = Resultado::Err("Error");
+
+    match exito {
+        Resultado::Ok(valor) => println!("Exito: {}", valor),
+        Resultado::Err(mensaje) => println!("Error: {}", mensaje),
+    }
+
+    match error {
+        Resultado::Ok(valor) => println!("Exito: {}", valor),
+        Resultado::Err(mensaje) => println!("Error: {}", mensaje),
+    }
+}
+```
+
+En este ejemplo, hemos definido una enumeración genérica `Resultado` que tiene dos variantes `Ok` y `Err` que toman un valor de tipo `T` y `E`, respectivamente. Al crear una instancia de la enumeración `Resultado`, Rust infiere automáticamente los tipos de datos en función de los valores que se le asignan. En el primer caso, `exito` es de tipo `Resultado<i32, &str>`, ya que `Ok` toma un valor de tipo `i32`. En el segundo caso, `error` es de tipo `Resultado<i32, &str>`, ya que `Err` toma un valor de tipo `&str`.
+
+## Métodos en enumeraciones genéricas
+
+También puedes definir métodos en enumeraciones genéricas en Rust. Aquí tienes un ejemplo de cómo definir un método en una enumeración genérica:
+
+```rust
+
+enum Resultado<T, E> {
+    Ok(T),
+    Err(E),
+}
+
+impl<T, E> Resultado<T, E> {
+    fn mostrar(&self) {
+        match self {
+            Resultado::Ok(valor) => println!("Exito: {}", valor),
+            Resultado::Err(mensaje) => println!("Error: {}", mensaje),
+        }
+    }
+}
+
+fn main() {
+    let exito: Resultado<i32, &str> = Resultado::Ok(5);
+    let error: Resultado<i32, &str> = Resultado::Err("Error");
+
+    exito.mostrar();
+    error.mostrar();
+}
+```
+
+En este ejemplo, hemos definido un método `mostrar` en la enumeración genérica `Resultado` que imprime el valor almacenado en la instancia de la enumeración. Al llamar al método `mostrar` en las instancias `exito` y `error`, se imprime el valor almacenado en cada una de ellas.
+
+## Conclusión
+
+Las enumeraciones genéricas te permiten escribir código flexible y reutilizable que puede trabajar con diferentes tipos de datos. Al utilizar enumeraciones genéricas en Rust, puedes escribir código más limpio y mantenible que se adapta automáticamente a diferentes situaciones. ¡Inténtalo tú mismo y descubre el poder de las enumeraciones genéricas en Rust!

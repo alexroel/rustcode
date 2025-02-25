@@ -108,7 +108,7 @@ Las enumeraciones en Rust pueden contener estructuras como valores asociados. Pu
 
 ```rust
 #[derive(Debug)]
-struct RGB {
+struct Rgb {
     r: u8,
     g: u8,
     b: u8,
@@ -121,12 +121,12 @@ struct Hex {
 
 #[derive(Debug)]
 enum Color {
-    RGB(RGB),
+    Rgb(Rgb),
     Hex(Hex),
 }
 ```
 
-En este ejemplo, hemos definido dos estructuras `RGB` y `Hex` para representar los componentes rojo, verde y azul de un color y un color en formato hexadecimal, respectivamente. Hemos definido una enumeración `Color` con dos elementos: `RGB` y `Hex`, que contienen las estructuras `RGB` y `Hex` como valores asociados. Ahora puedes usar esta enumeración para representar colores más complejos en tu código.
+En este ejemplo, hemos definido dos estructuras `Rgb` y `Hex` para representar un color en formato RGB y hexadecimal, respectivamente. Hemos definido una enumeración `Color` con dos elementos: `Rgb` y `Hex`, que contienen valores asociados de tipo `Rgb` y `Hex`, respectivamente. Ahora puedes usar esta enumeración para representar colores en tu código.
 
 Ejemplo de uso de la enumeración `Color` con estructuras:
 
@@ -160,6 +160,8 @@ fn main() {
 }
 ```
 
+En este ejemplo, hemos definido una estructura `Pixel` con tres campos: `x` de tipo `u32`, `y` de tipo `u32` y `color` de tipo `Color`. Hemos definido un método asociado `nuevo` en la estructura `Pixel` para crear instancias de la estructura con los valores proporcionados. Hemos definido un método de instancia `info` en la estructura `Pixel` para mostrar la información del píxel en la consola. Hemos creado dos instancias de la estructura `Pixel` con diferentes colores y mostrado la información de cada píxel en la consola.
 
+Las enumeraciones en Rust son una forma poderosa de representar datos con un conjunto finito de valores posibles. Puedes usar enumeraciones para modelar estados, opciones, categorías y más en tu código de forma segura y eficiente. ¡Experimenta con enumeraciones en tu código y descubre cómo pueden mejorar la estructura y la claridad de tu código!
 
-
+¡Felicitaciones por completar esta lección! Ahora estás listo para comenzar a trabajar con enumeraciones en Rust. ¡Sigue adelante y sigue aprendiendo! 🚀

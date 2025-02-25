@@ -1,0 +1,65 @@
+---
+title: Estructuras genéricas
+description: En este tutorial, aprenderás cómo definir estructuras genéricas en Rust. Las estructuras genéricas te permiten escribir código flexible y reutilizable que puede trabajar con diferentes tipos de datos.
+---
+
+
+En Rust, puedes definir estructuras genéricas que trabajen con diferentes tipos de datos. Las estructuras genéricas te permiten escribir código flexible y reutilizable que se adapta automáticamente a diferentes situaciones. En este tutorial, aprenderás cómo definir estructuras genéricas en Rust y cómo utilizarlas en tu código.
+
+## Definición de estructuras genéricas
+
+Para definir una estructura genérica en Rust, puedes utilizar el mismo enfoque que con las funciones genéricas. Aquí tienes un ejemplo de cómo definir una estructura genérica en Rust:
+
+```rust
+
+struct Punto<T> {
+    x: T,
+    y: T,
+}
+
+fn main() {
+    let p1 = Punto { x: 5, y: 10 };
+    let p2 = Punto { x: 5.5, y: 10.5 };
+
+    println!("Punto 1: ({}, {})", p1.x, p1.y);
+    println!("Punto 2: ({}, {})", p2.x, p2.y);
+}
+```
+
+En este ejemplo, hemos definido una estructura genérica `Punto` que tiene dos campos `x` e `y` de tipo `T`. Al crear una instancia de la estructura `Punto`, Rust infiere automáticamente el tipo de dato en función de los valores que se le asignan. En el primer caso, `p1` es de tipo `Punto<i32>`, ya que `x` e `y` son de tipo `i32`. En el segundo caso, `p2` es de tipo `Punto<f64>`, ya que `x` e `y` son de tipo `f64`.
+
+## Métodos en estructuras genéricas
+
+También puedes definir métodos en estructuras genéricas en Rust. Aquí tienes un ejemplo de cómo definir un método en una estructura genérica:
+
+```rust
+
+struct Punto<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Punto<T> {
+    fn nuevo(x: T, y: T) -> Punto<T> {
+        Punto { x, y }
+    }
+
+    fn mostrar(&self) {
+        println!("({}, {})", self.x, self.y);
+    }
+}
+
+fn main() {
+    let p1 = Punto::nuevo(5, 10);
+    let p2 = Punto::nuevo(5.5, 10.5);
+
+    p1.mostrar();
+    p2.mostrar();
+}
+```
+
+En este ejemplo, hemos definido un método `nuevo` en la estructura genérica `Punto` que crea una nueva instancia de la estructura. También hemos definido un método `mostrar` que imprime los valores de los campos `x` e `y` de la estructura. Al llamar a los métodos `nuevo` y `mostrar`, Rust infiere automáticamente el tipo de dato en función de los argumentos que se le pasan.
+
+## Conclusión  
+
+Las estructuras genéricas te permiten escribir código flexible y reutilizable que puede trabajar con diferentes tipos de datos. Al utilizar estructuras genéricas, puedes evitar la repetición de código y escribir estructuras que se adaptan automáticamente a diferentes situaciones. Esperamos que este tutorial te haya ayudado a entender cómo definir estructuras genéricas en Rust y cómo utilizarlas en tu código.

@@ -1,37 +1,32 @@
 ---
 title: Introducción
-description: En esta sección aprenderemos sobre el manejo de errores en Rust y cómo podemos utilizar el sistema de tipos del lenguaje para prevenir errores en tiempo de compilación.
+description: En esta sección se explican los conceptos básicos de los genéricos en Rust. Se explica cómo se definen y cómo se utilizan.
 ---
 
-Bienvenido a la sección de manejo de errores en Rust. En esta sección, aprenderemos sobre cómo Rust maneja los errores y cómo podemos utilizar el sistema de tipos del lenguaje para prevenir errores en tiempo de compilación. Aquí hay un resumen de los temas que cubriremos:
+Bienvenido a la sección de genéricos. En esta sección se explican los conceptos básicos de los genéricos en Rust. Se explica cómo se definen y cómo se utilizan. 
+
+Los genéricos son una característica muy poderosa de Rust que permite escribir código que es independiente del tipo de dato. Esto permite reutilizar código y escribir funciones y estructuras de datos que pueden trabajar con diferentes tipos de datos.
+
+En esta sección se explican los conceptos básicos de los genéricos en Rust. Se explica cómo se definen y cómo se utilizan.
 
 ## Temas a tratar
-En esta sección, cubriremos los siguientes temas:
 
-- **Errores en Rust:** Aprenderemos sobre los diferentes tipos de errores en Rust y cómo se manejan en el lenguaje.
-
-- **Uso de tipo Option:** Utilizaremos el tipo `Option` para representar valores opcionales y manejar casos en los que un valor puede ser nulo.
-
-- **Uso de tipo Result:** Utilizaremos el tipo `Result` para representar operaciones que pueden fallar y manejar errores de manera segura.
-
-- **Manejo de errores con `match`:** Aprenderemos a utilizar la declaración `match` para manejar errores y tomar decisiones basadas en el resultado de una operación.
-
-- **Manejo de errores con `unwrap`:** Aprenderemos a utilizar el método `unwrap` para desempaquetar valores de tipo `Option` y `Result` de manera segura.
-
-- **Manejo de errores con `expect`:** Aprenderemos a utilizar el método `expect` para manejar errores de manera más descriptiva y proporcionar mensajes de error personalizados.
-
-- **Manejo de errores con `?`:** Aprenderemos a utilizar el operador `?` para propagar errores de manera eficiente y concisa.
+- **Introducción a los genéricos**: Se explica qué son los genéricos y por qué son útiles.
+- **Funciones genéricas**: Se explica cómo se definen funciones genéricas. Se muestra cómo se pueden escribir funciones que trabajan con diferentes tipos de datos.
+- **Estructuras genéricas**: Se explica cómo se definen estructuras genéricas. Se muestra cómo se pueden escribir estructuras de datos que trabajan con diferentes tipos de datos.
+- **Enums genéricos**: Se explica cómo se definen enums genéricos. Se muestra cómo se pueden escribir enums que trabajan con diferentes tipos de datos.
+- **Traits genéricos**: Se explica cómo se definen traits genéricos. Se muestra cómo se pueden escribir traits que trabajan con diferentes tipos de datos.
 
 
-## Objetivos de aprendizaje
-Al final de esta sección, serás capaz de:
+## Objetivos
 
-- Comprender los diferentes tipos de errores en Rust y cómo se manejan en el lenguaje.
+El objetivo de esta sección es aprender a utilizar los genéricos en Rust. Al final de esta sección, deberías ser capaz de:
 
-- Utilizar los tipos `Option` y `Result` para manejar valores opcionales y errores de manera segura.
+- Entender qué son los genéricos y por qué son útiles.
+- Definir funciones genéricas.
+- Definir estructuras genéricas.
+- Definir enums genéricos.
+- Definir traits genéricos.
 
-- Utilizar la declaración `match` para manejar errores y tomar decisiones basadas en el resultado de una operación.
+¡Vamos a empezar!
 
-- Utilizar los métodos `unwrap`, `expect` y el operador `?` para manejar errores de manera eficiente y concisa.
-
-¡Vamos a empezar! 🚀

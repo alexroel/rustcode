@@ -1,0 +1,37 @@
+---
+title: Errores irrecoperables
+description: Aprende más sobre mi proyecto en este sitio de documentación construido con Starlight.
+---
+
+En la programación, los genéricos nos permiten escribir código flexible y reutilizable al trabajar con distintos tipos de datos sin comprometer la seguridad en tiempo de compilación. En Rust, los genéricos se utilizan principalmente con funciones, structs, enums y traits, lo que nos ayuda a evitar la repetición de código y mejorar la eficiencia.
+
+## ¿Qué son los Genéricos?
+
+Los genéricos permiten definir estructuras o funciones que pueden operar con diferentes tipos de datos sin necesidad de especificarlos de antemano. En Rust, los genéricos se representan con letras mayúsculas, como T, U, V, aunque podrían tener cualquier otro nombre significativo.
+
+Veamos un ejemplo básico de una función sin genéricos:
+
+```rust
+fn mayor(a: i32, b: i32) -> i32 {
+    if a > b { a } else { b }
+}
+
+fn main() {
+    let x = 5;
+    let y = 10;
+
+    println!("El número mayor es: {}", mayor(x, y));
+}
+```
+
+En este caso, la función `mayor` toma dos parámetros de tipo `i32` y devuelve un valor de tipo `i32`. Si queremos que esta función se para otros tipos de datos, tendríamos que escribir una función para cada tipo de dato, lo que resultaría en código repetitivo y difícil de mantener.
+
+Para evitar esto, podemos utilizar genéricos para definir una función que pueda trabajar con diferentes tipos de datos.
+
+## Benificios de los Genéricos
+
+- **Reutilización de código**: Los genéricos nos permiten escribir funciones y estructuras de datos que pueden trabajar con diferentes tipos de datos sin tener que repetir el código.
+- **Seguridad en tiempo de compilación**: Los genéricos en Rust son seguros en tiempo de compilación, lo que significa que los errores de tipo se detectan antes de que el código se ejecute.
+- **Mejora de la eficiencia**: Al utilizar genéricos, podemos escribir código más eficiente y flexible, lo que nos permite optimizar el rendimiento de nuestras aplicaciones.
+- **Facilidad de mantenimiento**: Al evitar la repetición de código, los genéricos nos permiten escribir código más limpio y fácil de mantener.
+

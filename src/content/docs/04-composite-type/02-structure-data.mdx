@@ -3,6 +3,8 @@ title: Estructuras
 description: Aqúi aprenderás cómo estructurar datos y como crear nuevos datos con estructuras en Rust.
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 En esta clase aprenderás cómo estructurar datos y cómo crear nuevos datos con estructuras en Rust. Aprenderás cómo definir estructuras, cómo crear instancias de estructuras y cómo acceder a los campos de una estructura. También aprenderás cómo crear métodos para estructuras y cómo implementar métodos en estructuras.
 
 ## Definición de estructuras
@@ -40,31 +42,101 @@ println!("Nombre: {}", persona.nombre);
 println!("Edad: {}", persona.edad);
 ```
 
+Ejemplo completo:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        struct Persona {
+            nombre: String,
+            edad: u8,
+        }
+
+        fn main() {
+            let persona = Persona {
+                nombre: String::from("Alex"),
+                edad: 30,
+            };
+
+            println!("Nombre: {}", persona.nombre);
+            println!("Edad: {}", persona.edad);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Nombre: Alex
+        Edad: 30
+        ```
+    </TabItem>
+</Tabs>
+
 En este ejemplo, estamos accediendo a los campos `nombre` y `edad` de la estructura `Persona` y mostrando sus valores en la consola.
 
 :::note[Debug una estructura]
 Puedes imprimir una estructura usando el formato de depuración `{:?}` para ver todos los campos de la estructura.
 
-```rust
-println!("{:?}", persona);
-```
-
 Para poder imprimir una estructura con el formato de depuración, debes implementar el trait `Debug` para la estructura. Aprenderás cómo hacerlo más adelante en esta clase. 
 
-```rust
-#[derive(Debug)]
-struct Persona {
-    nombre: String,
-    edad: u8,
-}
-```
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        #[derive(Debug)]
+        struct Persona {
+            nombre: String,
+            edad: u8,
+        }
+
+        fn main() {
+            let persona = Persona {
+                nombre: String::from("Alex"),
+                edad: 30,
+            };
+
+            println!("{:?}", persona);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Persona { nombre: "Alex", edad: 30 }
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos implementado el trait `Debug` para la estructura `Persona` usando el atributo `#[derive(Debug)]`. Ahora podemos imprimir la estructura `Persona` con el formato de depuración `{:?}`.
+
 :::
 
 Las estructuras en Rust son similares a las clases en otros lenguajes de programación y te permiten definir tus propios tipos de datos con campos y métodos. En la siguiente sección, aprenderás cómo crear métodos para estructuras y cómo implementar métodos en estructuras.
 
-## Conclusiones
+## Estrucutras como tuplas
 
-En Rust, puedes definir tus propios tipos de datos con estructuras. Las estructuras te permiten agrupar varios valores juntos y acceder a ellos de forma conjunta. Puedes crear instancias de estructuras, acceder a los campos de una estructura y definir métodos para estructuras. Las estructuras son una parte fundamental de la programación en Rust y te permiten modelar tus datos de forma eficiente y segura. En la siguiente sección, aprenderás cómo crear métodos para estructuras y cómo implementar métodos en estructuras.
+En Rust, puedes usar una estructura como una tupla. Aquí tienes un ejemplo de cómo hacerlo:
+
+<Tabs>
+    <TabItem label="Código" icon="seti:rust">
+        ```rust
+        struct Grados(char, char, char, i32);
+
+        fn main() {
+            let grados = Grados('A', 'B', 'C', 100);
+            println!("Grados: {}, {}, {}, {}", grados.0, grados.1, grados.2, grados.3);
+        }
+        ```
+    </TabItem>
+    <TabItem label="Salida" icon="seti:powershell">
+        ```bash
+        Grados: A, B, C, 100
+        ```
+    </TabItem>
+</Tabs>
+
+En este ejemplo, hemos definido una estructura `Grados` con cuatro campos de tipo `char` y `i32`. Hemos creado una instancia de la estructura `Grados` con los valores `'A'`, `'B'`, `'C'` y `100`. Hemos accedido a los campos de la estructura `Grados` usando la notación de punto `.` y mostrado sus valores en la consola.
+
+## Conclusión
+
+En esta clase has aprendido cómo estructurar datos y cómo crear nuevos datos con estructuras en Rust. Has aprendido cómo definir estructuras, cómo crear instancias de estructuras y cómo acceder a los campos de una estructura. También has aprendido cómo crear métodos para estructuras y cómo implementar métodos en estructuras. En la siguiente clase, aprenderás cómo crear métodos para estructuras y cómo implementar métodos en estructuras.
 
 
 

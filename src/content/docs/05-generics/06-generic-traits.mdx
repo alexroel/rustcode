@@ -1,0 +1,77 @@
+---
+title: Restricciones de Traits
+description: En este tutorial, aprenderás cómo utilizar restricciones de Traits en Rust para limitar los tipos de datos que pueden implementar un Trait.
+---
+
+
+En Rust, puedes utilizar restricciones de Traits para limitar los tipos de datos que pueden implementar un Trait. Las restricciones de Traits te permiten especificar qué métodos y funciones deben estar disponibles en los tipos de datos que implementan un Trait. En este tutorial, aprenderás cómo utilizar restricciones de Traits en Rust y cómo aplicarlas en tu código.
+
+## ¿Qué es un Trait?
+
+Un Trait en Rust es una colección de métodos que pueden ser implementados por un tipo de dato. Los Traits te permiten definir un comportamiento común que puede ser compartido por diferentes tipos de datos. Por ejemplo, puedes definir un Trait `Mostrar` que define un método `mostrar` que muestra el valor de un tipo de dato.
+
+```rust
+trait Mostrar {
+    fn mostrar(&self);
+}
+
+struct Punto {
+    x: i32,
+    y: i32,
+}
+
+impl Mostrar for Punto {
+    fn mostrar(&self) {
+        println!("({}, {})", self.x, self.y);
+    }
+}
+
+fn main() {
+    let p = Punto { x: 5, y: 10 };
+    p.mostrar();
+}
+```
+
+En este ejemplo, hemos definido un Trait `Mostrar` que define un método `mostrar`. Luego, hemos implementado el Trait `Mostrar` para la estructura `Punto`, lo que nos permite llamar al método `mostrar` en una instancia de `Punto`.
+
+## Restricciones de Traits
+
+Las restricciones de Traits te permiten limitar los tipos de datos que pueden implementar un Trait. Puedes utilizar restricciones de Traits para especificar qué métodos y funciones deben estar disponibles en los tipos de datos que implementan un Trait. Por ejemplo, puedes utilizar una restricción de Traits para limitar los tipos de datos que pueden implementar el Trait `Mostrar` a aquellos que también implementan el Trait `Debug`.
+
+```rust
+use std::fmt::Debug;
+
+trait Mostrar: Debug {
+    fn mostrar(&self);
+}
+
+struct Punto {
+    x: i32,
+    y: i32,
+}
+
+impl Mostrar for Punto {
+    fn mostrar(&self) {
+        println!("({}, {})", self.x, self.y);
+    }
+}
+
+fn main() {
+    let p = Punto { x: 5, y: 10 };
+    p.mostrar();
+    println!("{:?}", p);
+}
+```
+
+En este ejemplo, hemos añadido una restricción de Traits `Debug` al Trait `Mostrar`. Esto significa que sólo los tipos de datos que implementan el Trait `Debug` pueden implementar el Trait `Mostrar`. Al intentar implementar el Trait `Mostrar` para un tipo de dato que no implementa el Trait `Debug`, obtendrás un error de compilación.
+
+## Trait en genéricos
+
+Implemeta un Trait un train para un función genérica que pueda sumar dos valores de cualquier tipo de dato.
+
+
+
+
+
+
+
