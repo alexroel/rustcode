@@ -1,0 +1,96 @@
+---
+title: "Práctica: Palíndromo"
+description: En esta práctica, aplicaremos los conceptos de propiedades y préstamos en Rust para verificar si una cadena es un palíndromo. 
+---
+
+En esta práctica, aplicaremos los conceptos de propiedades y préstamos en Rust para verificar si una cadena es un palíndromo. Un palíndromo es una palabra, frase o secuencia que se lee igual en ambos sentidos. Por ejemplo, "radar", "reconocer", "ana" y "la ruta natural" son ejemplos de palíndromos.
+
+## Requerimientos
+
+Para completar esta práctica, necesitarás realizar las siguientes tareas:
+
+- El programa debe solicitar al usuario que ingrese una cadena.
+- El programa debe verificar si la cadena ingresada es un palíndromo.
+- El programa debe imprimir un mensaje indicando si la cadena es un palíndromo o no.
+
+## Solución
+
+Para resolver este problema, necesitamos verificar si la cadena ingresada es un palíndromo. Para hacerlo, podemos seguir los siguientes pasos:
+
+1. Solicitar al usuario que ingrese una cadena.
+2. Convertir la cadena en minúsculas y eliminar los espacios en blanco y los signos de puntuación.
+3. Verificar si la cadena es un palíndromo comparando la cadena original con la cadena invertida. Para esto crearemos una función `es_palindromo` que tomará la cadena como argumento y devolverá un valor booleano indicando si la cadena es un palíndromo o no.
+4. Imprimir un mensaje indicando si la cadena es un palíndromo o no.
+
+A continuación, se muestra una posible implementación de la solución:
+
+```rust
+fn es_palindromo(cadena: &String) -> bool {
+    
+    let cadena = cadena.to_lowercase().replace(" ", "").trim().to_string();
+    
+    let cadena_invertida:String = cadena.chars().rev().collect();
+
+    cadena == cadena_invertida
+}
+
+fn main() {
+    println!("Verifica si una cadena es palíndromo");
+
+    println!("Ingresa una cadena:");
+    let mut cadena = String::new();
+    std::io::stdin().read_line(&mut cadena).unwrap();
+
+    if es_palindromo(&cadena) {
+        println!("La cadena {} es palíndromo", cadena.trim());
+    } else {
+        println!("La cadena {} no es palíndromo", cadena.trim());
+    }
+}
+```
+
+En el código anterior, definimos una función `es_palindromo` que toma una cadena como argumento y devuelve un valor booleano indicando si la cadena es un palíndromo o no. La función convierte la cadena en minúsculas, elimina los espacios en blanco y los signos de puntuación, y luego compara la cadena original con la cadena invertida para determinar si es un palíndromo.
+
+- `cadena.chars()` convierte la cadena en un iterador de caracteres.
+- `rev()` invierte el iterador de caracteres.
+- `collect()` convierte el iterador de caracteres invertido en una cadena.
+
+En la función `main`, solicitamos al usuario que ingrese una cadena, llamamos a la función `es_palindromo` para verificar si la cadena es un palíndromo y luego imprimimos un mensaje indicando si la cadena es un palíndromo o no.
+
+Cuando trabajamos con tipo `String` en Rust, es importante tener en cuenta el concepto de *ownership* y *borrowing*. En este caso, pasamos una referencia a la cadena a la función `es_palindromo` en lugar de pasar la propiedad de la cadena. Esto nos permite acceder a la cadena sin necesidad de transferir la propiedad de la cadena a la función.
+
+Pero si trabajamos con tipo `&str`, no necesitamos preocuparnos por la propiedad de la cadena, ya que `&str` es una referencia a una cadena y no tiene propiedad.
+
+Por ejemplo, si cambiamos el tipo de argumento de la función `es_palindromo` de `&String` a `&str`, el código se vería así:
+
+```rust
+fn es_palindromo(cadena: &str) -> bool {
+    
+    let cadena = cadena.to_lowercase().replace(" ", "");
+    
+    let cadena_invertida:String = cadena.chars().rev().collect();
+
+    cadena == cadena_invertida
+}
+
+fn main() {
+    println!("Verifica si una cadena es palíndromo");
+
+    println!("Ingresa una cadena:");
+    let mut cadena = String::new();
+    std::io::stdin().read_line(&mut cadena).unwrap();
+
+    let cadena = cadena.trim();
+
+    if es_palindromo(cadena) {
+        println!("La cadena {} es palíndromo", cadena);
+    } else {
+        println!("La cadena {} no es palíndromo", cadena);
+    }
+}
+```
+
+En este caso, la función `es_palindromo` toma una referencia a una cadena (`&str`) en lugar de una referencia a un `String` (`&String`). Esto nos permite trabajar con referencias a cadenas sin preocuparnos por la propiedad de la cadena.
+
+¡Ahora puedes probar el programa y verificar si una cadena es un palíndromo! 🚀
+

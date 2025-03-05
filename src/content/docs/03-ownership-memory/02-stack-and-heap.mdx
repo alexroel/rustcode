@@ -1,0 +1,103 @@
+---
+title: Manejo de memoria
+description: En este artículo, aprenderemos sobre manejo de memoria y cómo maneja la memoria Rust.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+En este artículo, aprenderemos sobre manejo de memoria y cómo maneja la memoria Rust. Rust es un lenguaje de programación de bajo nivel que proporciona control sobre la memoria. Rust garantiza la seguridad de la memoria en tiempo de compilación sin necesidad de un recolector de basura.
+
+## Manejo de memoria en lenguajes de programación
+
+Los lenguajes de programación como Python, JavaScript, Java, etc., tienen un recolector de basura que se encarga de liberar la memoria que ya no se necesita. El recolector de basura se encarga de liberar la memoria automáticamente, lo que puede llevar a problemas de rendimiento. 
+
+Los lenguajes como C y C++ no tienen un recolector de basura y requieren que el programador gestione la memoria manualmente. Esto puede llevar a errores de memoria como fugas de memoria, punteros nulos, etc.
+
+Rust es un lenguaje de programación que proporciona control sobre la memoria sin necesidad de un recolector de basura. Rust garantiza la seguridad de la memoria en tiempo de compilación.
+
+### Recolección de basura (Garbage Collection)
+
+La recolección de basura es un proceso que se encarga de liberar la memoria que ya no se necesita. Los lenguajes de programación como Python, JavaScript, Java, etc., tienen un recolector de basura que se encarga de liberar la memoria automáticamente. 
+
+La recolección de basura puede llevar a problemas de rendimiento, ya que el recolector de basura tiene que buscar y liberar la memoria que ya no se necesita. Esto puede llevar a pausas en la ejecución del programa.
+
+- **Ventajas de la recolección de basura**:
+    - Fácil de usar: No es necesario gestionar la memoria manualmente.
+    - Seguridad: Evita errores de memoria como fugas de memoria, punteros nulos, etc.
+- **Desventajas de la recolección de basura**:
+    - Problemas de rendimiento: El recolector de basura puede llevar a pausas en la ejecución del programa.
+    - Dificultad para predecir el rendimiento: El recolector de basura puede llevar a problemas de rendimiento impredecibles.
+
+### Manejo manual de memoria (C y C++)
+
+Los lenguajes de programación como C y C++ no tienen un recolector de basura y requieren que el programador gestione la memoria manualmente. Esto puede llevar a errores de memoria como fugas de memoria, punteros nulos, etc. 
+
+El programador es responsable de liberar la memoria que ya no se necesita. Esto puede llevar a errores de memoria como fugas de memoria, punteros nulos, etc.
+
+- **Ventajas del manejo manual de memoria**:
+    - Control total sobre la memoria: El programador tiene control total sobre la memoria.
+    - Rendimiento predecible: El programador puede controlar cuándo se libera la memoria.
+    - Sin pausas en la ejecución: No hay pausas
+
+- **Desventajas del manejo manual de memoria**:
+    - Propenso a errores: El programador puede cometer errores de memoria como fugas de memoria, punteros nulos, etc.
+    - Difícil de depurar: Los errores de memoria pueden ser difíciles de depurar.
+
+### Manejo de memoria en Rust
+
+Rust es un lenguaje de programación que proporciona control sobre la memoria sin necesidad de un recolector de basura. Rust garantiza la seguridad de la memoria en tiempo de compilación. Rust utiliza un sistema de tipos que garantiza la seguridad de la memoria en tiempo de compilación. 
+
+Rust utiliza el concepto de *ownership* para gestionar la memoria. El concepto de *ownership* garantiza que cada valor en Rust tiene un propietario. Cuando el propietario sale del ámbito, Rust libera automáticamente la memoria.
+
+Rust también utiliza el concepto de *borrowing* para gestionar la memoria. El concepto de *borrowing* permite que varias partes del código accedan a un valor sin necesidad de copiarlo. Esto evita la necesidad de copiar grandes cantidades de datos en la memoria.
+
+En resumen, Rust proporciona control sobre la memoria sin necesidad de un recolector de basura. Rust garantiza la seguridad de la memoria en tiempo de compilación utilizando el concepto de *ownership* y *borrowing*.
+
+
+## Stack y Heap
+
+Cuando un programa se ejecuta, la memoria se divide en dos partes: la pila (*stack*) y el montón (*heap*). La pila es una estructura de datos en la que se almacenan las variables locales y los valores de retorno de las funciones. La pila es de tamaño fijo y se gestiona automáticamente por el sistema operativo.
+
+El montón es una estructura de datos en la que se almacenan los datos que no se pueden almacenar en la pila. El montón es de tamaño variable y se gestiona manualmente por el programador. El montón es útil para almacenar datos grandes que no caben en la pila.
+
+Aquí hay una tabla de comparación entre la pila y el montón:
+
+| Característica | Pila(Stack) | Montón(Heap) |
+|----------------|-------------|--------------|
+| Velocidad      | Rápida      | Lenta        |
+|Ordenamiento   | LIFO (Last In First Out) | Aleatorio |
+|Tamaño         | Fijo        | Variable     |
+|Acceso         | Rápido      | Lento        |
+|Gestión        | Automática  | Manual       |
+|Fragmentación  | No          | Sí           |
+|Asignación     | Estático    | Dinámico     |
+|Desasignación  | Automática  | Manual       |
+
+
+## Stack y Heap en Rust
+
+En Rust, la pila (*stack*) y el montón (*heap*) se utilizan para almacenar datos de diferentes tipos. Los datos de tamaño fijo se almacenan en la pila, mientras que los datos de tamaño variable se almacenan en el montón.
+
+Los datos de tamaño fijo, como los enteros y los punteros, se almacenan en la pila. Los datos de tamaño variable, como las cadenas y los vectores, se almacenan en el montón.
+
+Rust utiliza el concepto de *ownership* para gestionar la memoria en la pila y el montón. Cuando un valor se asigna en la pila, Rust libera automáticamente la memoria cuando el valor sale del ámbito. Cuando un valor se asigna en el montón, el programador es responsable de liberar la memoria manualmente.
+
+En resumen, en Rust, la pila (*stack*) se utiliza para almacenar datos de tamaño fijo, mientras que el montón (*heap*) se utiliza para almacenar datos de tamaño variable. Rust utiliza el concepto de *ownership* para gestionar la memoria en la pila y el montón.
+
+```rust
+fn main() {
+    // Variable de tamaño fijo almacenada en la pila
+    let x = 5;
+
+    // Variable de tamaño variable almacenada en el montón
+    let y = Box::new(10);
+}
+```
+
+En el ejemplo anterior, la variable `x` se almacena en la pila, mientras que la variable `y` se almacena en el montón utilizando la macro `Box::new`. Cuando `x` sale del ámbito, Rust libera automáticamente la memoria. Cuando `y` sale del ámbito, el programador es responsable de liberar la memoria manualmente.
+
+En este artículo, aprendimos sobre manejo de memoria y cómo maneja la memoria Rust. Rust proporciona control sobre la memoria sin necesidad de un recolector de basura. Rust garantiza la seguridad de la memoria en tiempo de compilación utilizando el concepto de *ownership* y *borrowing*. Rust utiliza la pila (*stack*) y el montón (*heap*) para almacenar datos de diferentes tipos.
+
+
+
+
